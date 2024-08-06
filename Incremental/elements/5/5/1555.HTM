@@ -1,0 +1,114 @@
+<b> : </b>Why Health Checks are Like Sidewalks</H1></DIV></DIV>
+<DIV id=content class=column style="FONT-SIZE: 18px; FONT-FAMILY: Muli, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">
+<DIV class=section>
+<DIV class="region region-content">
+<DIV id=block-system-main class="block block-system main">
+<DIV class=content>
+<DIV id=node-285703 class="node node-login-online view-mode-full view-mode-full--node view-mode-full--node--login_online clearfix">
+<DIV class=content>
+<DIV class="group-article-body-wrapper field-group-div" style="BOX-SIZING: border-box; MAX-WIDTH: 1200px; POSITION: relative; PADDING-LEFT: 0px; MARGIN: 0px auto; PADDING-RIGHT: 0px; box-shadow: rgba(0, 0, 0, 0.15) 0px 11px 10px 0px">
+<DIV class="field field-name-field-lv2-subtitle field-type-text field-label-hidden" style="BOX-SIZING: border-box; FONT-SIZE: 20px; FONT-FAMILY: Klavika, sans-serif; TEXT-ALIGN: center; MARGIN: 0px 150px">
+<DIV class=field-items>
+<DIV class="field-item odd">Systems thinking applied to common orchestration pitfalls</DIV></DIV></DIV>
+<DIV class="field field-name-field-lv2-publication-date field-type-datetime field-label-hidden" style="FONT-SIZE: 14px; PADDING-BOTTOM: 10px; TEXT-ALIGN: center; PADDING-TOP: 10px">
+<DIV class=field-items>
+<DIV class="field-item odd"><SPAN class=date-display-single>December 7, 2022</SPAN></DIV></DIV></DIV>
+<DIV class="field field-name-field-lv2-article-type field-type-taxonomy-term-reference field-label-hidden" style="BOX-SIZING: border-box; FONT-SIZE: 14px; TEXT-TRANSFORM: uppercase; FONT-WEIGHT: 800; MARGIN: 0px 150px; DISPLAY: flex; align-items: center; justify-content: center">
+<DIV class=field-items>
+<DIV class="field-item odd" style="PADDING-LEFT: 10px; PADDING-RIGHT: 10px; flex-shrink: 0">Column</DIV></DIV></DIV>
+<DIV class="field field-label-inline clearfix field-type-text-long field-pseudo-field field-pseudo-field--author-list" style="BOX-SIZING: border-box; FONT-SIZE: 16px; PADDING-BOTTOM: 10px; TEXT-ALIGN: justify; MARGIN: 0px 150px; DISPLAY: flex; justify-content: center; flex-direction: row">
+<DIV class=field-label style="FLOAT: left; FONT-WEIGHT: 400">Authors:&nbsp;</DIV>
+<DIV class=field-items style="FLOAT: left"><A title="Laura Nolan" style="TEXT-DECORATION: none; COLOR: rgb(3,57,216); BACKGROUND-COLOR: transparent" href="https://www.usenix.org/publications/loginonline/why-health-check-sidewalk#Laura%20Nolan">Laura Nolan</A></DIV></DIV>
+<DIV class="field field-name-field-lv2-shepherds field-type-user-reference field-label-inline clearfix" style="BOX-SIZING: border-box; FONT-SIZE: 16px; PADDING-BOTTOM: 10px; TEXT-ALIGN: justify; MARGIN: 0px 150px; DISPLAY: flex; justify-content: center; flex-direction: row">
+<DIV class=field-label style="FLOAT: left; FONT-WEIGHT: 400">Article shepherded by:&nbsp;</DIV>
+<DIV class=field-items style="FLOAT: left">
+<DIV class="field-item odd"><SPAN class=usenix-user-reference-names>Rik Farrow</SPAN></DIV></DIV></DIV>
+<DIV class="paragraphs-items paragraphs-items-field-lv2-body paragraphs-items-field-lv2-body-full paragraphs-items-full" style="BOX-SIZING: border-box; BORDER-TOP: rgb(143,143,143) 2px solid; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; MARGIN: 0px 150px">
+<DIV class="field field-name-field-lv2-body field-type-paragraphs field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd">
+<DIV class="entity entity-paragraphs-item paragraphs-item-single-column-text view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--single_column_text paragraphs-first-text" style="PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-single-column-text field-type-text-long field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd">
+<P><SPAN><SPAN>What could be simpler than a health check endpoint that just returns a HTTP 200 when called? But health checks aren&#8217;t simple at all. Health checks are a critical signal in orchestration systems, and when things go wrong, they can cause havoc. There are systemic patterns that can happen when we use health checking in certain ways, and systems thinking can help us understand some of the pitfalls of health check-driven orchestration.</SPAN></SPAN></P></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class="field-item even">
+<DIV class="entity entity-paragraphs-item paragraphs-item-single-column-text view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--single_column_text" style="PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-single-column-sub field-type-text field-label-hidden" style="FONT-SIZE: 40px; FONT-FAMILY: Klavika, sans-serif; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; PADDING-TOP: 20px; MARGIN: 0px; LINE-HEIGHT: 50px">
+<DIV class=field-items>
+<DIV class="field-item odd">A Digression: The City as a System</DIV></DIV></DIV>
+<DIV class="field field-name-field-single-column-text field-type-text-long field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd">
+<P><SPAN><SPAN>Consider the humble sidewalk (or, for my fellow European readers, the footpath). Streets that feature local businesses see foot traffic throughout the day &#8212; and well into the evening, if some of those businesses are restaurants or bars. This creates a critical mass of &#8216;eyes on the street&#8217;, which means that those streets are likely to be safer. Residential windows overlooking the street also help to promote safer streets. Conversely, residential-only areas, particularly those that feature sidewalks and spaces that are publicly-accessible but not well-trafficked or overlooked, tend to become unsafe. These are reinforcing phenomena (vicious and virtuous cycles): people are happy to walk around what they feel are safe streets, or to sit on their porches, but not to walk through areas that feel dangerous. The perception of danger thus reduces &#8216;eyes on the street&#8217;, which further increases danger.</SPAN></SPAN></P></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class="field-item odd">
+<DIV class="entity entity-paragraphs-item paragraphs-item-article-image view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--article_image" style="BORDER-BOTTOM: rgb(20,53,147) 3px solid; PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-article-image field-type-image field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd"><IMG style="MAX-WIDTH: 100%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="" src="https://www.usenix.org/sites/default/files/styles/article_embedded/public/city_0.png?itok=7SrtCrOA" width=1440 height=873></DIV></DIV></DIV>
+<DIV class="field field-name-field-article-image-caption field-type-text field-label-hidden" style="FONT-SIZE: 14px; FONT-WEIGHT: 600; COLOR: rgb(0,0,0); FONT-STYLE: normal">
+<DIV class=field-items>
+<DIV class="field-item odd">Figure 1: Factors that influence the perception of safety in urban areas.</DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class="field-item even">
+<DIV class="entity entity-paragraphs-item paragraphs-item-single-column-text view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--single_column_text" style="PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-single-column-text field-type-text-long field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd">
+<P><SPAN>Another reinforcing phenomenon: in areas with streets that feel safe to walk on, with a good density of residences mixed with other uses that bring people to the area, you tend to get a lot of small businesses catering to the people using the sidewalks. In areas with local businesses, residents can form a loose web of casual acquaintanceships: talking to the shopkeeper, greeting their neighbor at the coffee kiosk in the local park. In areas that are residential-only, without the intricate web of local businesses, acquaintanceships are harder to form and people are far less likely to know other people who live nearby. As a consequence, older urban areas tend to have robust local politics &#8212; and thus, to be able to effect positive change in their neighborhoods, which can reinforce their status as vibrant districts &#8212; while modern planned districts lack engagement with local politics.&nbsp;</SPAN></P>
+<P><SPAN>The physical layout of streets and sidewalks creates public safety and functioning local political organizing. Lose your overlooked sidewalks and your local small businesses and you seriously impair the ability of residents to organize effectively. Nobody planned traditional urban areas to work this way: effective local politics is an emergent property of the system that arises from all these overlapping interactions, as are safe streets. Change the street layout to remove the &#8220;eyes on the street&#8221;, lose the small businesses &#8212; or replace them with a busy, anonymous centralized store &#8212; and the system won&#8217;t work the same way.&nbsp;</SPAN></P>
+<P><SPAN>On the surface, it may seem that people can still get from place to place and buy goods; these primary purposes will still be fulfilled, but the secondary effects of street surveillance and forming human networks will be gone. It won&#8217;t be immediately obvious that something has been lost. The city is a complex system, and these emergent properties depend on the structure of that system.&nbsp;</SPAN></P>
+<P><SPAN>These examples of systems thinking &#8212; understanding how the structure of the city affects outcomes &#8212; come from Jane Jacobs&#8217;<SPAN>&nbsp;</SPAN></SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(3,57,216); BACKGROUND-COLOR: transparent" href="https://en.wikipedia.org/wiki/The_Death_and_Life_of_Great_American_Cities" rel=nofollow target=_blank><SPAN>The Death and Life of Great American Cities</SPAN></A><SPAN><SPAN>&nbsp;</SPAN>[1]. Jacobs&#8217; book is about urban planning &#8212; in particular, critiquing the tendency of mid-twentieth-century high modernist urban planners to raze functional urban areas and replace them with inward-looking closed &#8216;garden city&#8217; areas. Jacobs&#8217; relentlessly focuses on showing how functional neighborhoods in a city work as systems, with each component of the neighborhood&#8217;s built environment and its people interacting with other components to create areas that work well &#8212; or that do not. Jacobs then contrasts these functional urban systems with recently-built dysfunctional neighborhoods to identify what these newer zones lack. The overall message is that neighborhoods don&#8217;t work because of any single element: they work because of the interactions between the elements.</SPAN></P></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class="field-item odd">
+<DIV class="entity entity-paragraphs-item paragraphs-item-single-column-text view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--single_column_text" style="PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-single-column-sub field-type-text field-label-hidden" style="FONT-SIZE: 40px; FONT-FAMILY: Klavika, sans-serif; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; PADDING-TOP: 20px; MARGIN: 0px; LINE-HEIGHT: 50px">
+<DIV class=field-items>
+<DIV class="field-item odd">Health checks: The Foundation of Orchestration</DIV></DIV></DIV>
+<DIV class="field field-name-field-single-column-text field-type-text-long field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd">
+<P><SPAN>Like an urban neighborhood, our distributed software systems are complex systems: they consist of many subsystems, each with state, and each able to affect other subsystems in various ways. In distributed systems &#8212; as in a city &#8212; the structure of the system influences outcomes, in ways that can be difficult to predict.&nbsp;</SPAN></P>
+<P><SPAN>Distributed computing systems are all unique, just as street layouts are, but they have certain common properties that influence outcomes in ways that we do understand: because we&#8217;ve seen it in other systems that share some of those characteristics. So, while it is a tenet of systems theory that we can&#8217;t fully predict the behavior of a complex system, we can transfer some experiences from system to system, just as planners can from district to district</SPAN></P>
+<P>The production systems equivalent of Jacobs&#8217; sidewalk &#8212; the foundation of a well-functioning urban system &#8212; may be the<SPAN>&nbsp;</SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(3,57,216); BACKGROUND-COLOR: transparent" href="https://john-millikin.com/sre-school/health-checking" rel=nofollow target=_blank>health check</A>: sending a request to verify whether a particular target instance is functioning and capable of serving traffic (this might be as simple as an endpoint that always returns a HTTP 200 status code to indicate that the process is running, or a more sophisticated check that takes into account the status of a variety of dependencies or performs an expensive end-to-end computation). There are multiple kinds of health check. Kubernetes defines<SPAN>&nbsp;</SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(3,57,216); BACKGROUND-COLOR: transparent" href="https://medium.com/devops-mojo/kubernetes-probes-liveness-readiness-startup-overview-introduction-to-probes-types-configure-health-checks-206ff7c24487" rel=nofollow target=_blank>three types of health check</A>: startup checks indicate that a container has started successfully; liveness probes indicate that a container is running and not in an irrecoverable state (such as a deadlock); readiness probes indicate that a container can receive traffic.&nbsp;</P>
+<P>Just as the sidewalk is the linchpin of a web of uses that have a major influence on safety and political outcomes, the health check operates as the nexus of a set of processes that have a major bearing on system reliability. Health checking is a fundamental part of a broader orchestration problem that includes load balancing, service discovery, alerting, and change management: a very broad swathe of what system operators manage on a daily basis.</P>
+<DIV></DIV></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class="field-item even">
+<DIV class="entity entity-paragraphs-item paragraphs-item-article-image view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--article_image" style="BORDER-BOTTOM: rgb(20,53,147) 3px solid; PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-article-image field-type-image field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd"><IMG style="MAX-WIDTH: 100%; BORDER-TOP: 0px; HEIGHT: auto; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="" src="https://www.usenix.org/sites/default/files/styles/article_embedded/public/orchestration.png?itok=QGWKuJob" width=1415 height=1370></DIV></DIV></DIV>
+<DIV class="field field-name-field-article-image-caption field-type-text field-label-hidden" style="FONT-SIZE: 14px; FONT-WEIGHT: 600; COLOR: rgb(0,0,0); FONT-STYLE: normal">
+<DIV class=field-items>
+<DIV class="field-item odd">Figure 2: Service orchestration components.</DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class="field-item odd">
+<DIV class="entity entity-paragraphs-item paragraphs-item-single-column-text view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--single_column_text" style="PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-single-column-text field-type-text-long field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd">
+<P>In load balancing, we use health checks to determine which of a set of potential targets are capable of serving a request (we might do this directly, or indirectly via a service discovery tool). Service discovery tools (such as<SPAN>&nbsp;</SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(3,57,216); BACKGROUND-COLOR: transparent" href="https://www.consul.io/" rel=nofollow target=_blank>Consul</A><SPAN>&nbsp;</SPAN>or<SPAN>&nbsp;</SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(3,57,216); BACKGROUND-COLOR: transparent" href="https://aws.amazon.com/cloud-map/" rel=nofollow target=_blank>AWS Cloud Map</A>) use health checks to keep their endpoint lists current. It is common (and good practice) to alert if a significant proportion of a service&#8217;s instances become unhealthy. Finally, rollouts and scaleup processes often use health checks to ensure that newly created (or modified) instances of a service are capable of serving - often only a few instances will be modified or replaced concurrently, limiting the damage to a service in the case that new (or modified) instances are not able to serve traffic. One of the things that makes Kubernetes popular is that it can do most of this kind of orchestration for you out of the box.&nbsp;</P>
+<P><SPAN>Health checking has become much more important than it used to be because in modern distributed system, failure is normal. In the good old days of the 2000s and before, it wasn&#8217;t the norm for backends to become unhealthy or to disappear. Things tended to stay stable, unless you were doing a rollout (which didn&#8217;t happen very often) or some other kind of maintenance. These days, we do frequent rollouts, and we constantly create and destroy infrastructure. This means that health checking is vital now, as otherwise we would constantly send requests to instances that no longer exist.&nbsp;</SPAN></P>
+<DIV></DIV></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class="field-item even">
+<DIV class="entity entity-paragraphs-item paragraphs-item-single-column-text view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--single_column_text" style="PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-single-column-sub field-type-text field-label-hidden" style="FONT-SIZE: 40px; FONT-FAMILY: Klavika, sans-serif; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; PADDING-TOP: 20px; MARGIN: 0px; LINE-HEIGHT: 50px">
+<DIV class=field-items>
+<DIV class="field-item odd">Emergent Properties of Health Checked Systems</DIV></DIV></DIV>
+<DIV class="field field-name-field-single-column-text field-type-text-long field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd">
+<P><SPAN>A sidewalk is not just a slab of concrete, and health checking is not just an endpoint that tells you whether an instance of your service is able to serve or not. From a systems point of view, health checks are a mechanism that transmits signals to different parts of the system &#8212;&nbsp;</SPAN>signals which may influence how requests are distributed to clusters and backends, whether rollouts continue or are paused, and perhaps whether instances should be replaced. A useful systems analysis technique is to think about what happens when these sorts of signals in distributed systems become unavailable, or give incorrect information, or when all of them change state unexpectedly. The nature of health checks as a critical orchestration signal, used in all kinds of ways in our automation, makes them a particularly important kind of signal to analyze.</P>
+<P><SPAN>Think about what would happen if we rolled out a change that broke our health checks for a critical service? This might be a result of a code or configuration change to the service &#8212; in which case, we would hopefully automatically halt the rollout &#8212; or it could happen as a result of a configuration change applied to the service that performs the health checking, such as a load balancer. If such a change was rolled out to a significant proportion of our systems, it could well cause an outage &#8212; even if the service was actually capable of serving. Health checking then creates new ways that our systems can fail &#8212; and fail catastrophically. Let&#8217;s examine some more examples.</SPAN></P>
+<DIV></DIV></DIV></DIV></DIV></DIV></DIV></DIV>
+<DIV class="field-item odd">
+<DIV class="entity entity-paragraphs-item paragraphs-item-single-column-text view-mode-full view-mode-full--paragraphs_item view-mode-full--paragraphs_item--single_column_text" style="PADDING-BOTTOM: 20px; PADDING-TOP: 20px">
+<DIV class=content>
+<DIV class="field field-name-field-single-column-text field-type-text-long field-label-hidden">
+<DIV class=field-items>
+<DIV class="field-item odd">

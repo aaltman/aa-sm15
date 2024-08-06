@@ -1,0 +1,17 @@
+<b> : </b>
+<UL>
+<LI>A B-tree is an M-way search tree with two special properties:
+<OL>
+<LI>It is perfectly balanced: every leaf node is at the same depth.
+<P></P></LI>
+<LI>Every node, except perhaps the root, is at least half-full, i.e. contains M/2 or more values (of course, it cannot contain more than M-1 values). The root may have any number of values (1 to M-1).</LI></OL>
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig1.gif"></CENTER>
+<P></P></LI>
+<LI>The 3-way search tree above is clearly<SPAN>&nbsp;</SPAN><EM>not</EM><SPAN>&nbsp;</SPAN>a B-tree. Here is a 3-way B-tree containing the same values:
+<P></P>
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig2.gif"></CENTER></LI>
+<LI>And here is a 5-way B-tree (each node other than the root must contain between 2 and 4 values):
+<P></P>
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig3.gif"></CENTER>
+<P></P></LI>
+<LI>In the descriptions of our algorithms, we assume that M is odd; therefore each node (other than the root) must contains between (M-1)/2 and M-1 values.

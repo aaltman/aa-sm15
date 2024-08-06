@@ -1,0 +1,130 @@
+<b> : </b><b>Comparison matrix</SPAN></H2>
+<P style="FONT-SIZE: 12px; FONT-FAMILY: sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0.4em 0px 0.5em; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">This page is being overhauled at<SPAN>&nbsp;</SPAN><A title=Clustering style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(6,69,173)" href="https://wiki.postgresql.org/wiki/Clustering">Clustering</A></P>
+<TABLE style="FONT-SIZE: 10px; BORDER-TOP: gray 1px solid; FONT-FAMILY: sans-serif; BORDER-RIGHT: gray 1px solid; WIDTH: 721px; WHITE-SPACE: normal; WORD-SPACING: 0px; BORDER-COLLAPSE: collapse; TABLE-LAYOUT: fixed; BORDER-BOTTOM: gray 1px solid; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; TEXT-ALIGN: center; BORDER-LEFT: gray 1px solid; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial" cellSpacing=0 cellPadding=1 border=1>
+<TBODY>
+<TR style="BACKGROUND: rgb(236,236,236)">
+<TH>Program</TH>
+<TH>License</TH>
+<TH>Maturity</TH>
+<TH>Replication Method</TH>
+<TH>Sync</TH>
+<TH>Connection Pooling</TH>
+<TH>Load Balancing</TH>
+<TH>Query Partitioning</TH></TR>
+<TR>
+<TH bgColor=#ececec><A title=PgCluster style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(6,69,173)" href="https://wiki.postgresql.org/wiki/PgCluster">PgCluster</A></TH>
+<TD bgColor=#ffffaa>BSD</TD>
+<TD bgColor=#ffffaa>Not production ready</TD>
+<TD bgColor=#ffffaa>Master-Master</TD>
+<TD bgColor=#ffffaa>Synchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><B>pgpool-I</B></TH>
+<TD bgColor=#ffffaa>BSD</TD>
+<TD bgColor=#ffffaa>Stable</TD>
+<TD bgColor=#ffffaa>Statement-Based Middleware</TD>
+<TD bgColor=#ffffaa>Synchronous</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><A title=Pgpool-II style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(6,69,173)" href="https://wiki.postgresql.org/wiki/Pgpool-II">Pgpool-II</A></TH>
+<TD bgColor=#ffffaa>BSD</TD>
+<TD bgColor=#ffffaa>Recent release</TD>
+<TD bgColor=#ffffaa>Statement-Based Middleware</TD>
+<TD bgColor=#ffffaa>Synchronous</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ddffdd>Yes</TD></TR>
+<TR>
+<TH bgColor=#ececec><A title=Slony style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(6,69,173)" href="https://wiki.postgresql.org/wiki/Slony">slony</A></TH>
+<TD bgColor=#ffffaa>BSD</TD>
+<TD bgColor=#ffffaa>Stable</TD>
+<TD bgColor=#ffffaa>Primary-Replica</TD>
+<TD bgColor=#ffffaa>Asynchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><A title=Bucardo style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(6,69,173)" href="https://wiki.postgresql.org/wiki/Bucardo">Bucardo</A></TH>
+<TD bgColor=#ffffaa>BSD</TD>
+<TD bgColor=#ffffaa>Stable</TD>
+<TD bgColor=#ffffaa>Master-Master, Primary-Replica</TD>
+<TD bgColor=#ffffaa>Asynchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><A title=Londiste class=mw-redirect style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(6,69,173)" href="https://wiki.postgresql.org/wiki/Londiste">Londiste</A></TH>
+<TD bgColor=#ffffaa>BSD</TD>
+<TD bgColor=#ffffaa>Stable</TD>
+<TD bgColor=#ffffaa>Primary-Replica</TD>
+<TD bgColor=#ffffaa>Asynchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><A title=Mammoth style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(6,69,173)" href="https://wiki.postgresql.org/wiki/Mammoth">Mammoth</A></TH>
+<TD bgColor=#ffffaa>BSD</TD>
+<TD bgColor=#ffffaa>No longer maintained</TD>
+<TD bgColor=#ffffaa>Primary-Replica</TD>
+<TD bgColor=#ffffaa>Asynchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><A title=Rubyrep style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(6,69,173)" href="https://wiki.postgresql.org/wiki/Rubyrep">rubyrep</A></TH>
+<TD bgColor=#ffffaa>MIT</TD>
+<TD bgColor=#ffffaa>No longer maintained</TD>
+<TD bgColor=#ffffaa>Master-Master, Primary-Replica</TD>
+<TD bgColor=#ffffaa>Asynchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><A class="external text" style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(51,102,187); PADDING-RIGHT: 13px" href="https://2ndquadrant.com/en/resources/bdr/" rel=nofollow>Bi-Directional Replication</A></TH>
+<TD bgColor=#ffffaa>PostgreSQL (BSD)</TD>
+<TD bgColor=#ffffaa>Recent release</TD>
+<TD bgColor=#ffffaa>Master-Master<BR>(no triggers needed)</TD>
+<TD bgColor=#ffffaa>Asynchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><A class="external text" style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(51,102,187); PADDING-RIGHT: 13px" href="https://www.citusdata.com/citus-products/pg-shard" rel=nofollow>pg_shard</A></TH>
+<TD bgColor=#ffffaa>LGPL</TD>
+<TD bgColor=#ffffaa>Recent release</TD>
+<TD bgColor=#ffffaa>Statement-based Middleware (as an extension)</TD>
+<TD bgColor=#ffffaa>Synchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ddffdd>Yes</TD></TR>
+<TR>
+<TH bgColor=#ececec><A class="external text" style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(51,102,187); PADDING-RIGHT: 13px" href="http://2ndquadrant.com/resources/pglogical" rel=nofollow>pglogical</A></TH>
+<TD bgColor=#ffffaa>PostgreSQL</TD>
+<TD bgColor=#ffffaa>Recent release</TD>
+<TD bgColor=#ffffaa>Primary-Replica</TD>
+<TD bgColor=#ffffaa>Asynchronous</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD>
+<TD bgColor=#ffaaaa>No</TD></TR>
+<TR>
+<TH bgColor=#ececec><A class="external text" style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(51,102,187); PADDING-RIGHT: 13px" href="http://postgres-xl.org/" rel=nofollow>Postgres-XL</A></TH>
+<TD bgColor=#ffffaa>PostgreSQL</TD>
+<TD bgColor=#ffffaa>Recent release</TD>
+<TD bgColor=#ffffaa>MPP Postgres, scalable writes &amp; reads</TD>
+<TD bgColor=#ffffaa>Synchronous</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ddffdd>Yes</TD></TR>
+<TR>
+<TH bgColor=#ececec><A class="external text" style="TEXT-DECORATION: none; BACKGROUND: none transparent scroll repeat 0% 0%; COLOR: rgb(51,102,187); PADDING-RIGHT: 13px" href="https://www.citusdata.com/" rel=nofollow>Citus</A></TH>
+<TD bgColor=#ffffaa>AGPL</TD>
+<TD bgColor=#ffffaa>Recent release</TD>
+<TD bgColor=#ffffaa>MPP Postgres, scalable writes &amp; reads</TD>
+<TD bgColor=#ffffaa>Asynchronous or Synchronous</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ddffdd>Yes</TD>
+<TD bgColor=#ddffdd>Yes</TD></TR></TBODY></TABLE>

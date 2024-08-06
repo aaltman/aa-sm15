@@ -1,0 +1,20 @@
+<b> : </b>
+<UL>
+<LI>To insert value X into a B-tree, there are 3 steps:
+<OL>
+<LI>using the SEARCH procedure for M-way trees (described above) find the leaf node to which X should be added.
+<P></P></LI>
+<LI>add X to this node in the appropriate place among the values already there. Being a leaf node there are no subtrees to worry about.
+<P></P></LI>
+<LI>if there are M-1 or fewer values in the node after adding X, then we are finished.
+<P>If there are M nodes after adding X, we say the node has<SPAN>&nbsp;</SPAN><EM>overflowed</EM>. To repair this, we split the node into three parts:</P>
+<DL>
+<DT>Left:</DT>
+<DD>the first (M-1)/2 values</DD>
+<DT>Middle:</DT>
+<DD>the middle value (position 1+((M-1)/2)</DD>
+<DT>Right:</DT>
+<DD>the last (M-1)/2 values</DD></DL>
+<P>Notice that Left and Right have just enough values to be made into individual nodes. That's what we do... they become the left and right children of Middle, which we add in the appropriate place in this node's parent.</P>
+<P>But what if there is no room in the parent? If it overflows we do the same thing again: split it into Left-Middle-Right, make Left and Right into new nodes and add Middle (with Left and Right as its children) to the node above. We continue doing this until no overflow occurs, or until the root itself overflows. If the root overflows, we split it, as usual, and create a new root node with Middle as its only value and Left and Right as its children (as usual).</P></LI></OL>
+<P></P></LI></UL></H3>

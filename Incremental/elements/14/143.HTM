@@ -1,0 +1,23 @@
+<b> : </b>Summary</H2>
+<UL class=simple>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5">Specifications have variables. These can either be a fixed value (using<SPAN>&nbsp;</SPAN><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>=</SPAN></CODE>) or an element in a set (using<SPAN>&nbsp;</SPAN><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>\in</SPAN></CODE>). Any TLC value can be a variable.</P>
+<UL>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5">If an element of a set, then TLC will test the model on<SPAN>&nbsp;</SPAN><EM>every possible starting state</EM>.</P></LI></UL></LI>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5">PlusCal is a language that makes writing specifications easier.</P>
+<UL>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5">In the PlusCal algorithm body, variables are updated with<SPAN>&nbsp;</SPAN><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>:=</SPAN></CODE>.<SPAN>&nbsp;</SPAN><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>=</SPAN></CODE><SPAN>&nbsp;</SPAN>is comparison.</P></LI></UL></LI>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5">PlusCal specs are broken up into<SPAN>&nbsp;</SPAN><EM>labels</EM>, units of computations that happen atomically. Everything in the label happens<SPAN>&nbsp;</SPAN><EM>at once</EM>. Labels have restrictions on where they can be placed.</P></LI>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5">Macros are the primary unit of spec deduplication.</P></LI>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5">PlusCal has several block constructs, including<SPAN>&nbsp;</SPAN><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>with</SPAN></CODE>,<SPAN>&nbsp;</SPAN><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>if</SPAN></CODE>, and<SPAN>&nbsp;</SPAN><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>while</SPAN></CODE>.</P>
+<UL>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5"><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>with</SPAN></CODE><SPAN>&nbsp;</SPAN>creates temporary identifiers in a block.</P></LI>
+<LI style="LINE-HEIGHT: 1.5">
+<P style="MARGIN: 0px; LINE-HEIGHT: 1.5"><CODE class="docutils literal notranslate" style='FONT-SIZE: 0.9em; FONT-FAMILY: "Roboto Mono", monospace, Monaco, Consolas, "Andale Mono"; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; border-radius: 0.2rem'><SPAN class=pre>while</SPAN></CODE><SPAN>&nbsp;</SPAN>statements are nonatomic: every loop happens in a separate step.</P></LI></UL></LI></UL><SECTION id=summary-of-label-rules style="MARGIN-TOP: 2px; MARGIN-LEFT: 2px; MARGIN-RIGHT: 2px"><SPAN id=label-rules-summary></SPAN>

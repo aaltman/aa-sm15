@@ -1,0 +1,55 @@
+<b> : </b>Insertion</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">Before working on the details of the<SPAN>&nbsp;</SPAN><I style="BOX-SIZING: border-box">insertion</I><SPAN>&nbsp;</SPAN>operation, we need to introduce an important helper operation,<SPAN>&nbsp;</SPAN><I style="BOX-SIZING: border-box"><B style="BOX-SIZING: border-box; FONT-WEIGHT: 700">rotation</B></I>, for red-black tree.</P>
+<TABLE class=table style="BOX-SIZING: border-box; MARGIN-BOTTOM: 20px; MAX-WIDTH: 100%; WIDTH: 1189px; BORDER-COLLAPSE: collapse; BORDER-SPACING: 0px; BACKGROUND-COLOR: transparent">
+<TBODY style="BOX-SIZING: border-box">
+<TR style="BOX-SIZING: border-box">
+<TD style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px"><PRE style='BOX-SIZING: border-box; FONT-SIZE: 13px; OVERFLOW: auto; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; BORDER-LEFT: rgb(204,204,204) 1px solid; MARGIN: 0px 0px 10px; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); overflow-wrap: break-word; border-radius: 4px'>Left_Rotate(T,x) {
+    y = right[x];
+    right[x] = left[y];
+    p[left[y]] = x;
+    p[y] = p[x];
+    if (p[x] == p[root]) 
+        root[T] = y;
+    else if (x == left[p[x]])
+        left[p[x]] = y;
+    else 
+        right[p[x]] = y;
+    left[y] = x;
+    p[x] = y;
+}
+							</PRE></TD>
+<TD style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px"><IMG style="BOX-SIZING: border-box; BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt=rotation src="https://upload.wikimedia.org/wikipedia/commons/3/31/Tree_rotation_animation_250x250.gif" width=300 align=middle height=300></TD>
+<TD style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; VERTICAL-ALIGN: top; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px"><PRE style='BOX-SIZING: border-box; FONT-SIZE: 13px; OVERFLOW: auto; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; BORDER-LEFT: rgb(204,204,204) 1px solid; MARGIN: 0px 0px 10px; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); overflow-wrap: break-word; border-radius: 4px'>Right_Rotate(T,y) {
+    x = left[y];
+    left[y] = right[x];
+    p[right[x]] = y;
+    p[x] = p[y];
+    if (p[y] == p[root]) 
+        root[T] = x;
+    else if (y == left[p[y]])
+        left[p[y]] = x;
+    else 
+        right[p[y]] = x;
+    right[x] = y;
+    p[y] = x;
+}
+							</PRE></TD></TR></TBODY></TABLE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">When we insert a new node to the red-black tree, the first step is to physically insert the node to the given red-black tree, just as we do for regular binary search tree, and color the node to red. Then we need to fix upward from the inserted node to the root to maintain the red-black tree's properties. In general, we have three cases for insertion. Suppose we insert node<SPAN>&nbsp;</SPAN><I style="BOX-SIZING: border-box"><B style="BOX-SIZING: border-box; FONT-WEIGHT: 700">N</B></I><SPAN>&nbsp;</SPAN>to the red-black tree, the following table explains each of the three cases.</P>
+<TABLE id=case-table class=table style="BOX-SIZING: border-box; MARGIN-BOTTOM: 20px; MAX-WIDTH: 100%; BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1249px; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: medium none; BORDER-SPACING: 0px; BORDER-LEFT: medium none; BACKGROUND-COLOR: transparent">
+<THEAD style="BOX-SIZING: border-box">
+<TR style="BOX-SIZING: border-box">
+<TH style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: medium none; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px">Case 1: The uncle of inserted node is<SPAN>&nbsp;</SPAN><FONT style="BOX-SIZING: border-box" color=red>red</FONT>.</TH>
+<TH style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(0,0,0) 1px solid; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px">Case 2: The inserted node is right child of its parent and its uncle is black.</TH>
+<TH style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(0,0,0) 1px solid; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px">Case 3: The inserted node is left child of its parent and its uncle is black.</TH></TR></THEAD>
+<TBODY style="BOX-SIZING: border-box">
+<TR style="BOX-SIZING: border-box">
+<TD style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: medium none; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px"><IMG style="BOX-SIZING: border-box; BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="case 1" src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Red-black_tree_insert_case_3.svg" width=400 align=middle height=200></TD>
+<TD style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(0,0,0) 1px solid; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px"><IMG style="BOX-SIZING: border-box; BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="case 2" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Red-black_tree_insert_case_4.svg" width=400 align=middle height=200></TD>
+<TD style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(0,0,0) 1px solid; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px"><IMG style="BOX-SIZING: border-box; BORDER-TOP: 0px; BORDER-RIGHT: 0px; VERTICAL-ALIGN: middle; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="case 3" src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Red-black_tree_insert_case_5.svg" width=400 align=middle height=200></TD></TR>
+<TR style="BOX-SIZING: border-box">
+<TD style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: medium none; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px">For case 1, we just need to recolor the inserted node, its parent, uncle and its grandparent. Then we continue to fix upward and reuse the grandparent node as the "inserted" node<SPAN>&nbsp;</SPAN><I style="BOX-SIZING: border-box">N</I>.</TD>
+<TD style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(0,0,0) 1px solid; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px">We can to a left rotation on the inserted node's parent to turn it to case 3. And switch label for the parent and inserted node.</TD>
+<TD style="BOX-SIZING: border-box; BORDER-TOP: medium none; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: rgb(0,0,0) 1px solid; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px">In case 3, we first do a right rotation on the inserted node's parent, then recolor parent and grandparent. Then we move up and fix upward. In this case, we do not reuse the grandparent node.</TD></TR></TBODY></TABLE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"></P></DIV></DIV></DIV>
+<DIV class=container style='BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: "Helvetica Neue", Helvetica, Arial, sans-serif; WIDTH: 1170px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(51,51,51); FONT-STYLE: normal; PADDING-LEFT: 15px; MARGIN-LEFT: auto; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; PADDING-RIGHT: 15px; MARGIN-RIGHT: auto; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+<DIV class=row style="BOX-SIZING: border-box; MARGIN-LEFT: -15px; MARGIN-RIGHT: -15px">

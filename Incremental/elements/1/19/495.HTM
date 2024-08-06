@@ -1,0 +1,29 @@
+<b> : </b>How do we fix a non-root node that has underflowed? Let us take as a specific example, deleting 6 from this B-tree (of degree 5):
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig6.gif"></CENTER>
+<P>Removing 6 causes the node it is in to underflow, as it now contains just 1 value (7). Our strategy for fixing this is to try to `borrow' values from a neighbouring node. We join together the current node and its more populous neighbour to form a `combined node' - and we must also include in the combined node the value in the parent node that is in between these two nodes.</P>
+<P>In this example, we join node [7] with its more populous neighbour [17 22 44 45] and put `10' in between them, to create</P>
+<P>[6 7 10 17 22 44 45]</P>
+<P>How many values might there be in this combined node?</P>
+<UL>
+<LI>The parent node contributes 1 value.</LI>
+<LI>The node that underflowed contributes exactly (M-1)/2-1 values.</LI>
+<LI>The neighbouring node contributes somewhere between (M-1)/2 and (M-1) values.</LI></UL>The treatment of the combined node is different depending on whether the neighbouring contributes exactly (M-1)/2 values or more than this number.
+<P><B>Case 1:</B><SPAN>&nbsp;</SPAN>Suppose that the neighbouring node contains more than (M-1)/2 values. In this case, the total number of values in the combined node is strictly greater than 1 + ((M-1)/2 - 1) + ((M-1)/2), i.e. it is strictly greater than (M-1). So it must contain M values or more.</P>
+<P>We split the combined node into three pieces: Left, Middle, and Right, where Middle is a single value in the very middle of the combined node. Because the combined node has M values or more, Left and Right are guaranteed to have (M-1)/2 values each, and therefore are legitimate nodes. We replace the value we borrowed from the parent with Middle and we use Left and Right as its two children. In this case the parent's size does not change, so we are completely finished.</P>
+<P>This is what happens in our example of deleting 6 from the tree above. The combined node [6 7 10 17 22 44 45] contains more than 3 values, so we split it into:</P>
+<UL>
+<LI>Left = [ 6 7 10 ]</LI>
+<LI>Middle = 17</LI>
+<LI>Right = [ 22 44 45 ]</LI></UL>Then put Middle into the parent node (in the position where the `10' had been) with Left and Right as its children:
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig10.gif"></CENTER>
+<P><B>Case 2:</B><SPAN>&nbsp;</SPAN>Suppose, on the other hand, that the neighbouring node contains exactly (M-1)/2 values. Then the total number of values in the combined node is 1 + ((M-1)/2 - 1) + ((M-1)/2) = (M-1)</P>
+<P>In this case the combined node contains the right number of values to be treated as a node. So we make it into a node and remove from the parent node the value that has been incorporated into the new, combined node. As a concrete example of this case, suppose that, in the above tree, we had deleted 3 instead of 6. The node [2 3] underflows when 3 is removed. It would be combined with its more populous neighbour [6 7] and the intervening value from the parent (5) to create the combined node [2 5 6 7]. This contains 4 values, so it can be used without further processing. The result would be:</P>
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig11.gif"></CENTER>
+<P>It is very important to note that the parent node now has one fewer value. This might cause<SPAN>&nbsp;</SPAN><EM>it</EM><SPAN>&nbsp;</SPAN>to underflow - imagine that 5 had been the<SPAN>&nbsp;</SPAN><EM>only</EM><SPAN>&nbsp;</SPAN>value in the parent node. If the parent node underflows, it would be treated in exactly the same way - combined with<SPAN>&nbsp;</SPAN><EM>it</EM>s more populous neighbour etc. The underflow processing repeats at successive levels until no underflow occurs or until the root underflows (the processing for root-underflow is described next).</P>
+<P>Now let us consider the root. For the root to underflow, it must have originally contained just one value, which now has been removed. If the root was also a leaf, then there is no problem: in this case the tree has become completely empty.</P>
+<P>If the root is not a leaf, it must originally have had two subtrees (because it originally contained one value). How could it possibly underflow?</P>
+<P>The deletion process always starts at a leaf and therefore the only way the root could have its value removed is through the Case 2 processing just described: the root's two children have been combined, along with the root's only value to form a single node. But if the root's two children are now a single node, then<SPAN>&nbsp;</SPAN><EM>that node</EM><SPAN>&nbsp;</SPAN>can be used as the new root, and the current root (which has underflowed) can simply be deleted.</P>
+<P>To illustrate this, suppose we delete 7 from this B-tree (M=5):</P>
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig12.gif"></CENTER>
+<P>The node [3 7] would underflow, and the combined node [3 10 18 20] would be created. This has 4 values, which is acceptable when M=5. So it would be kept as a node, and `10' would be removed from the parent node - the root. This is the only circumstance in which underflow can occur in a root that is not a leaf. The situation is this:</P>
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig13.gif"></CENTER>Clearly, the current root node, now empty, can be deleted and its child used as the new root.</H4></LI></UL></H3>

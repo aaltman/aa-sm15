@@ -1,0 +1,17 @@
+<b> : </b>
+<LI>Recall our deletion algorithm for binary search trees: if the value to be deleted is in a node having two subtrees, we would replace the value with the largest value in its left subtree and then delete the node in the left subtree that had contained the largest value (we are guaranteed that<SPAN>&nbsp;</SPAN><EM>this</EM><SPAN>&nbsp;</SPAN>node will be easy to delete).
+<P></P></LI>
+<LI>We will use a similar strategy to delete a value from a B-tree. If the value to be deleted does not occur in a leaf, we replace it with the largest value in its left subtree and then proceed to delete that value from the node that originally contained it.
+<P></P></LI>
+<LI>For example, if we wished to delete 67 from the above tree, we would find the largest value in 67's left subtree, 66, replace 67 with 66, and then delete the occurrence of 66 in the left subtree. In a B-tree, the largest value in any value's left subtree is guaranteed to be in leaf.
+<P></P></LI>
+<LI>Therefore wherever the value to be deleted initially resides, the following deletion algorithm always begins at a leaf.
+<P></P></LI>
+<LI>To delete value X from a B-tree, starting at a leaf node, there are 2 steps:
+<OL>
+<LI>Remove X from the current node. Being a leaf node there are no subtrees to worry about.
+<P></P></LI>
+<LI>Removing X might cause the node containing it to have<SPAN>&nbsp;</SPAN><EM>too few</EM><SPAN>&nbsp;</SPAN>values.
+<P>Recall that we require the root to have at least 1 value in it and all other nodes to have at least (M-1)/2 values in them. If the node has too few values, we say it has<SPAN>&nbsp;</SPAN><EM>underflowed</EM>.</P>
+<P>If underflow does not occur, then we are finished the deletion process. If it does occur, it must be fixed. The process for fixing a root is slightly different than the process for fixing the other nodes, and will be discussed afterwards.</P></LI></OL>
+<P></P></LI></H3>

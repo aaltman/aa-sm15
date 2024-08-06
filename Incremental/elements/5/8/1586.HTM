@@ -1,0 +1,2 @@
+concurrency-freaks on whether wait-free or lock-free is faster:</P>
+<P>Lock-free can be faster if it happens that the needed atomic operations have less contention.&nbsp; While a wait-free algorithm will have fewer total steps in the worst cases, if some of those involve more cache line thrashing or if there are more total atomic operations, it can still be slower.

@@ -1,0 +1,19 @@
+<b> : </b>CAS (Compare and Swap)</H4>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">In this project, I use<SPAN>&nbsp;</SPAN><B style="BOX-SIZING: border-box; FONT-WEIGHT: 700"><I style="BOX-SIZING: border-box">CAS (Compare And Swap)</I></B><SPAN>&nbsp;</SPAN>synchronization primitive to implement my lock-free algorithm, which is supported by my most modern computer architectures.<BR style="BOX-SIZING: border-box"><I style="BOX-SIZING: border-box">Rather than acquiring a lock, a process makes a copy of the data it wishes to modify, changes the copy and then replaces the original data with the copy only if the original data is unchanged. If there is no contention, the update is made with no appreciable overhead. If there is contention, all but one concurrent process accessing the shared data must &#8220;roll-back&#8221; and redo its computation using the updated data.</I><SPAN>&nbsp;</SPAN>Most modern programming languages support<SPAN>&nbsp;</SPAN><I style="BOX-SIZING: border-box">CAS</I><SPAN>&nbsp;</SPAN>as an atomic operation. For example, in this project, I am going to use JAVA's<SPAN>&nbsp;</SPAN><I style="BOX-SIZING: border-box">AtomicBoolean</I><SPAN>&nbsp;</SPAN>class to realize the CAS strategy. We can also use other<SPAN>&nbsp;</SPAN><I style="BOX-SIZING: border-box">Atomic</I><SPAN>&nbsp;</SPAN>classes to implement<SPAN>&nbsp;</SPAN><I style="BOX-SIZING: border-box">CAS</I><SPAN>&nbsp;</SPAN>operation. The following piece of pesudocode just depicts how CAS function works.</P><PRE style='BOX-SIZING: border-box; FONT-SIZE: 13px; OVERFLOW: auto; BORDER-TOP: rgb(204,204,204) 1px solid; FONT-FAMILY: Menlo, Monaco, Consolas, "Courier New", monospace; BORDER-RIGHT: rgb(204,204,204) 1px solid; BORDER-BOTTOM: rgb(204,204,204) 1px solid; WORD-BREAK: break-all; COLOR: rgb(51,51,51); PADDING-BOTTOM: 9px; PADDING-TOP: 9px; PADDING-LEFT: 9px; BORDER-LEFT: rgb(204,204,204) 1px solid; MARGIN: 0px 0px 10px; DISPLAY: block; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 9px; BACKGROUND-COLOR: rgb(245,245,245); overflow-wrap: break-word; border-radius: 4px'>CAS(shVble,savedValue,newValue)
+Begin Atomic
+if (shVble==savedValue) {
+    shVble=newValue;
+    return True;
+} else {
+    return False; 
+}
+End Atomic
+
+do  {
+    savedValue=shVble;
+    newValue=computeNewValue(savedValue);
+}while (!CAS(shVble,savedValue,newValue));
+			</PRE>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"></P></DIV></DIV>
+<DIV class=container style='BOX-SIZING: border-box; FONT-SIZE: 16px; FONT-FAMILY: "Helvetica Neue", Helvetica, Arial, sans-serif; WIDTH: 1170px; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(51,51,51); FONT-STYLE: normal; PADDING-LEFT: 15px; MARGIN-LEFT: auto; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; PADDING-RIGHT: 15px; MARGIN-RIGHT: auto; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+<DIV class=row style="BOX-SIZING: border-box; MARGIN-LEFT: -15px; MARGIN-RIGHT: -15px">

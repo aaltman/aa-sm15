@@ -1,0 +1,4 @@
+<b> : </b>Interface versions<A title="Permalink to this heading" class=headerlink style="TEXT-DECORATION: none; COLOR: rgb(221,221,221); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; VISIBILITY: hidden" href="https://docs.kernel.org/driver-api/ioctl.html#interface-versions"></A></H2>
+<P style="LINE-HEIGHT: 1.4em; hyphens: auto">Some subsystems use version numbers in data structures to overload commands with different interpretations of the argument.</P>
+<P style="LINE-HEIGHT: 1.4em; hyphens: auto">This is generally a bad idea, since changes to existing commands tend to break existing applications.</P>
+<P style="LINE-HEIGHT: 1.4em; hyphens: auto">A better approach is to add a new ioctl command with a new number. The old command still needs to be implemented in the kernel for compatibility, but this can be a wrapper around the new implementation.</P></SECTION><SECTION id=return-code>

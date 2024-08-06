@@ -1,0 +1,11 @@
+<b> : </b><b>Use Cases</SPAN></H2>
+<P style="MARGIN: 0.4em 0px 0.5em">There are four possible use cases with increasing requirements:</P>
+<OL style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; LIST-STYLE-IMAGE: none; MARGIN: 0.3em 0px 0px 3.2em; PADDING-RIGHT: 0px">
+<LI style="MARGIN-BOTTOM: 0.1em">Cross-node read-only queries on read-only shards using aggregate queries, e.g. data warehouse:
+<P style="MARGIN: 0.4em 0px 0.5em">This is the simplest to implement as it doesn't require a global transaction manager, global snapshot manager, and the number of rows returned from the shards is minimal because of the aggregates.</P></LI>
+<LI style="MARGIN-BOTTOM: 0.1em">Cross-node read-only queries on read-only shards using non-aggregate queries:
+<P style="MARGIN: 0.4em 0px 0.5em">This will stress the coordinator to collect and process many returned rows, and will show how well the FDW transfer mechanism scales.</P></LI>
+<LI style="MARGIN-BOTTOM: 0.1em">Cross-node read-only queries on read/write shards:
+<P style="MARGIN: 0.4em 0px 0.5em">This will require a global snapshot manager to make sure the shards return consistent data.</P></LI>
+<LI style="MARGIN-BOTTOM: 0.1em">Cross-node read-write queries:
+<P style="MARGIN: 0.4em 0px 0.5em">This will require a global snapshot manager and global transaction manager.</P></LI></OL></DIV></DIV></DIV>

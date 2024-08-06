@@ -1,0 +1,26 @@
+<b> : </b><A name="ANSWERS TO QUICK QUIZZES">9. ANSWERS TO QUICK QUIZZES</A></H2>
+<DL style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+<DT>Quick Quiz #1:</DT>
+<DD>Why is this argument naive? How could a deadlock occur when using this algorithm in a real-world Linux kernel? [Referring to the lock-based "toy" RCU algorithm.]</DD>
+<DT>Answer:</DT>
+<DD>Consider the following sequence of events:
+<OL>
+<LI>CPU 0 acquires some unrelated lock, call it "<TT>problematic_lock</TT>".</LI>
+<LI>CPU 1 enters<SPAN>&nbsp;</SPAN><TT>synchronize_rcu()</TT>, write-acquiring<SPAN>&nbsp;</SPAN><TT>rcu_gp_mutex</TT>.</LI>
+<LI>CPU 0 enters<SPAN>&nbsp;</SPAN><TT>rcu_read_lock()</TT>, but must wait because CPU 1 holds<SPAN>&nbsp;</SPAN><TT>rcu_gp_mutex</TT>.</LI>
+<LI>CPU 1 is interrupted, and the irq handler attempts to acquire<SPAN>&nbsp;</SPAN><TT>problematic_lock</TT>.</LI></OL>The system is now deadlocked.
+<P>One way to avoid this deadlock is to use an approach like that of CONFIG_PREEMPT_RT, where all normal spinlocks become blocking locks, and all irq handlers execute in the context of special tasks. In this case, in step 4 above, the irq handler would block, allowing CPU 1 to release<SPAN>&nbsp;</SPAN><TT>rcu_gp_mutex</TT>, avoiding the deadlock.</P>
+<P>Even in the absence of deadlock, this RCU implementation allows latency to "bleed" from readers to other readers through<SPAN>&nbsp;</SPAN><TT>synchronize_rcu()</TT>. To see this, consider task A in an RCU read-side critical section (thus read-holding<SPAN>&nbsp;</SPAN><TT>rcu_gp_mutex</TT>), task B blocked attempting to write-acquire<SPAN>&nbsp;</SPAN><TT>rcu_gp_mutex</TT>, and task C blocked in<SPAN>&nbsp;</SPAN><TT>rcu_read_lock()</TT><SPAN>&nbsp;</SPAN>attempting to read_acquire<SPAN>&nbsp;</SPAN><TT>rcu_gp_mutex</TT>. Task A's RCU read-side latency is holding up task C, albeit indirectly via task B.</P>
+<P>Realtime RCU implementations therefore use a counter-based approach where tasks in RCU read-side critical sections cannot be blocked by tasks executing<SPAN>&nbsp;</SPAN><TT>synchronize_rcu()</TT>.</P>
+<P></P></DD>
+<DT>Quick Quiz #2:</DT>
+<DD>Give an example where Classic RCU's read-side overhead is<SPAN>&nbsp;</SPAN><I>negative</I>.</DD>
+<DT>Answer:</DT>
+<DD>Imagine a single-CPU system with a non-CONFIG_PREEMPT kernel where a routing table is used by process-context code, but can be updated by irq-context code (for example, by an "ICMP REDIRECT" packet). The usual way of handling this would be to have the process-context code disable interrupts while searching the routing table. Use of RCU allows such interrupt-disabling to be dispensed with. Thus, without RCU, you pay the cost of disabling interrupts, and with RCU you don't.
+<P>One can argue that the overhead of RCU in this case is negative with respect to the single-CPU interrupt-disabling approach. Others might argue that the overhead of RCU is merely zero, and that replacing the positive overhead of the interrupt-disabling scheme with the zero-overhead RCU scheme does not constitute negative overhead.</P>
+<P>In real life, of course, things are more complex. But even the theoretical possibility of negative overhead for a synchronization primitive is a bit unexpected. ;-)</P></DD>
+<DT>Quick Quiz #3:</DT>
+<DD>If it is illegal to block in an RCU read-side critical section, what the heck do you do in PREEMPT_RT, where normal spinlocks can block???</DD>
+<DT>Answer:</DT>
+<DD>Just as PREEMPT_RT permits preemption of spinlock critical sections, it permits preemption of RCU read-side critical sections. It also permits spinlocks blocking while in RCU read-side critical sections.
+<P>Why the apparent inconsistency? Because it is it possible to use priority boosting to keep the RCU grace periods short if need be (for example, if running short of memory). In contrast, if blocking waiting for (say) network reception, there is no way to know what should be boosted. Especially given that the process we need to boost might well be a human being who just went out for a pizza or something. And although a computer-operated cattle prod might arouse serious interest, it might also provoke serious objections. Besides, how does the computer know what pizza parlor the human being went to???</P></DD></DL>

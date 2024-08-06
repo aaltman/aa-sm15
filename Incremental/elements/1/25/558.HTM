@@ -1,0 +1,16 @@
+<b> : </b>Alternatives to ioctl<A title="Permalink to this heading" class=headerlink style="TEXT-DECORATION: none; COLOR: rgb(221,221,221); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; VISIBILITY: hidden" href="https://docs.kernel.org/driver-api/ioctl.html#alternatives-to-ioctl"></A></H2>
+<P style="LINE-HEIGHT: 1.4em; hyphens: auto">There are many cases in which ioctl is not the best solution for a problem. Alternatives include:</P>
+<UL class=simple style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 10px 30px; PADDING-RIGHT: 0px">
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">System calls are a better choice for a system-wide feature that is not tied to a physical device or constrained by the file system permissions of a character device node</P>
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">netlink is the preferred way of configuring any network related objects through sockets.</P>
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">debugfs is used for ad-hoc interfaces for debugging functionality that does not need to be exposed as a stable interface to applications.</P>
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">sysfs is a good way to expose the state of an in-kernel object that is not tied to a file descriptor.</P>
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">configfs can be used for more complex configuration than sysfs</P>
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">A custom file system can provide extra flexibility with a simple user interface but adds a lot of complexity to the implementation.</P></LI></UL></SECTION></SECTION></DIV></DIV></DIV>
+<DIV class=clearer style="CLEAR: both"></DIV></DIV><BR class=Apple-interchange-newline>

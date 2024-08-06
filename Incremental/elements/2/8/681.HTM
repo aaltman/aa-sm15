@@ -1,0 +1,29 @@
+<b> : </b>Lock-Based Algorithm</H3>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"><I style="BOX-SIZING: border-box">A lock or mutex (from mutual exclusion) is a synchronization mechanism for enforcing limits on access to a resource in an environment where there are many threads of execution.</I></P>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px">Lock-based parallel algorithms are usually implemented on the parallel random-access machine (PRAM), which is a shared-memory model of parallel computation that consists of a collection of identical processors and a shared memory. There are four types of PRAM.</P>
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+<LI style="BOX-SIZING: border-box"><B style="BOX-SIZING: border-box; FONT-WEIGHT: 700">EREW (exclusive read exclusive write)</B></LI>Concurrents are not allowed to read and write to the same memory location at the same time.
+<LI style="BOX-SIZING: border-box"><B style="BOX-SIZING: border-box; FONT-WEIGHT: 700">CREW (concurrent read exclusive write)</B></LI>Concurrents can only read a memory location.
+<LI style="BOX-SIZING: border-box"><B style="BOX-SIZING: border-box; FONT-WEIGHT: 700">CRCW (concurrent read concurrent write)</B></LI>Concurrents allows both concurrent reads and concurrent writes to a memory location
+<LI style="BOX-SIZING: border-box"><B style="BOX-SIZING: border-box; FONT-WEIGHT: 700">ERCW (Exclusive read concurrent write)</B></LI>This case is usually not considered.</UL>
+<P style="BOX-SIZING: border-box; MARGIN: 0px 0px 10px"></P></DIV>
+<DIV class=row style="BOX-SIZING: border-box; MARGIN-LEFT: -15px; MARGIN-RIGHT: -15px">
+<TABLE class="table borderless" style="BOX-SIZING: border-box; MARGIN-BOTTOM: 20px; MAX-WIDTH: 100%; WIDTH: 1170px; BORDER-COLLAPSE: collapse; BORDER-SPACING: 0px; BACKGROUND-COLOR: transparent">
+<THEAD style="BOX-SIZING: border-box">
+<TR style="BOX-SIZING: border-box">
+<TH style="BOX-SIZING: border-box; BORDER-TOP: 0px; BORDER-RIGHT: medium none; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: medium none; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px; border-image: initial">Advantages</TH>
+<TH style="BOX-SIZING: border-box; BORDER-TOP: 0px; BORDER-RIGHT: medium none; VERTICAL-ALIGN: bottom; BORDER-BOTTOM: rgb(221,221,221) 2px solid; PADDING-BOTTOM: 8px; TEXT-ALIGN: left; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: medium none; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px; border-image: initial">Disadvantages</TH></TR></THEAD>
+<TBODY style="BOX-SIZING: border-box">
+<TR style="BOX-SIZING: border-box">
+<TD style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; BORDER-RIGHT: medium none; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: medium none; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px; border-image: initial">
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+<LI style="BOX-SIZING: border-box">Simple to use</LI>
+<LI style="BOX-SIZING: border-box">Ubiquitous</LI>
+<LI style="BOX-SIZING: border-box">Easily to amenable to performance analysis</LI></UL></TD>
+<TD style="BOX-SIZING: border-box; BORDER-TOP: rgb(221,221,221) 1px solid; BORDER-RIGHT: medium none; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 8px; PADDING-TOP: 8px; PADDING-LEFT: 8px; BORDER-LEFT: medium none; LINE-HEIGHT: 1.4285; PADDING-RIGHT: 8px; border-image: initial">
+<UL style="BOX-SIZING: border-box; MARGIN-BOTTOM: 10px; MARGIN-TOP: 0px">
+<LI style="BOX-SIZING: border-box">Potential for deadlock</LI>
+<LI style="BOX-SIZING: border-box">Unavoidable overhead at each synchronization point, which usually can be a system call</LI>
+<LI style="BOX-SIZING: border-box">Possible scheduling anomalies (such as priority inversion), where high-priority processes are delayed waiting for a lock held by a low-priority process</LI>
+<LI style="BOX-SIZING: border-box">Convoying, where a delayed process holding a lock effectively blocks all other processes waiting for the lock</LI></UL></TD></TR></TBODY></TABLE></DIV>
+<DIV class=row style="BOX-SIZING: border-box; MARGIN-LEFT: -15px; MARGIN-RIGHT: -15px">

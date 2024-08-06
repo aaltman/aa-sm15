@@ -1,0 +1,13 @@
+SuperMemo Report
+   Activity: Collecting retention data
+   Collection: C:\SuperMemo\systems\Incremental
+   Date: Wednesday, July 31, 2024, 8:45:35 PM
+   SuperMemo 15 Freeware (Build 15.5, Jul 1, 2018)
+
+Retention data errors can be ignored
+
+Process completed at 8:45:35 PM in 00:00:00 sec (Wednesday, July 31, 2024)
+
+NO ERRORS (Collecting retention data)
+
+____________________________________________________________

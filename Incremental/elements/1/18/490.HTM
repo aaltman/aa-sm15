@@ -1,0 +1,29 @@
+<b> : </b>For example, let's do a sequence of insertions into this B-tree (M=5, so each node other than the root must contain between 2 and 4 values):
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig4.gif"></CENTER>
+<P><FONT color=green>Insert 17:</FONT><SPAN>&nbsp;</SPAN>Add it to the middle leaf. No overflow, so we're done.</P>
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig5.gif"></CENTER>
+<P><FONT color=green>Insert 6:</FONT><SPAN>&nbsp;</SPAN>Add it to the leftmost leaf. That overflows, so we split it:</P>
+<UL>
+<LI>Left = [ 2 3 ]</LI>
+<LI>Middle = 5</LI>
+<LI>Right = [ 6 7 ]</LI></UL>Left and Right become nodes; Middle is added to the node above with Left and Right as its children.
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig6.gif"></CENTER>The node above (the root in this small example) does not overflow, so we are done.
+<P><FONT color=green>Insert 21:</FONT><SPAN>&nbsp;</SPAN>Add it to the middle leaf. That overflows, so we split it:</P>
+<UL>
+<LI>left = [ 17 21 ]</LI>
+<LI>Middle = 22</LI>
+<LI>Right = [ 44 45 ]</LI></UL>Left and Right become nodes; Middle is added to the node above with Left and Right as its children.
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig7.gif"></CENTER>
+<P>The node above (the root in this small example) does not overflow, so we are done.</P>
+<P><FONT color=green>Insert 67:</FONT><SPAN>&nbsp;</SPAN>Add it to the rightmost leaf. That overflows, so we split it:</P>
+<UL>
+<LI>Left = [ 55 66 ]</LI>
+<LI>Middle = 67</LI>
+<LI>Right = [ 68 70 ]</LI></UL>Left and Right become nodes; Middle is added to the node above with Left and Right as its children.
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig8.gif"></CENTER>But now the node above does overflow. So it is split in exactly the same manner:
+<UL>
+<LI>Left = [ 5 10 ] (along with their children)</LI>
+<LI>Middle = 22</LI>
+<LI>Right = [ 50 67 ] (along with their children)</LI></UL>
+<P>Left and Right become nodes, the children of Middle. If this were not the root, Middle would be added to the node above and the process repeated. If there is no node above, as in this example, a new root is created with Middle as its only value.</P>
+<CENTER><IMG src="https://condor.depaul.edu/ichu/csc416/notes/notes9/BTree_files/10Fig9.gif"></CENTER>

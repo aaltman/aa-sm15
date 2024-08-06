@@ -1,0 +1,10 @@
+<b> : </b>Subsystem abstractions<A title="Permalink to this heading" class=headerlink style="TEXT-DECORATION: none; COLOR: rgb(221,221,221); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; VISIBILITY: hidden" href="https://docs.kernel.org/driver-api/ioctl.html#subsystem-abstractions"></A></H2>
+<P style="LINE-HEIGHT: 1.4em; hyphens: auto">While some device drivers implement their own ioctl function, most subsystems implement the same command for multiple drivers. Ideally the subsystem has an .ioctl() handler that copies the arguments from and to user space, passing them into subsystem specific callback functions through normal kernel pointers.</P>
+<P style="LINE-HEIGHT: 1.4em; hyphens: auto">This helps in various ways:</P>
+<UL class=simple style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 10px 0px 10px 30px; PADDING-RIGHT: 0px">
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">Applications written for one driver are more likely to work for another one in the same subsystem if there are no subtle differences in the user space ABI.</P>
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">The complexity of user space access and data structure layout is done in one place, reducing the potential for implementation bugs.</P>
+<LI style="LINE-HEIGHT: 1.4em; hyphens: auto">
+<P style="MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px; LINE-HEIGHT: 1.4em; hyphens: auto">It is more likely to be reviewed by experienced developers that can spot problems in the interface when the ioctl is shared between multiple drivers than when it is only used in a single driver.</P></LI></UL></SECTION><SECTION id=alternatives-to-ioctl>

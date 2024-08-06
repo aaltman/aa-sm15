@@ -1,0 +1,344 @@
+<A title="Transmission Control Protocol" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">Transmission Control Protocol</A> (TCP) uses a <A title="Congestion control" class=mw-redirect href="https://en.wikipedia.org/wiki/Congestion_control">congestion control</A> algorithm that includes various aspects of an <A title="Additive increase/multiplicative decrease" href="https://en.wikipedia.org/wiki/Additive_increase/multiplicative_decrease">additive increase/multiplicative decrease</A> (AIMD) scheme, along with other schemes including <A href="https://en.wikipedia.org/wiki/TCP_congestion_control#Slow_start">slow start</A><SUP id=cite_ref-FOOTNOTEJacobsonKarels1988_1-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-FOOTNOTEJacobsonKarels1988-1"><FONT size=3>[1]</FONT></A></SUP> and a <A href="https://en.wikipedia.org/wiki/TCP_congestion_control#Congestion_window">congestion window</A> (CWND), to achieve congestion avoidance. The <B>TCP congestion-avoidance algorithm</B> is the primary basis for <A title="Congestion control" class=mw-redirect href="https://en.wikipedia.org/wiki/Congestion_control">congestion control</A> in the Internet.<SUP id=cite_ref-RFC_2001_2-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-RFC_2001-2"><FONT size=3>[2]</FONT></A></SUP><SUP id=cite_ref-RFC_3390_3-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-RFC_3390-3"><FONT size=3>[3]</FONT></A></SUP><SUP id=cite_ref-4 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-4"><FONT size=3>[4]</FONT></A></SUP> Per the <A title="End-to-end principle" href="https://en.wikipedia.org/wiki/End-to-end_principle">end-to-end principle</A>, congestion control is largely a function of <A title="Internet host" class=mw-redirect href="https://en.wikipedia.org/wiki/Internet_host">internet hosts</A>, not the network itself. There are several variations and versions of the algorithm implemented in <A title="Protocol stack" href="https://en.wikipedia.org/wiki/Protocol_stack">protocol stacks</A> of <A title="Operating system" href="https://en.wikipedia.org/wiki/Operating_system">operating systems</A> of computers that connect to the <A title=Internet href="https://en.wikipedia.org/wiki/Internet">Internet</A>. </P>
+<P>To avoid <A title="Congestive collapse" class=mw-redirect href="https://en.wikipedia.org/wiki/Congestive_collapse">congestive collapse</A>, TCP uses multi-faceted congestion-control strategy. For each connection, TCP maintains a CWND, limiting the total number of unacknowledged packets that may be in transit end-to-end. This is somewhat analogous to TCP's <A title="Sliding window" class=mw-redirect href="https://en.wikipedia.org/wiki/Sliding_window">sliding window</A> used for <A title="Transmission Control Protocol" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol#Flow_control">flow control</A>. </P>
+<DIV class="mw-heading mw-heading2">
+<H2 id=Additive_increase/multiplicative_decrease><SPAN id=Additive_increase.2Fmultiplicative_decrease></SPAN>Additive increase/multiplicative decrease</H2></DIV>
+<P>The <A title="Additive increase/multiplicative decrease" href="https://en.wikipedia.org/wiki/Additive_increase/multiplicative_decrease">additive increase/multiplicative decrease</A> (AIMD) algorithm is a <A title="Control system" href="https://en.wikipedia.org/wiki/Control_system">closed-loop control algorithm</A>. AIMD combines linear growth of the congestion window with an exponential reduction when congestion occurs. Multiple flows using AIMD congestion control will eventually converge to use equal amounts of a contended link.<SUP id=cite_ref-chui1989_5-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-chui1989-5"><FONT size=3>[5]</FONT></A></SUP> </P>
+<P>This is the algorithm that is described in <A title="RFC (identifier)" class=mw-redirect href="https://en.wikipedia.org/wiki/RFC_(identifier)">RFC</A>&nbsp;<A class="external text" href="https://datatracker.ietf.org/doc/html/rfc5681" rel=nofollow>5681</A> for the "congestion avoidance" state.<SUP id=cite_ref-6 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-6"><FONT size=3>[6]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading2">
+<H2 id=Congestion_window>Congestion window</H2></DIV>
+<P>In TCP, the <B>congestion window (CWND)</B> is one of the factors that determines the number of bytes that can be sent out at any time. The congestion window is maintained by the sender and is a means of preventing <I>a link</I> between the sender and the receiver from becoming overloaded with too much traffic. This should not be confused with the sliding window maintained by the sender which exists to prevent <I>the receiver</I> from becoming overloaded. The congestion window is calculated by estimating how much congestion there is on the link. </P>
+<P>When a connection is set up, the congestion window, a value maintained independently at each host, is set to a small multiple of the <B><A title="Maximum segment size" href="https://en.wikipedia.org/wiki/Maximum_segment_size">maximum segment size</A></B> (<B>MSS</B>) allowed on that connection. Further variance in the congestion window is dictated by an <A title="Additive increase/multiplicative decrease" href="https://en.wikipedia.org/wiki/Additive_increase/multiplicative_decrease">additive increase/multiplicative decrease</A> (AIMD) approach. This means that if all segments are received and the acknowledgments reach the sender on time, some constant is added to the window size. It will follow different algorithms. </P>
+<P>A <A title="System administrator" href="https://en.wikipedia.org/wiki/System_administrator">system administrator</A> may adjust the maximum window size limit, or adjust the constant added during additive increase, as part of <A title="TCP tuning" href="https://en.wikipedia.org/wiki/TCP_tuning">TCP tuning</A>. </P>
+<P>The flow of data over a TCP connection is also controlled by the use of the <I><A title="Transmission Control Protocol" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol#Flow_control">receive window</A></I> advertised by the receiver. A sender can send data less than its own congestion window and the <I>receive window</I>. </P>
+<DIV class="mw-heading mw-heading2">
+<H2 id=Slow_start>Slow start</H2></DIV>
+<P>Slow start, defined by <A title="RFC (identifier)" class=mw-redirect href="https://en.wikipedia.org/wiki/RFC_(identifier)">RFC</A>&nbsp;<A class="external text" href="https://datatracker.ietf.org/doc/html/rfc5681" rel=nofollow>5681</A>.<SUP id=cite_ref-Blanton_7-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-Blanton-7"><FONT size=3>[7]</FONT></A></SUP> is part of the <A title="Congestion control" class=mw-redirect href="https://en.wikipedia.org/wiki/Congestion_control">congestion control</A> strategy used by TCP in conjunction with other <A title=Algorithm href="https://en.wikipedia.org/wiki/Algorithm">algorithms</A> to avoid sending more data than the network is capable of forwarding, that is, to avoid causing network congestion. </P>
+<P>Slow start begins initially with a congestion window size (CWND) of 1, 2, 4 or 10 MSS.<SUP id=cite_ref-8 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-8"><FONT size=3>[8]</FONT></A></SUP><SUP id=cite_ref-RFC_3390_3-1 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-RFC_3390-3"><FONT size=3>[3]</FONT></A></SUP><SUP class="reference nowrap"><SPAN title="Page / location: 1"><FONT color=#000000 size=3>:&#8202;1&#8202;</FONT></SPAN></SUP> The value for the congestion window size can be increased by 1 MSS with each <A title="Acknowledgement (data networks)" href="https://en.wikipedia.org/wiki/Acknowledgement_(data_networks)">acknowledgement</A> (ACK) received, effectively doubling the window size each <A title="Round-trip delay" href="https://en.wikipedia.org/wiki/Round-trip_delay">RTT</A>.<SUP id=cite_ref-9 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-9"><FONT size=3>[a]</FONT></A></SUP> </P>
+<P>The transmission rate will be increased by the slow-start algorithm until either a packet loss is detected, the receiver's advertised window (rwnd) becomes the limiting factor, or <I>slow start threshold (ssthresh)</I> is reached, which is used&nbsp;to determine whether the slow start or congestion avoidance algorithm is used, a value set to limit slow start. </P>
+<P>If the CWND reaches <I>ssthresh</I>, TCP switches to the congestion avoidance algorithm. It should be increased by up to 1 MSS for each RTT. A common formula is that <I>each new ACK</I> increases the CWND by <I><SPAN class=nowrap>MSS * MSS / CWND.</SPAN></I> It increases almost linearly and provides an acceptable approximation. </P>
+<P>If a loss event occurs, TCP assumes that it is due to network congestion and takes steps to reduce the offered load on the network. These measures depend on the exact TCP congestion avoidance algorithm used. </P>
+<P>When a TCP sender detects segment loss using the retransmission timer and the given segment has not yet been resent, the value of <I>ssthresh</I> must be set to no more than half of the amount of data that has been sent but not yet cumulatively acknowledged or <I>2 * MSS</I>, whichever value is greater. </P>
+<DL>
+<DT>TCP Tahoe</DT>
+<DD>When a loss occurs, retransmit is sent, half of the current CWND is saved as <I>ssthresh</I> and slow start begins again from its initial CWND.</DD>
+<DT>TCP Reno</DT>
+<DD>A <A href="https://en.wikipedia.org/wiki/TCP_congestion_control#Fast_retransmit">fast retransmit</A> is sent, half of the current CWND is saved as <I>ssthresh</I> and as new CWND, thus skipping slow start and going directly to the congestion avoidance algorithm. The overall algorithm here is called <B><SPAN class=vanchor><SPAN id=fast_recovery></SPAN><SPAN class=vanchor-text>fast recovery</SPAN></SPAN></B>.</DD></DL>
+<P>Slow start assumes that unacknowledged segments are due to network congestion. While this is an acceptable assumption for many networks, segments may be lost for other reasons, such as poor <A title="Data link layer" href="https://en.wikipedia.org/wiki/Data_link_layer">data link layer</A> transmission quality. Thus, slow start can perform poorly in situations with poor reception, such as <A title="Wireless LAN" href="https://en.wikipedia.org/wiki/Wireless_LAN">wireless networks</A>. </P>
+<P>The slow start protocol also performs badly for short-lived connections. Older <A title="Web browsers" class=mw-redirect href="https://en.wikipedia.org/wiki/Web_browsers">web browsers</A> would create many consecutive short-lived connections to the web server, and would open and close the connection for each file requested. This kept most connections in the slow start mode, which resulted in poor response time. To avoid this problem, modern browsers either open multiple connections simultaneously or <A title="HTTP persistent connections" class=mw-redirect href="https://en.wikipedia.org/wiki/HTTP_persistent_connections">reuse one connection</A> for all files requested from a particular web server. Connections, however, cannot be reused for the multiple third-party servers used by web sites to implement <A title="Advertising network" href="https://en.wikipedia.org/wiki/Advertising_network">web advertising</A>, <A title="Like button" href="https://en.wikipedia.org/wiki/Like_button">sharing features</A> of <A title="Social networking service" href="https://en.wikipedia.org/wiki/Social_networking_service">social networking services</A>,<SUP id=cite_ref-10 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-10"><FONT size=3>[9]</FONT></A></SUP> and <A title="Web analytics" href="https://en.wikipedia.org/wiki/Web_analytics#Page_tagging">counter scripts of web analytics</A>. </P>
+<DIV class="mw-heading mw-heading2">
+<H2 id=Fast_retransmit>Fast retransmit</H2></DIV>
+<P><B>Fast retransmit</B> is an enhancement to <A title="Transmission Control Protocol" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</A> that reduces the time a sender waits before retransmitting a lost segment. A TCP sender normally uses a simple timer to recognize lost segments. If an acknowledgment is not received for a particular segment within a specified time (a function of the estimated <A title="Round-trip delay time" class=mw-redirect href="https://en.wikipedia.org/wiki/Round-trip_delay_time">round-trip delay time</A>), the sender will assume the segment was lost in the network and will retransmit the segment. </P>
+<P><B>Duplicate acknowledgment</B> is the basis for the fast retransmit mechanism. After receiving a packet an acknowledgement is sent for the last in-order byte of data received. For an in-order packet, this is effectively the last packet's sequence number plus the current packet's payload length. If the next packet in the sequence is lost but a third packet in the sequence is received, then the receiver can only acknowledge the last in-order byte of data, which is the same value as was acknowledged for the first packet. The second packet is lost and the third packet is not in order, so the last in-order byte of data remains the same as before. Thus a <I>Duplicate acknowledgment</I> occurs. The sender continues to send packets, and a fourth and fifth packet are received by the receiver. Again, the second packet is missing from the sequence, so the last in-order byte has not changed. Duplicate acknowledgments are sent for both of these packets. </P>
+<P>When a sender receives three duplicate acknowledgments, it can be reasonably confident that the segment carrying the data that followed the last in-order byte specified in the acknowledgment was lost. A sender with fast retransmit will then retransmit this packet immediately without waiting for its timeout. On receipt of the retransmitted segment, the receiver can acknowledge the last in-order byte of data received. In the above example, this would acknowledge to the end of the payload of the fifth packet. There is no need to acknowledge intermediate packets since TCP uses cumulative acknowledgments by default. </P>
+<DIV class="mw-heading mw-heading2">
+<H2 id=Algorithms>Algorithms</H2></DIV>
+<P>The naming convention for congestion control algorithms (CCAs) may have originated in a 1996 paper by Kevin Fall and Sally Floyd.<SUP id=cite_ref-11 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-11"><FONT size=3>[10]</FONT></A></SUP><SUP class="noprint Inline-Template" style="WHITE-SPACE: nowrap">[<I><A title=Wikipedia:Verifiability href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability"><SPAN title="The naming conventions are used in this paper but what we really need is a secondary source that indicates that this paper was the first to use them. (January 2019)">failed verification</SPAN></A></I>]</SUP> </P>
+<P>The following is one possible classification according to the following properties: </P>
+<OL>
+<LI>the type and amount of feedback received from the network</LI>
+<LI>incremental deployability on the current Internet</LI>
+<LI>the aspect of performance it aims to improve: high <A title="Bandwidth-delay product" href="https://en.wikipedia.org/wiki/Bandwidth-delay_product">bandwidth-delay product</A> networks (B); lossy links (L); fairness (F); advantage to short flows (S); variable-rate links (V); <A title="Speed of convergence" class=mw-redirect href="https://en.wikipedia.org/wiki/Speed_of_convergence">speed of convergence</A> (C)</LI>
+<LI>the fairness criterion it uses</LI></OL>
+<P>Some well-known congestion avoidance mechanisms are classified by this scheme as follows: </P>
+<P>
+<TABLE class="wikitable sortable jquery-tablesorter">
+<THEAD>
+<TR>
+<TH role="columnheader button" tabIndex=0 title="Sort ascending" class=headerSort>Variant </TH>
+<TH role="columnheader button" tabIndex=0 title="Sort ascending" class=headerSort>Feedback </TH>
+<TH role="columnheader button" tabIndex=0 title="Sort ascending" class=headerSort>Required changes </TH>
+<TH role="columnheader button" tabIndex=0 title="Sort ascending" class=headerSort>Benefits </TH>
+<TH role="columnheader button" tabIndex=0 title="Sort ascending" class=headerSort>Fairness </TH></TR></THEAD>
+<TBODY>
+<TR>
+<TD>(New) Reno </TD>
+<TD>Loss </TD>
+<TD class=table-na style="VERTICAL-ALIGN: middle; TEXT-ALIGN: center" data-sort-value="">&#8212; </TD>
+<TD class=table-na style="VERTICAL-ALIGN: middle; TEXT-ALIGN: center" data-sort-value="">&#8212; </TD>
+<TD>Delay </TD></TR>
+<TR>
+<TD>Vegas </TD>
+<TD>Delay </TD>
+<TD>Sender </TD>
+<TD>Less loss </TD>
+<TD>Proportional </TD></TR>
+<TR>
+<TD>High Speed </TD>
+<TD>Loss </TD>
+<TD>Sender </TD>
+<TD>High bandwidth </TD>
+<TD></TD></TR>
+<TR>
+<TD>BIC </TD>
+<TD>Loss </TD>
+<TD>Sender </TD>
+<TD>High bandwidth </TD>
+<TD></TD></TR>
+<TR>
+<TD>CUBIC </TD>
+<TD>Loss </TD>
+<TD>Sender </TD>
+<TD>High bandwidth </TD>
+<TD></TD></TR>
+<TR>
+<TD>C2TCP<SUP id=cite_ref-C2TCP-JSAC_12-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-JSAC-12"><FONT size=3>[11]</FONT></A></SUP><SUP id=cite_ref-C2TCP_13-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-13"><FONT size=3>[12]</FONT></A></SUP> </TD>
+<TD>Loss/Delay </TD>
+<TD>Sender </TD>
+<TD>Ultra-low latency and high bandwidth </TD>
+<TD></TD></TR>
+<TR>
+<TD>NATCP<SUP id=cite_ref-FOOTNOTEAbbaslooXuChaoShi2019_14-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-FOOTNOTEAbbaslooXuChaoShi2019-14"><FONT size=3>[13]</FONT></A></SUP> </TD>
+<TD>Multi-bit signal </TD>
+<TD>Sender </TD>
+<TD>Near Optimal Performance </TD>
+<TD></TD></TR>
+<TR>
+<TD>Elastic-TCP </TD>
+<TD>Loss/Delay </TD>
+<TD>Sender </TD>
+<TD>High bandwidth/short &amp; long-distance </TD>
+<TD></TD></TR>
+<TR>
+<TD>Agile-TCP </TD>
+<TD>Loss </TD>
+<TD>Sender </TD>
+<TD>High bandwidth/short-distance </TD>
+<TD></TD></TR>
+<TR>
+<TD>H-TCP </TD>
+<TD>Loss </TD>
+<TD>Sender </TD>
+<TD>High bandwidth </TD>
+<TD></TD></TR>
+<TR>
+<TD>FAST </TD>
+<TD>Delay </TD>
+<TD>Sender </TD>
+<TD>High bandwidth </TD>
+<TD>Proportional </TD></TR>
+<TR>
+<TD>Compound TCP </TD>
+<TD>Loss/Delay </TD>
+<TD>Sender </TD>
+<TD>High bandwidth </TD>
+<TD>Proportional </TD></TR>
+<TR>
+<TD>Westwood </TD>
+<TD>Loss/Delay </TD>
+<TD>Sender </TD>
+<TD>Lossy links </TD>
+<TD></TD></TR>
+<TR>
+<TD>Jersey </TD>
+<TD>Loss/Delay </TD>
+<TD>Sender </TD>
+<TD>Lossy links </TD>
+<TD></TD></TR>
+<TR>
+<TD>BBR<SUP id=cite_ref-15 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-15"><FONT size=3>[14]</FONT></A></SUP> </TD>
+<TD>Delay </TD>
+<TD>Sender </TD>
+<TD>BLVC, <A title=Bufferbloat href="https://en.wikipedia.org/wiki/Bufferbloat">Bufferbloat</A> </TD>
+<TD></TD></TR>
+<TR>
+<TD>CLAMP </TD>
+<TD>Multi-bit signal </TD>
+<TD>Receiver, Router </TD>
+<TD>Variable-rate links </TD>
+<TD>Max-min </TD></TR>
+<TR>
+<TD>TFRC </TD>
+<TD>Loss </TD>
+<TD>Sender, Receiver </TD>
+<TD>No Retransmission </TD>
+<TD>Minimum delay </TD></TR>
+<TR>
+<TD>XCP </TD>
+<TD>Multi-bit signal </TD>
+<TD>Sender, Receiver, Router </TD>
+<TD>BLFC </TD>
+<TD>Max-min </TD></TR>
+<TR>
+<TD>VCP </TD>
+<TD>2-bit signal </TD>
+<TD>Sender, Receiver, Router </TD>
+<TD>BLF </TD>
+<TD>Proportional </TD></TR>
+<TR>
+<TD>MaxNet </TD>
+<TD>Multi-bit signal </TD>
+<TD>Sender, Receiver, Router </TD>
+<TD>BLFSC </TD>
+<TD>Max-min </TD></TR>
+<TR>
+<TD>JetMax </TD>
+<TD>Multi-bit signal </TD>
+<TD>Sender, Receiver, Router </TD>
+<TD>High bandwidth </TD>
+<TD>Max-min </TD></TR>
+<TR>
+<TD>RED </TD>
+<TD>Loss </TD>
+<TD>Router </TD>
+<TD>Reduced delay </TD>
+<TD></TD></TR>
+<TR>
+<TD>ECN </TD>
+<TD>Single-bit signal </TD>
+<TD>Sender, Receiver, Router </TD>
+<TD>Reduced loss </TD>
+<TD></TD></TR></TBODY>
+<TFOOT></TFOOT></TABLE></P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_Tahoe_and_Reno>TCP Tahoe and Reno</H3></DIV>
+<P>TCP Tahoe and Reno algorithms were retrospectively named after the versions or flavours of the <A title=4.3BSD class=mw-redirect href="https://en.wikipedia.org/wiki/4.3BSD">4.3BSD</A> operating system in which each first appeared (which were themselves named after <A title="Lake Tahoe" href="https://en.wikipedia.org/wiki/Lake_Tahoe">Lake Tahoe</A> and the nearby city of <A title="Reno, Nevada" href="https://en.wikipedia.org/wiki/Reno,_Nevada">Reno, Nevada</A>). The Tahoe algorithm first appeared in 4.3BSD-Tahoe (which was made to support the <A title="Computer Consoles Inc." href="https://en.wikipedia.org/wiki/Computer_Consoles_Inc.#Power_5_and_Power_6_computers">CCI Power 6/32 "Tahoe" minicomputer</A>), and was later made available to non-AT&amp;T licensees as part of the 4.3BSD Networking Release 1; this ensured its wide distribution and implementation. Improvements were made in 4.3BSD-Reno and subsequently released to the public as Networking Release 2 and later 4.4BSD-Lite. </P>
+<P>While both consider retransmission timeout (RTO) and duplicate ACKs as packet loss events, the behavior of Tahoe and Reno differ primarily in how they react to duplicate ACKs: </P>
+<UL>
+<LI>Tahoe: if three duplicate ACKs are received (i.e. four ACKs acknowledging the same packet, which are not piggybacked on data and do not change the receiver's advertised window), Tahoe performs a fast retransmit, sets the slow start threshold to half of the current congestion window, reduces the congestion window to 1 MSS, and resets to slow start state.<SUP id=cite_ref-FOOTNOTEKuroseRoss2008284_16-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-FOOTNOTEKuroseRoss2008284-16"><FONT size=3>[15]</FONT></A></SUP></LI>
+<LI>Reno: if three duplicate ACKs are received, Reno will perform a fast retransmit and skip the slow start phase by instead halving the congestion window (instead of setting it to 1 MSS like Tahoe), setting the ssthresh equal to the new congestion window, and enter a phase called <I>fast recovery</I>.<SUP id=cite_ref-FOOTNOTEKuroseRoss2012277_17-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-FOOTNOTEKuroseRoss2012277-17"><FONT size=3>[16]</FONT></A></SUP></LI></UL>
+<P>In both Tahoe and Reno, if an ACK times out (RTO timeout), slow start is used, and both algorithms reduce the congestion window to 1 MSS.<SUP class="noprint Inline-Template Template-Fact" style="WHITE-SPACE: nowrap">[<I><A title="Wikipedia:Citation needed" href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed"><SPAN title="This claim needs references to reliable sources. (October 2021)">citation needed</SPAN></A></I>]</SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_New_Reno>TCP New Reno</H3></DIV>
+<P>TCP New Reno, defined by <A title="RFC (identifier)" class=mw-redirect href="https://en.wikipedia.org/wiki/RFC_(identifier)">RFC</A>&nbsp;<A class="external text" href="https://datatracker.ietf.org/doc/html/rfc6582" rel=nofollow>6582</A> (which obsolesces previous definitions in <A title="RFC (identifier)" class=mw-redirect href="https://en.wikipedia.org/wiki/RFC_(identifier)">RFC</A>&nbsp;<A class="external text" href="https://datatracker.ietf.org/doc/html/rfc3782" rel=nofollow>3782</A> and <A title="RFC (identifier)" class=mw-redirect href="https://en.wikipedia.org/wiki/RFC_(identifier)">RFC</A>&nbsp;<A class="external text" href="https://datatracker.ietf.org/doc/html/rfc2582" rel=nofollow>2582</A>), improves retransmission during the fast-recovery phase of TCP Reno. </P>
+<P>During fast recovery, to keep the transmit window full, for every duplicate ACK that is returned, a new unsent packet from the end of the congestion window is sent. </P>
+<P>The difference from Reno is that New Reno does not halve ssthresh immediately which may reduce the window too much if multiple packet losses occur. It does not exit fast-recovery and reset ssthresh until it acknowledges all&nbsp;of the data. </P>
+<P>After retransmission, newly acknowledged data have two cases: </P>
+<UL>
+<LI>Full acknowledgments: The ACK acknowledges all the intermediate segments sent, the ssthresh can be not changed, cwnd can be set to ssthresh</LI>
+<LI>Partial acknowledgments: The ACK does not acknowledge all data. It means another loss may occur, retransmit the first unacknowledged segment if permitted</LI></UL>
+<P>It uses a variable called "recover" to record how much data needs to be recovered. After a retransmit timeout, it records the highest sequence number transmitted in the recover variable and exits the fast recovery procedure. If this sequence number is acknowledged, TCP returns to the congestion avoidance state. </P>
+<P>A problem occurs with New Reno when there are no packet losses but instead, packets are reordered by more than 3 packet sequence numbers. In this case, New Reno mistakenly enters fast recovery. When the reordered packet is delivered, duplicate and needless retransmissions are immediately sent. </P>
+<P>New Reno performs as well as SACK at low packet error rates and substantially outperforms Reno at high error rates.<SUP id=cite_ref-18 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-18"><FONT size=3>[17]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_Vegas>TCP Vegas</H3></DIV>
+<DIV role=note class="hatnote navigation-not-searchable">Main article: <A title="TCP Vegas" href="https://en.wikipedia.org/wiki/TCP_Vegas">TCP Vegas</A></DIV>
+<P>Until the mid-1990s, all of TCP's set timeouts and measured round-trip delays were based upon only the last transmitted packet in the transmit buffer. <A title="University of Arizona" href="https://en.wikipedia.org/wiki/University_of_Arizona">University of Arizona</A> researchers <A title="Larry Peterson" class=mw-redirect href="https://en.wikipedia.org/wiki/Larry_Peterson">Larry Peterson</A> and <A title="Lawrence Brakmo" href="https://en.wikipedia.org/wiki/Lawrence_Brakmo">Lawrence Brakmo</A> introduced TCP Vegas in which timeouts were set and round-trip delays were measured for every packet in the transmit buffer. In addition, TCP Vegas uses additive increases in the congestion window. In a comparison study of various TCP <ABBR title="congestion control algorithm">CCA</ABBR>s, TCP Vegas appeared to be the smoothest followed by TCP CUBIC.<SUP id=cite_ref-19 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-19"><FONT size=3>[18]</FONT></A></SUP> </P>
+<P>TCP Vegas was not widely deployed outside Peterson's laboratory but was selected as the default congestion control method for <A title=DD-WRT href="https://en.wikipedia.org/wiki/DD-WRT">DD-WRT</A> firmware v24 SP2.<SUP id=cite_ref-20 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-20"><FONT size=3>[19]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_Hybla>TCP Hybla</H3></DIV>
+<P>TCP Hybla<SUP id=cite_ref-21 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-21"><FONT size=3>[20]</FONT></A></SUP><SUP id=cite_ref-22 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-22"><FONT size=3>[21]</FONT></A></SUP> aims to eliminate penalties to TCP connections that use high-latency terrestrial or satellite radio links. Hybla improvements are based on analytical evaluation of the congestion window dynamics.<SUP id=cite_ref-23 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-23"><FONT size=3>[22]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_BIC>TCP BIC</H3></DIV>
+<DIV role=note class="hatnote navigation-not-searchable">Main article: <A title="BIC TCP" href="https://en.wikipedia.org/wiki/BIC_TCP">BIC TCP</A></DIV>
+<P>Binary Increase Congestion control (BIC) is a TCP implementation with an optimized CCA for high-speed networks with high latency, known as <A title="Long fat network" class=mw-redirect href="https://en.wikipedia.org/wiki/Long_fat_network">long fat networks</A> (LFNs).<SUP id=cite_ref-24 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-24"><FONT size=3>[23]</FONT></A></SUP> BIC is used by default in <A title="Linux kernel" href="https://en.wikipedia.org/wiki/Linux_kernel">Linux kernels</A> 2.6.8 through 2.6.18.<SUP class="noprint Inline-Template Template-Fact" style="WHITE-SPACE: nowrap">[<I><A title="Wikipedia:Citation needed" href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed"><SPAN title="This claim needs references to reliable sources. (March 2020)">citation needed</SPAN></A></I>]</SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_CUBIC>TCP CUBIC</H3></DIV>
+<DIV role=note class="hatnote navigation-not-searchable">Main article: <A title="CUBIC TCP" href="https://en.wikipedia.org/wiki/CUBIC_TCP">CUBIC TCP</A></DIV>
+<P>CUBIC is a less aggressive and more systematic derivative of BIC, in which the window is a cubic function of time since the last congestion event, with the inflection point set to the window prior to the event. CUBIC is used by default in <A title="Linux kernel" href="https://en.wikipedia.org/wiki/Linux_kernel">Linux kernels</A> since version 2.6.19. </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=Agile-SD_TCP>Agile-SD TCP</H3></DIV>
+<P>Agile-SD is a Linux-based CCA which is designed for the real Linux kernel. It is a receiver-side algorithm that employs a loss-based approach using a novel mechanism, called <I>agility factor</I> (AF). to increase the bandwidth utilization over high-speed and short-distance networks (low bandwidth-delay product networks) such as local area networks or fiber-optic network, especially when the applied buffer size is small.<SUP id=cite_ref-agilesd_25-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-agilesd-25"><FONT size=3>[24]</FONT></A></SUP> It has been evaluated by comparing its performance to Compound TCP (the default CCA in MS Windows) and CUBIC (the default of Linux) using NS-2 simulator. It improves the total performance up to 55% in term of average throughput. </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_Westwood+><SPAN id=TCP_Westwood.2B></SPAN>TCP Westwood+</H3></DIV>
+<DIV role=note class="hatnote navigation-not-searchable">Main article: <A title="TCP Westwood plus" class=mw-redirect href="https://en.wikipedia.org/wiki/TCP_Westwood_plus">TCP Westwood plus</A></DIV>
+<P>Westwood+ is a sender-only modification of TCP Reno that optimizes the performance of TCP congestion control over both wired and <A title="Wireless network" href="https://en.wikipedia.org/wiki/Wireless_network">wireless networks</A>. TCP Westwood+ is based on end-to-end <A title="Bandwidth (computing)" href="https://en.wikipedia.org/wiki/Bandwidth_(computing)">bandwidth</A> estimation to set the congestion window and slow-start threshold after a congestion episode, that is, after three duplicate acknowledgments or a timeout. The bandwidth is estimated by averaging the rate of returning acknowledgment packets. In contrast with TCP Reno, which blindly halves the congestion window after three duplicate ACKs, TCP Westwood+ adaptively sets a slow-start threshold and a congestion window that takes into account an estimate of bandwidth available at the time congestion is experienced. Compared to Reno and New Reno, Westwood+ significantly increases throughput over wireless links and improves fairness in wired networks.<SUP class="noprint Inline-Template Template-Fact" style="WHITE-SPACE: nowrap">[<I><A title="Wikipedia:Citation needed" href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed"><SPAN title="This claim needs references to reliable sources. (August 2020)">citation needed</SPAN></A></I>]</SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=Compound_TCP>Compound TCP</H3></DIV>
+<DIV role=note class="hatnote navigation-not-searchable">Main article: <A title="Compound TCP" href="https://en.wikipedia.org/wiki/Compound_TCP">Compound TCP</A></DIV>
+<P>Compound TCP is a <A title=Microsoft href="https://en.wikipedia.org/wiki/Microsoft">Microsoft</A> implementation of TCP which maintains two different congestion windows simultaneously, with the goal of achieving good performance on LFNs while not impairing <A title="Fairness measure" href="https://en.wikipedia.org/wiki/Fairness_measure">fairness</A>. It has been widely deployed in Windows versions since Microsoft <A title="Windows Vista" href="https://en.wikipedia.org/wiki/Windows_Vista">Windows Vista</A> and <A title="Windows Server 2008" href="https://en.wikipedia.org/wiki/Windows_Server_2008">Windows Server 2008</A> and has been ported to older Microsoft Windows versions as well as <A title=Linux href="https://en.wikipedia.org/wiki/Linux">Linux</A>. </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_Proportional_Rate_Reduction>TCP Proportional Rate Reduction</H3></DIV>
+<P>TCP Proportional Rate Reduction (PRR)<SUP id=cite_ref-26 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-26"><FONT size=3>[25]</FONT></A></SUP> is an algorithm designed to improve the accuracy of data sent during recovery. The algorithm ensures that the window size after recovery is as close as possible to the slow start threshold. In tests performed by <A title=Google href="https://en.wikipedia.org/wiki/Google">Google</A>, PRR resulted in a 3&#8211;10% reduction in average latency and recovery timeouts were reduced by 5%.<SUP id=cite_ref-27 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-27"><FONT size=3>[26]</FONT></A></SUP> PRR is available in <A title="Linux kernel" href="https://en.wikipedia.org/wiki/Linux_kernel">Linux kernels</A> since version 3.2.<SUP id=cite_ref-28 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-28"><FONT size=3>[27]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=TCP_BBR>TCP BBR</H3></DIV>
+<P>Bottleneck Bandwidth and Round-trip propagation time (BBR) is a CCA developed at Google in 2016.<SUP id=cite_ref-GOOGBBR_29-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-GOOGBBR-29"><FONT size=3>[28]</FONT></A></SUP> While most CCAs are loss-based, in that they rely on packet loss to detect congestion and lower rates of transmission, BBR, like <A href="https://en.wikipedia.org/wiki/TCP_congestion_control#TCP_Vegas">TCP Vegas</A>, is model-based. The algorithm uses the maximum bandwidth and round-trip time at which the network delivered the most recent flight of outbound data packets to build a model of the network. Each cumulative or selective acknowledgment of packet delivery produces a rate sample that records the amount of data delivered over the time interval between the transmission of a data packet and the acknowledgment of that packet.<SUP id=cite_ref-30 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-30"><FONT size=3>[29]</FONT></A></SUP> </P>
+<P>When implemented at <A title=YouTube href="https://en.wikipedia.org/wiki/YouTube">YouTube</A>, BBRv1 yielded an average of 4% higher network throughput and up to 14% in some countries.<SUP id=cite_ref-31 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-31"><FONT size=3>[30]</FONT></A></SUP> BBR has been available for Linux TCP since Linux 4.9.<SUP id=cite_ref-32 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-32"><FONT size=3>[31]</FONT></A></SUP> It is also available for <A title=QUIC href="https://en.wikipedia.org/wiki/QUIC">QUIC</A>.<SUP id=cite_ref-33 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-33"><FONT size=3>[32]</FONT></A></SUP> </P>
+<P>BBR version 1 (BBRv1) fairness to non-BBR streams is disputed. While Google's presentation shows BBRv1 co-existing well with CUBIC,<SUP id=cite_ref-GOOGBBR_29-1 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-GOOGBBR-29"><FONT size=3>[28]</FONT></A></SUP> researchers like Geoff Huston and Hock, Bless and Zitterbart found it unfair to other streams and not scalable.<SUP id=cite_ref-34 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-34"><FONT size=3>[33]</FONT></A></SUP> Hock et al. also found "some severe inherent issues such as increased queuing delays, unfairness, and massive packet loss" in the BBR implementation of Linux 4.9.<SUP id=cite_ref-35 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-35"><FONT size=3>[34]</FONT></A></SUP> Soheil Abbasloo et al. (authors of C2TCP) show that BBRv1 doesn't perform well in dynamic environments such as cellular networks.<SUP id=cite_ref-C2TCP-JSAC_12-1 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-JSAC-12"><FONT size=3>[11]</FONT></A></SUP><SUP id=cite_ref-C2TCP_13-1 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-13"><FONT size=3>[12]</FONT></A></SUP> They have also shown that BBR has an unfairness issue. For instance, when a <A title="CUBIC TCP" href="https://en.wikipedia.org/wiki/CUBIC_TCP">CUBIC</A> flow (which is the default <A title="Transmission Control Protocol" href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</A> implementation in Linux, Android, and MacOS) coexists with a BBR flow in the network, the BBR flow can dominate the CUBIC flow and get the whole link bandwidth from it (see figure 16 in<SUP id=cite_ref-C2TCP-JSAC_12-2 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-JSAC-12"><FONT size=3>[11]</FONT></A></SUP>). </P>
+<P>Version 2 attempts to deal with the issue of unfairness when operating alongside loss-based congestion management such as CUBIC.<SUP id=cite_ref-36 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-36"><FONT size=3>[35]</FONT></A></SUP> In BBRv2 the model used by BBRv1 is augmented to include information about packet loss and information from <A title="Explicit Congestion Notification" href="https://en.wikipedia.org/wiki/Explicit_Congestion_Notification">Explicit Congestion Notification</A> (ECN).<SUP id=cite_ref-bbr3_37-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-bbr3-37"><FONT size=3>[36]</FONT></A></SUP> Whilst BBRv2 may at times have lower throughput than BBRv1 it is generally considered to have better <A title=Goodput href="https://en.wikipedia.org/wiki/Goodput">goodput</A>.<SUP class="noprint Inline-Template Template-Fact" style="WHITE-SPACE: nowrap">[<I><A title="Wikipedia:Citation needed" href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed"><SPAN title="This claim needs references to reliable sources. (June 2023)">citation needed</SPAN></A></I>]</SUP> </P>
+<P>Version 3 (BBRv3) fixes two bugs in BBRv2 (premature end of bandwidth probing, bandwidth convergence) and performs some performance tuning. There is also a variant, termed BBR.Swift, optimized for datacenter-internal links: it uses network_RTT (excluding receiver delay) as the main congestion control signal.<SUP id=cite_ref-bbr3_37-1 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-bbr3-37"><FONT size=3>[36]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=C2TCP>C2TCP</H3></DIV>
+<P>Cellular Controlled Delay TCP (C2TCP)<SUP id=cite_ref-C2TCP-JSAC_12-3 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-JSAC-12"><FONT size=3>[11]</FONT></A></SUP><SUP id=cite_ref-C2TCP_13-2 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-13"><FONT size=3>[12]</FONT></A></SUP> was motivated by the lack of a flexible end-to-end TCP approach that can satisfy various <A title="Quality of service" href="https://en.wikipedia.org/wiki/Quality_of_service">QoS</A> requirements for different applications without requiring any changes in the network devices. C2TCP aims to satisfy ultra-low <A title="Latency (engineering)" href="https://en.wikipedia.org/wiki/Latency_(engineering)">latency</A> and high-bandwidth requirements of applications such as <A title="Virtual reality" href="https://en.wikipedia.org/wiki/Virtual_reality">virtual reality</A>, <A title="Video conferencing" class=mw-redirect href="https://en.wikipedia.org/wiki/Video_conferencing">video conferencing</A>, <A title="Online game" href="https://en.wikipedia.org/wiki/Online_game">online gaming</A>, <A title="Vehicular communication systems" href="https://en.wikipedia.org/wiki/Vehicular_communication_systems">vehicular communication systems</A>, etc. in a highly dynamic environment such as current <A title="LTE (telecommunication)" href="https://en.wikipedia.org/wiki/LTE_(telecommunication)">LTE</A> and future <A title=5G href="https://en.wikipedia.org/wiki/5G">5G</A> <A title="Cellular network" href="https://en.wikipedia.org/wiki/Cellular_network">cellular networks</A>. C2TCP works as an <A title="Plug-in (computing)" href="https://en.wikipedia.org/wiki/Plug-in_(computing)">add-on</A> on top of loss-based TCP (e.g. Reno, NewReno, <A title="CUBIC TCP" href="https://en.wikipedia.org/wiki/CUBIC_TCP">CUBIC</A>, <A title="BIC TCP" href="https://en.wikipedia.org/wiki/BIC_TCP">BIC</A>, ...), it is only required to be installed on the server-side and makes the average delay of packets bounded to the desired delays set by the applications. </P>
+<P>Researchers at <A title=NYU class=mw-redirect href="https://en.wikipedia.org/wiki/NYU">NYU</A><SUP id=cite_ref-38 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-38"><FONT size=3>[37]</FONT></A></SUP> showed that C2TCP outperforms the delay and delay-variation performance of various state-of-the-art TCP schemes. For instance, they showed that compared to BBR, CUBIC, and Westwood on average, C2TCP decreases the average delay of packets by about 250%, 900%, and 700% respectively on various cellular network environments.<SUP id=cite_ref-C2TCP-JSAC_12-4 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-JSAC-12"><FONT size=3>[11]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=Elastic-TCP>Elastic-TCP</H3></DIV>
+<P>Elastic-TCP was proposed in February 2019 to increase bandwidth utilization over high-BDP networks in support of cloud computing. It is a Linux-based CCA that is designed for the Linux kernel. It is a receiver-side algorithm that employs a loss-delay-based approach using a novel mechanism called a window-correlated weighting function (WWF). It has a high level of elasticity to deal with different network characteristics without the need for human tuning. It has been evaluated by comparing its performance to Compound TCP (the default CCA in MS Windows), CUBIC (the default for Linux) and TCP-BBR (the default of Linux 4.9 used by Google) using the NS-2 simulator and testbed. Elastic-TCP significantly improves the total performance in terms of average throughput, loss ratio, and delay.<SUP id=cite_ref-elastictcp_39-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-elastictcp-39"><FONT size=3>[38]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=NATCP>NATCP</H3></DIV>
+<P>Soheil Abbasloo et al. proposed NATCP (Network-Assisted TCP)<SUP id=cite_ref-FOOTNOTEAbbaslooXuChaoShi2019_14-1 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-FOOTNOTEAbbaslooXuChaoShi2019-14"><FONT size=3>[13]</FONT></A></SUP> a <SPAN class=citation-needed-content style="BORDER-TOP: #ddd 1px solid; BORDER-RIGHT: #ddd 1px solid; BORDER-BOTTOM: #ddd 1px solid; COLOR: ; PADDING-LEFT: 0.1em; BORDER-LEFT: #ddd 1px solid; PADDING-RIGHT: 0.1em">controversial</SPAN><SUP class="noprint Inline-Template" style="WHITE-SPACE: nowrap; MARGIN-LEFT: 0.1em">[<I><A title="Wikipedia:Manual of Style/Words to watch" href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Words_to_watch#Unsupported_attributions"><SPAN title="The material near this tag may use weasel words or too-vague attribution. (October 2021)">according to whom?</SPAN></A></I>]</SUP> TCP design targeting <A title="Multi-access edge computing" href="https://en.wikipedia.org/wiki/Multi-access_edge_computing">multi-access edge computing</A> (MEC). The key idea of NATCP is that if the characteristics of the network were known beforehand, TCP would have been designed differently. Therefore, NATCP employs the available features and properties in the current MEC-based cellular architectures to push the performance of TCP close to the optimal performance. NATCP uses out-of-band feedback from the network to the servers located nearby. The feedback from the network, which includes the capacity of the cellular access link and the minimum RTT of the network, guides the servers to adjust their sending rates. As preliminary results show, NATCP outperforms the state-of-the-art TCP schemes.<SUP id=cite_ref-FOOTNOTEAbbaslooXuChaoShi2019_14-2 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-FOOTNOTEAbbaslooXuChaoShi2019-14"><FONT size=3>[13]</FONT></A></SUP><SUP id=cite_ref-40 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-40"><FONT size=3>[39]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=Other_TCP_congestion_avoidance_algorithms>Other TCP congestion avoidance algorithms</H3></DIV>
+<UL>
+<LI><A title="FAST TCP" href="https://en.wikipedia.org/wiki/FAST_TCP">FAST TCP</A></LI>
+<LI>Generalized FAST TCP<SUP id=cite_ref-41 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-41"><FONT size=3>[40]</FONT></A></SUP></LI>
+<LI><A title=H-TCP href="https://en.wikipedia.org/wiki/H-TCP">H-TCP</A></LI>
+<LI><A title="Data Center TCP" class=mw-redirect href="https://en.wikipedia.org/wiki/Data_Center_TCP">Data Center TCP</A></LI>
+<LI><A title="High Speed TCP" class=mw-redirect href="https://en.wikipedia.org/wiki/High_Speed_TCP">High Speed TCP</A></LI>
+<LI>HSTCP-LP<SUP id=cite_ref-ece.rice.edu_42-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-ece.rice.edu-42"><FONT size=3>[41]</FONT></A></SUP></LI>
+<LI><A title=TCP-Illinois href="https://en.wikipedia.org/wiki/TCP-Illinois">TCP-Illinois</A></LI>
+<LI>TCP-LP<SUP id=cite_ref-ece.rice.edu_42-1 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-ece.rice.edu-42"><FONT size=3>[41]</FONT></A></SUP></LI>
+<LI><A title="TCP SACK" class=mw-redirect href="https://en.wikipedia.org/wiki/TCP_SACK">TCP SACK</A></LI>
+<LI><A title="Scalable TCP" href="https://en.wikipedia.org/wiki/Scalable_TCP">Scalable TCP</A></LI>
+<LI>TCP Veno<SUP id=cite_ref-43 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-43"><FONT size=3>[42]</FONT></A></SUP></LI>
+<LI><A title="TCP Westwood" href="https://en.wikipedia.org/wiki/TCP_Westwood">Westwood</A></LI>
+<LI>XCP<SUP id=cite_ref-44 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-44"><FONT size=3>[43]</FONT></A></SUP></LI>
+<LI>YeAH-TCP<SUP id=cite_ref-45 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-45"><FONT size=3>[44]</FONT></A></SUP></LI>
+<LI>TCP-FIT<SUP id=cite_ref-46 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-46"><FONT size=3>[45]</FONT></A></SUP></LI>
+<LI>Congestion Avoidance with Normalized Interval of Time (CANIT)<SUP id=cite_ref-47 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-47"><FONT size=3>[46]</FONT></A></SUP></LI>
+<LI>Non-linear neural network congestion control based on genetic algorithm for TCP/IP networks<SUP id=cite_ref-48 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-48"><FONT size=3>[47]</FONT></A></SUP></LI>
+<LI>D-TCP<SUP id=cite_ref-49 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-49"><FONT size=3>[48]</FONT></A></SUP></LI>
+<LI>NexGen D-TCP<SUP id=cite_ref-50 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-50"><FONT size=3>[49]</FONT></A></SUP></LI>
+<LI>Copa<SUP id=cite_ref-51 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-51"><FONT size=3>[50]</FONT></A></SUP></LI></UL>
+<P><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#TCP_New_Reno">TCP New Reno</A> was the most commonly implemented algorithm,<SUP class="noprint Inline-Template Template-Fact" style="WHITE-SPACE: nowrap">[<I><A title="Wikipedia:Citation needed" href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed"><SPAN title="This claim needs references to reliable sources. (September 2021)">citation needed</SPAN></A></I>]</SUP> SACK support is very common<SUP class="noprint Inline-Template Template-Fact" style="WHITE-SPACE: nowrap">[<I><A title="Wikipedia:Citation needed" href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed"><SPAN title="This claim needs references to reliable sources. (September 2021)">citation needed</SPAN></A></I>]</SUP> and is an extension to Reno/New Reno. Most others are competing proposals that still need evaluation. Starting with 2.6.8 the Linux kernel switched the default implementation from New Reno to <A title="BIC TCP" href="https://en.wikipedia.org/wiki/BIC_TCP">BIC</A>. The default implementation was again changed to CUBIC in the 2.6.19 version. <A title=FreeBSD href="https://en.wikipedia.org/wiki/FreeBSD">FreeBSD</A> from version 14.X onwards also uses CUBIC as the default algorithm.<SUP id=cite_ref-52 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-52"><FONT size=3>[51]</FONT></A></SUP> Previous version used New Reno. However, FreeBSD supports a number of other choices.<SUP id=cite_ref-53 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-53"><FONT size=3>[52]</FONT></A></SUP> </P>
+<P>When the per-flow product of bandwidth and latency increases, regardless of the queuing scheme, TCP becomes inefficient and prone to instability. This becomes increasingly important as the Internet evolves to incorporate very high-bandwidth optical links. </P>
+<P>TCP Interactive (iTCP)<SUP id=cite_ref-54 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-54"><FONT size=3>[53]</FONT></A></SUP> allows applications to subscribe to TCP events and respond accordingly enabling various functional extensions to TCP from outside TCP layer. Most TCP congestion schemes work internally. iTCP additionally enables advanced applications to directly participate in congestion control such as to control the source generation rate. </P>
+<P><A title=Zeta-TCP href="https://en.wikipedia.org/wiki/Zeta-TCP">Zeta-TCP</A> detects congestion from both latency and loss rate measures. To maximize the <A title=Goodput href="https://en.wikipedia.org/wiki/Goodput">goodput</A> Zeta-TCP and applies different congestion window backoff strategies based on the likelihood of congestion. It also has other improvements to accurately detect packet losses, avoiding retransmission timeout retransmission; and accelerate and control the inbound (download) traffic.<SUP id=cite_ref-Zeta-TCP_55-0 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-Zeta-TCP-55"><FONT size=3>[54]</FONT></A></SUP> </P>
+<DIV class="mw-heading mw-heading2">
+<H2 id=Classification_by_network_awareness>Classification by network awareness</H2></DIV>
+<P>CCAs may be classified in relation to network awareness, meaning the extent to which these algorithms are aware of the state of the network. This consist of three primary categories: black box, grey box, and green box.<SUP id=cite_ref-56 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-56"><FONT size=3>[55]</FONT></A></SUP> </P>
+<P>Black box algorithms offer blind methods of congestion control. They operate only on the binary feedback received upon congestion and do not assume any knowledge concerning the state of the networks which they manage. </P>
+<P>Grey box algorithms use time-based measurement, such as RTT variation and rate of packet arrival, in order to obtain measurements and estimations of bandwidth, flow contention, and other knowledge of network conditions. </P>
+<P>Green box algorithms offer bimodal methods of congestion control which measures the fair share of total bandwidth which should be allocated for each flow, at any point, during the system's execution. </P>
+<DIV class="mw-heading mw-heading3">
+<H3 id=Black_box>Black box</H3></DIV>
+<UL>
+<LI><A title=Highspeed-TCP class=mw-redirect href="https://en.wikipedia.org/wiki/Highspeed-TCP">Highspeed-TCP</A><SUP id=cite_ref-57 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-57"><FONT size=3>[56]</FONT></A></SUP></LI>
+<LI><A title="BIC TCP" href="https://en.wikipedia.org/wiki/BIC_TCP">BIC TCP</A> (Binary Increase Congestion Control Protocol) uses a concave increase of the sources rate after each congestion event until the window is equal to that before the event, in order to maximize the time that the network is fully utilized. After that, it probes aggressively.</LI>
+<LI><A title="CUBIC TCP" href="https://en.wikipedia.org/wiki/CUBIC_TCP">CUBIC TCP</A> &#8211; a less aggressive and more systematic derivative of BIC, in which the window is a cubic function of time since the last congestion event, with the inflection point set to the window prior to the event.</LI>
+<LI><A title="AIMD-FC (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=AIMD-FC&amp;action=edit&amp;redlink=1">AIMD-FC</A> (additive increase multiplicative decrease with fast convergence), an improvement of AIMD.<SUP id=cite_ref-58 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-58"><FONT size=3>[57]</FONT></A></SUP></LI>
+<LI><A title="Binomial Mechanisms (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=Binomial_Mechanisms&amp;action=edit&amp;redlink=1">Binomial Mechanisms</A></LI>
+<LI><A title="SIMD Protocol (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=SIMD_Protocol&amp;action=edit&amp;redlink=1">SIMD Protocol</A></LI>
+<LI><A title="GAIMD (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=GAIMD&amp;action=edit&amp;redlink=1">GAIMD</A></LI></UL>
+<DIV class="mw-heading mw-heading3">
+<H3 id=Grey_box>Grey box</H3></DIV>
+<UL>
+<LI><A title="TCP Vegas" href="https://en.wikipedia.org/wiki/TCP_Vegas">TCP Vegas</A> &#8211; estimates the queuing delay, and linearly increases or decreases the window so that a constant number of packets per flow are queued in the network. Vegas implements proportional fairness.</LI>
+<LI><A title="FAST TCP" href="https://en.wikipedia.org/wiki/FAST_TCP">FAST TCP</A> &#8211; achieves the same equilibrium as Vegas, but uses <A title="Proportional control" href="https://en.wikipedia.org/wiki/Proportional_control">proportional control</A> instead of linear increase, and intentionally scales the gain down as the bandwidth increases with the aim of ensuring stability.</LI>
+<LI>TCP BBR &#8211; estimates the queuing delay but uses exponential increase. Intentionally slows down periodically for fairness and decreased delay.</LI>
+<LI><A title=TCP-Westwood class=mw-redirect href="https://en.wikipedia.org/wiki/TCP-Westwood">TCP-Westwood</A> (TCPW) &#8211; a loss causes the window to be reset to the sender's estimate of the bandwidth-delay product (the smallest measured RTT multiplied by the observed rate of receiving ACKs).<SUP id=cite_ref-59 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-59"><FONT size=3>[58]</FONT></A></SUP></LI>
+<LI>C2TCP<SUP id=cite_ref-C2TCP_13-3 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-13"><FONT size=3>[12]</FONT></A></SUP><SUP id=cite_ref-C2TCP-JSAC_12-5 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-C2TCP-JSAC-12"><FONT size=3>[11]</FONT></A></SUP></LI>
+<LI><A title="TCP Friendly Rate Control" href="https://en.wikipedia.org/wiki/TCP_Friendly_Rate_Control">TFRC</A><SUP id=cite_ref-60 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-60"><FONT size=3>[59]</FONT></A></SUP></LI>
+<LI><A title="TCP-Real (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=TCP-Real&amp;action=edit&amp;redlink=1">TCP-Real</A></LI>
+<LI><A title="TCP-Jersey (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=TCP-Jersey&amp;action=edit&amp;redlink=1">TCP-Jersey</A></LI></UL>
+<DIV class="mw-heading mw-heading3">
+<H3 id=Green_box>Green box</H3></DIV>
+<UL>
+<LI><A title="Bimodal Mechanism (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=Bimodal_Mechanism&amp;action=edit&amp;redlink=1">Bimodal Mechanism</A> &#8211; <A title="Bimodal Congestion Avoidance and Control (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=Bimodal_Congestion_Avoidance_and_Control&amp;action=edit&amp;redlink=1">Bimodal Congestion Avoidance and Control</A> mechanism.</LI>
+<LI>Signalling methods implemented by routers 
+<UL>
+<LI><A title="Random Early Detection" class=mw-redirect href="https://en.wikipedia.org/wiki/Random_Early_Detection">Random Early Detection</A> (RED) randomly drops packets in proportion to the router's queue size, triggering multiplicative decrease in some flows.</LI>
+<LI><A title="Explicit Congestion Notification" href="https://en.wikipedia.org/wiki/Explicit_Congestion_Notification">Explicit Congestion Notification</A> (ECN)</LI></UL></LI>
+<LI><A title="Network-Assisted Congestion Control (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=Network-Assisted_Congestion_Control&amp;action=edit&amp;redlink=1">Network-Assisted Congestion Control</A> 
+<UL>
+<LI>NATCP<SUP id=cite_ref-FOOTNOTEAbbaslooXuChaoShi2019_14-3 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-FOOTNOTEAbbaslooXuChaoShi2019-14"><FONT size=3>[13]</FONT></A></SUP> &#8211; Network-Assisted TCP uses out-of-band explicit feedback indicating minimum RTT of the network and capacity of the cellular access link.</LI>
+<LI>The variable-structure congestion control protocol (VCP) uses two ECN bits to explicitly feedback the network state of congestion. It includes an end host side algorithm as well.<SUP class="noprint Inline-Template Template-Fact" style="WHITE-SPACE: nowrap">[<I><A title="Wikipedia:Citation needed" href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed"><SPAN title="This claim needs references to reliable sources. (February 2022)">citation needed</SPAN></A></I>]</SUP></LI></UL></LI></UL>
+<P>The following algorithms require custom fields to be added to the TCP packet structure: </P>
+<UL>
+<LI><A title="Explicit Control Protocol (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=Explicit_Control_Protocol&amp;action=edit&amp;redlink=1">Explicit Control Protocol</A> (XCP) &#8211; XCP packets carry a congestion header with a feedback field, indicating the increase or decrease of the sender's congestion window. XCP routers set the feedback value explicitly for efficiency and fairness.<SUP id=cite_ref-61 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-61"><FONT size=3>[60]</FONT></A></SUP></LI>
+<LI><A title="MaxNet (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=MaxNet&amp;action=edit&amp;redlink=1">MaxNet</A> &#8211; Uses a single header field, which carries the maximum congestion level of any router on a flow's path. The rate is set as a function of this maximum congestion, resulting in <A title="Max-min fairness" href="https://en.wikipedia.org/wiki/Max-min_fairness">max-min fairness</A>.<SUP id=cite_ref-62 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-62"><FONT size=3>[61]</FONT></A></SUP></LI>
+<LI><A title="JetMax (page does not exist)" class=new href="https://en.wikipedia.org/w/index.php?title=JetMax&amp;action=edit&amp;redlink=1">JetMax</A>, like MaxNet, responds only to the maximum congestion signal, but also carries other overhead fields.</LI></UL>
+<DIV class="mw-heading mw-heading2">
+<H2 id=Linux_usage>Linux usage</H2></DIV>
+<P>
+<TABLE role=presentation class="box-Unreferenced_section plainlinks metadata ambox ambox-content ambox-Unreferenced">
+<TBODY>
+<TR>
+<TD class=mbox-image>
+<DIV class=mbox-image-div><SPAN typeof="mw:File"><A class=mw-file-description href="https://en.wikipedia.org/wiki/File:Question_book-new.svg"><IMG class=mw-file-element alt="" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/50px-Question_book-new.svg.png" width=50 height=39 data-file-height="399" data-file-width="512" srcset="//upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/75px-Question_book-new.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/9/99/Question_book-new.svg/100px-Question_book-new.svg.png 2x" decoding="async"></A></SPAN></DIV></TD>
+<TD class=mbox-text>
+<DIV class=mbox-text-span>This section <B>does not <A title="Wikipedia:Citing sources" href="https://en.wikipedia.org/wiki/Wikipedia:Citing_sources">cite</A> any <A title=Wikipedia:Verifiability href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability">sources</A></B>.<SPAN class=hide-when-compact> Please help <A title="Special:EditPage/TCP congestion control" href="https://en.wikipedia.org/wiki/Special:EditPage/TCP_congestion_control">improve this section</A> by <A title="Help:Referencing for beginners" href="https://en.wikipedia.org/wiki/Help:Referencing_for_beginners">adding citations to reliable sources</A>. Unsourced material may be challenged and <A title=Wikipedia:Verifiability href="https://en.wikipedia.org/wiki/Wikipedia:Verifiability#Burden_of_evidence">removed</A>.</SPAN> <SPAN class=date-container><I>(<SPAN class=date>July 2022</SPAN>)</I></SPAN><SPAN class=hide-when-compact><I> (<SMALL><A title="Help:Maintenance template removal" href="https://en.wikipedia.org/wiki/Help:Maintenance_template_removal">Learn how and when to remove this message</A></SMALL>)</I></SPAN></DIV></TD></TR></TBODY></TABLE></P>
+<UL>
+<LI>BIC is used by default in Linux kernels 2.6.8 through 2.6.18. (August 2004 &#8211; September 2006)</LI>
+<LI>CUBIC is used by default in Linux kernels since version 2.6.19. (November 2006)<SUP id=cite_ref-63 class=reference><A href="https://en.wikipedia.org/wiki/TCP_congestion_control#cite_note-63"><FONT size=3>[62]</FONT></A></SUP></LI>
+<LI>PRR is incorporated in Linux kernels to improve loss recovery since version 3.2. (January 2012)</LI>
+<LI>BBRv1 is incorporated in Linux kernels to enable model-based congestion control since version 4.9. (December 2016)</LI></UL>

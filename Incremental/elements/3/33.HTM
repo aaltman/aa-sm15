@@ -1,0 +1,88 @@
+<b> : </b><A name="ANALOGY WITH READER-WRITER LOCKING">6. ANALOGY WITH READER-WRITER LOCKING</A></H2><SPAN style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>Although RCU can be used in many different ways, a very common use of RCU is analogous to reader-writer locking. The following unified diff shows how closely related RCU and reader-writer locking can be.</SPAN><PRE style="WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">	@@ -13,15 +14,15 @@
+		struct list_head *lp;
+		struct el *p;
+	 
+	-	read_lock();
+	-	list_for_each_entry(p, head, lp) {
+	+	rcu_read_lock();
+	+	list_for_each_entry_rcu(p, head, lp) {
+			if (p-&gt;key == key) {
+				*result = p-&gt;data;
+	-			read_unlock();
+	+			rcu_read_unlock();
+				return 1;
+			}
+		}
+	-	read_unlock();
+	+	rcu_read_unlock();
+		return 0;
+	 }
+	 
+	@@ -29,15 +30,16 @@
+	 {
+		struct el *p;
+	 
+	-	write_lock(&amp;listmutex);
+	+	spin_lock(&amp;listmutex);
+		list_for_each_entry(p, head, lp) {
+			if (p-&gt;key == key) {
+	-			list_del(&amp;p-&gt;list);
+	-			write_unlock(&amp;listmutex);
+	+			list_del_rcu(&amp;p-&gt;list);
+	+			spin_unlock(&amp;listmutex);
+	+			synchronize_rcu();
+				kfree(p);
+				return 1;
+			}
+		}
+	-	write_unlock(&amp;listmutex);
+	+	spin_unlock(&amp;listmutex);
+		return 0;
+	 }
+</PRE><SPAN style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>Or, for those who prefer a side-by-side listing:</SPAN><PRE style="WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial"> 1 struct el {                          1 struct el {
+ 2   struct list_head list;             2   struct list_head list;
+ 3   long key;                          3   long key;
+ 4   spinlock_t mutex;                  4   spinlock_t mutex;
+ 5   int data;                          5   int data;
+ 6   /* Other data fields */            6   /* Other data fields */
+ 7 };                                   7 };
+ 8 spinlock_t listmutex;                8 spinlock_t listmutex;
+ 9 struct el head;                      9 struct el head;
+
+ 1 int search(long key, int *result)    1 int search(long key, int *result)
+ 2 {                                    2 {
+ 3   struct list_head *lp;              3   struct list_head *lp;
+ 4   struct el *p;                      4   struct el *p;
+ 5                                      5
+ 6   read_lock();                       6   rcu_read_lock();
+ 7   list_for_each_entry(p, head, lp) { 7   list_for_each_entry_rcu(p, head, lp) {
+ 8     if (p-&gt;key == key) {             8     if (p-&gt;key == key) {
+ 9       *result = p-&gt;data;             9       *result = p-&gt;data;
+10       read_unlock();                10       rcu_read_unlock();
+11       return 1;                     11       return 1;
+12     }                               12     }
+13   }                                 13   }
+14   read_unlock();                    14   rcu_read_unlock();
+15   return 0;                         15   return 0;
+16 }                                   16 }
+
+ 1 int delete(long key)                 1 int delete(long key)
+ 2 {                                    2 {
+ 3   struct el *p;                      3   struct el *p;
+ 4                                      4
+ 5   write_lock(&amp;listmutex);            5   spin_lock(&amp;listmutex);
+ 6   list_for_each_entry(p, head, lp) { 6   list_for_each_entry(p, head, lp) {
+ 7     if (p-&gt;key == key) {             7     if (p-&gt;key == key) {
+ 8       list_del(&amp;p-&gt;list);            8       list_del_rcu(&amp;p-&gt;list);
+ 9       write_unlock(&amp;listmutex);      9       spin_unlock(&amp;listmutex);
+                                       10       synchronize_rcu();
+10       kfree(p);                     11       kfree(p);
+11       return 1;                     12       return 1;
+12     }                               13     }
+13   }                                 14   }
+14   write_unlock(&amp;listmutex);         15   spin_unlock(&amp;listmutex);
+15   return 0;                         16   return 0;
+16 }                                   17 }
+</PRE><SPAN style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>Either way, the differences are quite small. Read-side locking moves to<SPAN>&nbsp;</SPAN></SPAN><TT style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">rcu_read_lock()</TT><SPAN style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'><SPAN>&nbsp;</SPAN>and<SPAN>&nbsp;</SPAN></SPAN><TT style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">rcu_read_unlock()</TT><SPAN style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>, update-side locking moves from from a reader-writer lock to a simple spinlock, and a<SPAN>&nbsp;</SPAN></SPAN><TT style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">synchronize_rcu()</TT><SPAN style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'><SPAN>&nbsp;</SPAN>precedes the<SPAN>&nbsp;</SPAN></SPAN><TT style="WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">kfree()</TT><SPAN style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>.</SPAN>
+<P style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>However, there is one potential catch: the read-side and update-side critical sections can now run concurrently. In many cases, this will not be a problem, but it is necessary to check carefully regardless. For example, if multiple independent list updates must be seen as a single atomic update, converting to RCU will require special care.</P>
+<P style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>Also, the presence of<SPAN>&nbsp;</SPAN><TT>synchronize_rcu()</TT><SPAN>&nbsp;</SPAN>means that the RCU version of<SPAN>&nbsp;</SPAN><TT>delete()</TT><SPAN>&nbsp;</SPAN>can now block. If this is a problem, there is a callback-based mechanism that never blocks, namely<SPAN>&nbsp;</SPAN><TT>call_rcu()</TT>, that can be used in place of<SPAN>&nbsp;</SPAN><TT>synchronize_rcu()</TT>.

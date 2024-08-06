@@ -1,0 +1,1 @@
+The authors of the mutexee paper note that fairness (in the sense of tail latency for waiting threads) can be limited by using a timeout argument to futex().&nbsp; Doing so, though, drastically limit lock throughput as well as efficiency improvements, so they don't use this method in the main body of the article.&nbsp;
