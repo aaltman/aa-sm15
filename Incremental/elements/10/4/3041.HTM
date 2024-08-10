@@ -1,0 +1,15 @@
+<b> : </b><SPAN class=heading-anchor-content>API gateway workflow<A class=heading-anchor href="https://ngrok.com/blog-post/reverse-proxy-vs-api-gateway#api-gateway-workflow"></A></SPAN></H3></DIV>
+<P>Let's break down the typical flow of a client request as it moves through an API gateway to reach a backend service. This process ensures a secure and efficient interaction between clients and backend services.&nbsp;</P>
+<OL role=list>
+<LI><STRONG>Client request initiation</STRONG>: The client sends a request to an API gateway, typically using HTTP-based methods like REST, GraphQL, etc.</LI>
+<LI><STRONG>HTTP request validation</STRONG>: The API gateway validates the client&#8217;s request.</LI>
+<LI><STRONG>Security checks</STRONG>: The API gateway examines the IP address and HTTP headers, cross-referencing them with <EM>allow</EM> and <EM>deny</EM> lists.</LI>
+<LI><STRONG>Authentication and authorization</STRONG>: The API gateway forwards the request to an identity provider (IdP) for authentication and authorization. This process involves receiving an authenticated session from the provider that outlines the scope of permissible actions for the request.</LI>
+<LI><STRONG>Rate limit verification</STRONG>: The API gateway applies rate limit checks and rejects the request if the client has exceeded a rate limit.&nbsp;</LI>
+<LI><STRONG>Backend service location</STRONG>: The API gateway uses a service discovery component to locate a suitable backend service by matching paths.</LI>
+<LI><STRONG>Request transformation</STRONG>: If necessary, the API gateway transforms the request into the appropriate protocol.&nbsp;</LI>
+<LI><STRONG>Request forwarding: </STRONG>The API gateway sends the request to the backend service if all previous checks are successful.</LI>
+<LI><STRONG>Response handling</STRONG>: The API gateway receives the response from the backend service.&nbsp;</LI>
+<LI><STRONG>Response translation: </STRONG>The API gateway converts the response to the public-facing protocol.</LI>
+<LI><STRONG>Response forwarding:</STRONG> The API gateway returns the response to the client.</LI></OL>
+<DIV class=heading-anchor-wrapper>

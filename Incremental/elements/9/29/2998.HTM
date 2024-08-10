@@ -1,0 +1,11 @@
+<b> : </b><SPAN role=heading aria-level=2 class=devsite-heading>Lifecycle flow</SPAN></H2></DIV>
+<UL>
+<LI><STRONG>Register devices to receive messages from FCM</STRONG>. An instance of a client app registers to receive messages, obtaining a registration token that uniquely identifies the app instance.</LI>
+<LI><STRONG>Send and receive downstream messages</STRONG>. 
+<UL>
+<LI>Send a message. The app server sends messages to the client app: 
+<OL>
+<LI>The message is composed, either in the Notifications composer or a trusted environment, and a message request is sent to the FCM backend.</LI>
+<LI>The FCM backend receives the message request, generates a message ID and other metadata, and sends it to the platform specific transport layer.</LI>
+<LI>When the device is online, the message is sent via the platform-specific transport layer to the device.</LI>
+<LI>On the device, the client app receives the message or notification.</LI></OL></LI></UL></LI></UL>

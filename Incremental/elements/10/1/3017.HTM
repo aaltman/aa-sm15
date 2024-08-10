@@ -1,0 +1,8 @@
+<b> : </b><SPAN role=heading aria-level=3 class=devsite-heading>Downstream message throttling</SPAN></H3>
+<P>The HTTP v1 API introduced per-project, per-minute quotas for downstream messaging. The default quota of 600k messages per minute covers over 99% of <SPAN class=notranslate>FCM</SPAN> developers while protecting the stability of the system and minimizing the impact of spiky projects.</P>
+<P><A href="https://firebase.google.com/docs/cloud-messaging/scale-fcm#problem:-traffic">Spiky traffic patterns</A> can result in quota exceeded errors. In an over quota scenario, the system serves HTTP status code 429 (QUOTA_EXCEEDED) until the quota is refilled in the following minute. 429 responses may also be returned in overload situations, so you are strongly encouraged to handle 429s according to <A href="https://firebase.google.com/docs/reference/fcm/rest/v1/ErrorCode">published recommendations</A>.</P>
+<P>Note that:</P>
+<UL>
+<LI>The downstream quota measures messages, not requests.</LI>
+<LI>Client errors (HTTP status code 400-499) are counted (excluding 429s).</LI>
+<LI>Quotas are per-minute, but these minutes are not aligned to the clock.</LI></UL>

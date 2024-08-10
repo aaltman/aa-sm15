@@ -1,0 +1,26 @@
+<b> : </b><SPAN role=heading aria-level=4 class=devsite-heading>Which should I use?</SPAN></H4>
+<P></P>
+<P></P>
+<P>Collapsible messages are a better choice from a performance standpoint, provided your app doesn't need to use non-collapsible messages. However, if you use collapsible messages, remember that <SPAN class=notranslate>FCM</SPAN> only allows a maximum of four different collapse keys to be used by <SPAN class=notranslate>FCM</SPAN> per registration token at any given time. You must not exceed this number, or it could cause unpredictable consequences.</P>
+<P></P>
+<P></P>
+<DIV class=devsite-table-wrapper>
+<TABLE>
+<TBODY>
+<TR>
+<TH></TH>
+<TH>Use scenario</TH>
+<TH>How to send</TH></TR>
+<TR>
+<TD>Non-collapsible</TD>
+<TD>Every message is important to the client app and needs to be delivered.</TD>
+<TD>Except for notification messages, all messages are non-collapsible by default. </TD></TR>
+<TR>
+<TD>Collapsible</TD>
+<TD>When there is a newer message that renders an older, related message irrelevant to the client app, <SPAN class=notranslate>FCM</SPAN> replaces the older message. For example: messages used to initiate a data sync from the server, or outdated notification messages.</TD>
+<TD>Set the appropriate parameter in your message request: 
+<UL>
+<LI><CODE dir=ltr translate="no">collapseKey</CODE> on Android</LI>
+<LI><CODE dir=ltr translate="no">apns-collapse-id</CODE> on Apple</LI>
+<LI><CODE dir=ltr translate="no">Topic</CODE> on Web</LI>
+<LI><CODE dir=ltr translate="no">collapse_key</CODE> in legacy protocols (all platforms)</LI></UL></TD></TR></TBODY></TABLE></DIV>

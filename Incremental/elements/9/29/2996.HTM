@@ -1,0 +1,31 @@
+<H1 tabIndex=-1 class=devsite-page-title><FONT class=extract>FCM Architectural Overview</FONT></H1><DEVSITE-FEATURE-TOOLTIP id=devsite-collections-dropdown class="devsite-page-bookmark-tooltip nocontent inline-block" style="--devsite-popout-offset-x: 32px" ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-category="Site-Wide Custom Events" analytics-action-show="Callout Profile displayed" analytics-action-close="Callout Profile dismissed" analytics-label="Create Collection Callout" dismiss-button="true" dismiss-button-text="Dismiss" close-button-text="Got it" ready="" current-step="0"><DEVSITE-BOOKMARK class=show><DEVSITE-DROPDOWN-LIST style="--devsite-popout-offset-x: 0px" ready="" ellipsis="" checkboxes="" fetchingitems="true" writable="" additemtext="New Collection"></DEVSITE-DROPDOWN-LIST></DEVSITE-BOOKMARK></DEVSITE-FEATURE-TOOLTIP><DEVSITE-FEATURE-TOOLTIP id=devsite-collections-dropdown class="devsite-page-bookmark-tooltip nocontent inline-block" style="--devsite-popout-offset-x: 32px" ack-key="AckCollectionsBookmarkTooltipDismiss" analytics-category="Site-Wide Custom Events" analytics-action-show="Callout Profile displayed" analytics-action-close="Callout Profile dismissed" analytics-label="Create Collection Callout" dismiss-button="true" dismiss-button-text="Dismiss" close-button-text="Got it" ready="" current-step="0"><DEVSITE-BOOKMARK class=show><DEVSITE-DROPDOWN-LIST style="--devsite-popout-offset-x: 0px" ready="" ellipsis="" checkboxes="" fetchingitems="true" writable="" additemtext="New Collection"></DEVSITE-DROPDOWN-LIST></DEVSITE-BOOKMARK></DEVSITE-FEATURE-TOOLTIP>
+<DIV class=devsite-page-title-meta><FONT class=extract></FONT></DIV>
+<DIV class="devsite-article-body clearfix&#13;&#10;  ">
+<P><FONT class=extract></FONT></P>
+<P><FONT class=extract>FCM relies on the following set of components that build, transport, and receive messages:</FONT></P>
+<OL>
+<LI>
+<P><FONT class=extract>Tooling to compose or build message requests. The Notifications composer provides a GUI-based option for creating notification requests. For full automation and support for all </FONT><A href="https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages"><FONT class=extract>message types</FONT></A><FONT class=extract>, you must build message requests in a trusted </FONT><A href="https://firebase.google.com/docs/cloud-messaging/server"><FONT class=extract>server environment</FONT></A><FONT class=extract> that supports the Firebase Admin SDK or the FCM server protocol. This environment could be Cloud Functions for Firebase, <SPAN class=notranslate>App Engine</SPAN>, or your own app server.</FONT></P>
+<P><FONT class=extract><IMG alt="A diagram of the three architecture layers described in this page." src="https://firebase.google.com/static/docs/cloud-messaging/images/diagram-FCM.png" width="85%"></FONT></P>
+<LI>
+<P><FONT class=extract>The FCM backend, which (among other functions) accepts message requests, performs fanout of messages via topics, and generates message metadata such as the message ID.</FONT></P>
+<LI>
+<P><FONT class=extract>A platform-level transport layer, which routes the message to the targeted device, handles message delivery, and applies platform-specific configuration where appropriate. This transport layer includes:</FONT></P>
+<UL>
+<LI><FONT class=extract>Android transport layer (ATL) for Android devices with Google Play services </FONT>
+<LI><FONT class=extract>Apple Push Notification service (APNs) for Apple devices </FONT>
+<LI>
+<P><FONT class=extract>Web push protocol for web apps</FONT></P><ASIDE class=note><FONT class=extract><STRONG>Note:</STRONG><SPAN> Platform-level transport layers are outside the core <SPAN class=notranslate>FCM</SPAN> product. <SPAN class=notranslate>FCM</SPAN> messages routed to a platform-level transport layer may be subject to terms specific to that platform rather than FCM&#8217;s terms of service. Android message routing via ATL falls under the <A href="https://www.google.com/url?q=https://developers.google.com/terms/&amp;sa=D&amp;ust=1558536676246000&amp;usg=AFQjCNFrlRMLv51d1S9NkWxD0IoYSqJ2Ng">Google APIs terms of service</A>.</SPAN></ASIDE></FONT></LI></UL>
+<LI>
+<P><FONT class=extract>The FCM SDK on the user&#8217;s device, where the notification is displayed or the message is handled according to the app&#8217;s foreground/background state and any relevant application logic.</FONT></P></LI></OL>
+<H2 role=presentation tabIndex=-1 id=lifecycle_flow data-text="Lifecycle flow"><SPAN role=heading aria-level=2 class=devsite-heading><FONT class=extract>Lifecycle flow</FONT></SPAN></H2></DIV>
+<UL>
+<LI><FONT class=extract><STRONG>Register devices to receive messages from FCM</STRONG>. An instance of a client app registers to receive messages, obtaining a registration token that uniquely identifies the app instance. </FONT>
+<LI><FONT class=extract><STRONG>Send and receive downstream messages</STRONG>. </FONT>
+<UL>
+<LI><FONT class=extract>Send a message. The app server sends messages to the client app: </FONT>
+<OL>
+<LI><FONT class=extract>The message is composed, either in the Notifications composer or a trusted environment, and a message request is sent to the FCM backend. </FONT>
+<LI><FONT class=extract>The FCM backend receives the message request, generates a message ID and other metadata, and sends it to the platform specific transport layer. </FONT>
+<LI><FONT class=extract>When the device is online, the message is sent via the platform-specific transport layer to the device. </FONT>
+<LI><FONT class=extract>On the device, the client app receives the message or notification.</FONT></LI></OL></LI></UL></LI></UL>

@@ -1,0 +1,29 @@
+<b> : </b><SPAN role=heading aria-level=2 class=devsite-heading><SPAN class=notranslate>FCM</SPAN> ports and your firewall</SPAN></H2>
+<P>If your organization has a firewall to restrict traffic to or from the Internet, you need to configure it to allow mobile devices to connect with <SPAN class=notranslate>FCM</SPAN> in order for devices on your network to receive messages. <SPAN class=notranslate>FCM</SPAN> typically uses port 5228, but it sometimes uses 443, 5229, and 5230.</P>
+<P>For devices connecting on your network, <SPAN class=notranslate>FCM</SPAN> doesn't provide specific IPs because our IP range changes too frequently and your firewall rules could get out of date, impacting your users' experience. Ideally, allowlist ports 5228-5230 &amp; 443 with no IP restrictions. However, if you must have an IP restriction, you should allowlist all of the IP addresses listed in <A href="https://cloud.google.com/vpc/docs/configure-private-google-access#ip-addr-defaults">goog.json</A>. This large list is updated regularly, and you are recommended to update your rules on a monthly basis. Problems caused by firewall IP restrictions are often intermittent and difficult to diagnose.</P>
+<P>We do offer a set of domain names that can be allowlisted instead of IP addresses. Those hostnames are listed below. If we start using additional hostnames, we will update the list here. Using domain names for your firewall rule may or may not be functional in your firewall device.</P>
+<P><STRONG>TCP ports to open:</STRONG></P>
+<UL>
+<LI>5228</LI>
+<LI>5229</LI>
+<LI>5230</LI>
+<LI>443</LI></UL>
+<P><STRONG>Hostnames to open:</STRONG></P>
+<UL>
+<LI>mtalk.google.com</LI>
+<LI>mtalk4.google.com</LI>
+<LI>mtalk-staging.google.com</LI>
+<LI>mtalk-dev.google.com</LI>
+<LI>alt1-mtalk.google.com</LI>
+<LI>alt2-mtalk.google.com</LI>
+<LI>alt3-mtalk.google.com</LI>
+<LI>alt4-mtalk.google.com</LI>
+<LI>alt5-mtalk.google.com</LI>
+<LI>alt6-mtalk.google.com</LI>
+<LI>alt7-mtalk.google.com</LI>
+<LI>alt8-mtalk.google.com</LI>
+<LI>android.apis.google.com</LI>
+<LI>device-provisioning.googleapis.com</LI>
+<LI>firebaseinstallations.googleapis.com</LI></UL>
+<P><STRONG>Network Address Translation and/or Stateful Packet Inspection firewalls:</STRONG></P>
+<P>If your network implements Network Address Translation (NAT) or Stateful Packet Inspection (SPI), implement a 30 minute or larger timeout for our connections over ports 5228-5230. This enables us to provide reliable connectivity while reducing the battery consumption of your users' mobile devices.</P><ASIDE class=note><STRONG>Note:</STRONG><SPAN> If you are receiving notifications over APNs, make sure you have also opened the <A href="https://support.apple.com/en-ph/HT203609">ports specified by Apple</A>.</SPAN></ASIDE>

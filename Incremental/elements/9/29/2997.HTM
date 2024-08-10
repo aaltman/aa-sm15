@@ -1,0 +1,20 @@
+<b> : </b>FCM Architectural Overview</H1><DEVSITE-FEATURE-TOOLTIP id=devsite-collections-dropdown class="devsite-page-bookmark-tooltip nocontent inline-block" style="--devsite-popout-offset-x: 32px" current-step="0" ready="" close-button-text="Got it" dismiss-button-text="Dismiss" dismiss-button="true" analytics-label="Create Collection Callout" analytics-action-close="Callout Profile dismissed" analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events" ack-key="AckCollectionsBookmarkTooltipDismiss"><DEVSITE-BOOKMARK class=show><DEVSITE-DROPDOWN-LIST style="--devsite-popout-offset-x: 0px" ready="" additemtext="New Collection" writable="" fetchingitems="true" checkboxes="" ellipsis=""></DEVSITE-DROPDOWN-LIST></DEVSITE-BOOKMARK></DEVSITE-FEATURE-TOOLTIP><DEVSITE-FEATURE-TOOLTIP id=devsite-collections-dropdown class="devsite-page-bookmark-tooltip nocontent inline-block" style="--devsite-popout-offset-x: 32px" current-step="0" ready="" close-button-text="Got it" dismiss-button-text="Dismiss" dismiss-button="true" analytics-label="Create Collection Callout" analytics-action-close="Callout Profile dismissed" analytics-action-show="Callout Profile displayed" analytics-category="Site-Wide Custom Events" ack-key="AckCollectionsBookmarkTooltipDismiss"><DEVSITE-BOOKMARK class=show><DEVSITE-DROPDOWN-LIST style="--devsite-popout-offset-x: 0px" ready="" additemtext="New Collection" writable="" fetchingitems="true" checkboxes="" ellipsis=""></DEVSITE-DROPDOWN-LIST></DEVSITE-BOOKMARK></DEVSITE-FEATURE-TOOLTIP>
+<DIV class=devsite-page-title-meta></DIV>
+<DIV class="devsite-article-body clearfix&#13;&#10;  ">
+<P></P>
+<P>FCM relies on the following set of components that build, transport, and receive messages:</P>
+<OL>
+<LI>
+<P>Tooling to compose or build message requests. The Notifications composer provides a GUI-based option for creating notification requests. For full automation and support for all <A href="https://firebase.google.com/docs/cloud-messaging/concept-options#notifications_and_data_messages">message types</A>, you must build message requests in a trusted <A href="https://firebase.google.com/docs/cloud-messaging/server">server environment</A> that supports the Firebase Admin SDK or the FCM server protocol. This environment could be Cloud Functions for Firebase, <SPAN class=notranslate>App Engine</SPAN>, or your own app server.</P>
+<P><IMG alt="A diagram of the three architecture layers described in this page." src="https://firebase.google.com/static/docs/cloud-messaging/images/diagram-FCM.png" width="85%"></P></LI>
+<LI>
+<P>The FCM backend, which (among other functions) accepts message requests, performs fanout of messages via topics, and generates message metadata such as the message ID.</P></LI>
+<LI>
+<P>A platform-level transport layer, which routes the message to the targeted device, handles message delivery, and applies platform-specific configuration where appropriate. This transport layer includes:</P>
+<UL>
+<LI>Android transport layer (ATL) for Android devices with Google Play services</LI>
+<LI>Apple Push Notification service (APNs) for Apple devices</LI>
+<LI>
+<P>Web push protocol for web apps</P><ASIDE class=note><STRONG>Note:</STRONG><SPAN> Platform-level transport layers are outside the core <SPAN class=notranslate>FCM</SPAN> product. <SPAN class=notranslate>FCM</SPAN> messages routed to a platform-level transport layer may be subject to terms specific to that platform rather than FCM&#8217;s terms of service. Android message routing via ATL falls under the <A href="https://www.google.com/url?q=https://developers.google.com/terms/&amp;sa=D&amp;ust=1558536676246000&amp;usg=AFQjCNFrlRMLv51d1S9NkWxD0IoYSqJ2Ng">Google APIs terms of service</A>.</SPAN></ASIDE></LI></UL></LI>
+<LI>
+<P>The FCM SDK on the user&#8217;s device, where the notification is displayed or the message is handled according to the app&#8217;s foreground/background state and any relevant application logic.</P></LI></OL>

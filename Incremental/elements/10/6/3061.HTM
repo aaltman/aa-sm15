@@ -1,0 +1,57 @@
+<HEAD></HEAD>
+<BODY>
+<H2 id=api-endpoint-types><FONT class=extract>API Gateway endpoint types</FONT></H2>
+<P><FONT class=extract>Frst, let&#8217;s look at the API endpoint types that you can use in AWS when you choose to use REST APIs:</FONT></P>
+<P style="TEXT-ALIGN: center"><FONT class=extract><IMG alt="Api gateway endpoint types" src="https://d1tcczg8b21j1t.cloudfront.net/strapi-assets/api_gateway_endpoint_types_a0cfb9763d.png" width="100%"></FONT></P>
+<H3 id=edge-optimized-api-endpoints><FONT class=extract>Edge-optimized API endpoints</FONT></H3>
+<P><FONT class=extract>Edge-optimized API endpoints are best for geographically dispersed clients. API requests are routed to the nearest CloudFront edge location. This is the default endpoint type for API Gateway REST APIs. But this hosted CloudFront distribution is only there to help with connection latency and does not perform caching.</FONT></P>
+<H3 id=regional-api-endpoints><FONT class=extract>Regional API endpoints</FONT></H3>
+<P><FONT class=extract>Regional API endpoints are available for clients in the same region. Regional APIs can reduce connection overhead when clients running on EC2 instances call APIs in the same region, or when the API is designed to serve a small number of high-demand clients.</FONT></P>
+<H3 id=private-api-endpoints><FONT class=extract>Private API endpoints</FONT></H3>
+<P><FONT class=extract>A private API endpoint is an API endpoint that is only accessible from your Amazon Virtual Private Cloud (VPC) through an interface VPC endpoint, which is an endpoint network interface (ENI) that you create in your VPC.</FONT></P>
+<H2 id=edge-optimized-api-vs-cloudfront><FONT class=extract>Edge-optimized API Gateway vs API Gateway with CloudFront distribution</FONT></H2>
+<H3 id=edge-optimized-api-gateway><FONT class=extract>Edge-optimized API Gateway</FONT></H3>
+<P><FONT class=extract>The main benefit to using an edge-optimized API gateway is that you get CloudFront distribution without the need to set it up or update or manage it. Everything is hidden behind the REST API. But this also has some drawbacks.</FONT></P>
+<H3 id=cloudfront-for-api-benefits><FONT class=extract>Benefits of using Amazon CloudFront together with Amazon API Gateway</FONT></H3>
+<P><FONT class=extract>The first and major benefit of CloudFront is caching which may be a motivation for using CloudFront with API Gateway. Although API Gateway offers a built-in caching mechanism, it has some drawbacks:</FONT></P>
+<P style="MARGIN-LEFT: 15px"><FONT class=extract></FONT>
+<UL>
+<LI><FONT class=extract>It's only available for older REST APIs. </FONT>
+<LI><FONT class=extract>It's priced by the hour (512MB costs 0.02$ per hour). </FONT>
+<LI><FONT class=extract>If API Gateway returns an error, it will cache the error.</FONT></LI></UL>
+<P><FONT class=extract></FONT></P>
+<P><FONT class=extract>There are<STRONG> some more specific benefits to using your own CloudFront distribution</STRONG> in front of Amazon API Gateway:</FONT></P>
+<P style="MARGIN-LEFT: 15px"><FONT class=extract></FONT>
+<UL>
+<LI><FONT class=extract>Currently, </FONT><A href="https://www.stormit.cloud/blog/what-is-aws-shield-how-does-it-work/" target=_blank><FONT class=extract>AWS Shield Advanced</FONT></A><FONT class=extract> doesn't support enabling protection on API Gateways but supports CloudFront. </FONT>
+<LI><FONT class=extract>You can add custom caching behaviors (for example static files on S3, and some paths going to an ALB+EC2), and some paths going to API Gateway in multiple regions. This allows you to have everything behind the same domain. </FONT>
+<LI><FONT class=extract>CloudFront also supports geoblocking, which you can use to help block requests from particular geographic locations from being served. </FONT>
+<LI><FONT class=extract>Set up </FONT><A href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html" target=_blank><FONT class=extract>Cloudfront access logs</FONT></A><FONT class=extract>. </FONT>
+<LI><FONT class=extract>Your own CloudFront distribution can be used with any type of API Gateway: WebSocket API, HTTP API, REST API. </FONT>
+<LI><FONT class=extract>The data transfer costs to the Internet are smaller for CloudFront than API Gateway (0.085$ vs 0.090$), with data transfers between API Gateway and CloudFront are free of charge. And it&#8217;s possible to </FONT><A href="https://www.stormit.cloud/cdn-cost-calculator/" target=_blank><FONT class=extract>optimize CloudFront costs further</FONT></A><FONT class=extract> with StormIT optimized pricing. CloudFront offers 1TB of DTO in the free tier. </FONT>
+<LI><FONT class=extract>You can leverage </FONT><A href="https://www.stormit.cloud/blog/lambda-at-edge/" target=_blank><FONT class=extract>Lambda@Edge</FONT></A><FONT class=extract> to bring the code to the edge and enact HTTP header manipulations, URL rewrites/redirects, cache-key normalizations, and more.</FONT></LI></UL>
+<P><FONT class=extract></FONT></P><A href="https://www.flashedgecdn.com/free-trial/">
+<DIV class=flashedge-banner>
+<DIV class=flashedge-logo><?XML:NAMESPACE PREFIX = "[default] http://www.w3.org/2000/svg" NS = "http://www.w3.org/2000/svg" /><svg id=Layer_2 data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.98 26.75"><g id=Layer_1-2 data-name="Layer 1"><g id=Vrstva_2 data-name="Vrstva 2"><g id=Vrstva_1-2 data-name="Vrstva 1-2"><g><FONT class=extract></FONT></g></g></g></g></svg></DIV></DIV></A><A href="https://www.flashedgecdn.com/free-trial/">
+<DIV class=flashedge-content>
+<P class=flashedge-paragraph><FONT class=extract>Maximize Performance,</FONT></P>
+<P class=flashedge-paragraph><FONT class=extract>Minimize Costs with FlashEdge CDN</FONT></P></DIV>
+<DIV class=flashedge-button><FONT class=extract>Get free-trial now</FONT></DIV>
+<DIV class=flashedge-topleft><svg id=Layer_2 data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131.64 91.24"><g id=Layer_1-2 data-name="Layer 1"><g class=cls-3><FONT class=extract></FONT></g></g></svg></DIV></A><A href="https://www.flashedgecdn.com/free-trial/"><svg id=Layer_2 data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 131.64 83.15"><g id=Layer_1-2 data-name="Layer 1"><g class=cls-3></g></g></svg></A><A href="https://www.flashedgecdn.com/free-trial/"><svg id=Layer_2 data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195.31 195.9"><g id=Layer_1-2 data-name="Layer 1"><g class=cls-4></g></g></svg></A>
+<H3 id=does-putting-cloudfront-in-front-of-api-gateway-make-sense><FONT class=extract>Does putting CloudFront in front of API Gateway make sense?</FONT></H3>
+<P><FONT class=extract>As always, <STRONG>it depends on the API Gateway use cases and your requirements</STRONG>. If you find any benefits described interesting or you require only some of the CloudFront features, it&#8217;s very easy to start using CloudFront. In the next section, you will find a manual with steps that should help you get started.</FONT></P>
+<H2 id=cloudfront-creating-for-api><FONT class=extract>Creating a CloudFront distribution in front of API Gateway</FONT></H2>
+<P><FONT class=extract>These simple steps should help you to create a CloudFront distribution in front of API Gateway.</FONT></P>
+<P><FONT class=extract>When you create a CloudFront distribution, it&#8217;s recommended that you block access to API Gateway for anything other than CloudFront distribution. You can do this by following this manual: </FONT><A href="https://wellarchitectedlabs.com/security/300_labs/300_multilayered_api_security_with_cognito_and_waf/3_prevent_requests_from_accessing_api_directly/" target=_blank><FONT class=extract>Prevent requests from accessing API directly</FONT></A><FONT class=extract>.</FONT></P>
+<P><FONT class=extract>1. Log in to the </FONT><A href="https://console.aws.amazon.com/cloudfront?p=cft&amp;cp=bn&amp;ad=c"><FONT class=extract>CloudFront console</FONT></A><FONT class=extract>.<BR>2. If you already have a CloudFront distribution that you want to use, you can create a new </FONT><A href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior" target=_blank><FONT class=extract>caching behavior</FONT></A><FONT class=extract> setting. But we will start with creating a new distribution.<BR></FONT></P>
+<P style="TEXT-ALIGN: center"><FONT class=extract><IMG alt="Cloudfront and API Gateway manual 1" src="https://d1tcczg8b21j1t.cloudfront.net/strapi-assets/api_gateway_and_cloudfront_manual_1_2c9a8c9c4b.png" width="65%"></FONT></P>
+<P><FONT class=extract>3. For the <STRONG>&#8220;Origin domain&#8221;,</STRONG> add the API gateway link and choose <STRONG>&#8220;HTTPS only&#8221;</STRONG> as the <STRONG>&#8220;Protocol&#8221;</STRONG>. API Gateway doesn't support unencrypted HTTP.<BR></FONT></P>
+<P style="TEXT-ALIGN: center"><FONT class=extract><IMG alt="Cloudfront and API Gateway manual 2" src="https://d1tcczg8b21j1t.cloudfront.net/strapi-assets/api_gateway_and_cloudfront_manual_2_dc056c990e.png" width="90%"></FONT></P>
+<P><FONT class=extract>4. For <STRONG>&#8220;Viewer protocol policy&#8221;,</STRONG> select <STRONG>&#8220;Redirect HTTP to HTTPS&#8221;</STRONG> and choose <STRONG>&#8220;Get, Head, Options, Put, Post, Patch, Delete&#8221;</STRONG> for <STRONG>&#8220;Allowed HTTP methods&#8221;</STRONG>.<BR></FONT></P>
+<P style="TEXT-ALIGN: center"><FONT class=extract><IMG alt="Cloudfront and API Gateway manual 2" src="https://d1tcczg8b21j1t.cloudfront.net/strapi-assets/api_gateway_and_cloudfront_manual_3_2ffb7fc9c3.png" width="70%"></FONT></P>
+<P><FONT class=extract>5. In Cache key and origin requests select <STRONG>&#8220;Legacy cache settings&#8221;</STRONG> and:<BR></FONT></P>
+<P style="MARGIN-LEFT: 15px"><FONT class=extract>a. <STRONG>Headers: None</STRONG>. You can also choose &#8220;Include the following headers&#8221; and select what headers you need to forward to API Gateway. However, there is a problem with the Host header that causes a 403 forbidden error, so do not choose this header or option &#8220;All&#8221;, as it will not work.<BR>b. <STRONG>Query strings: All</STRONG><BR>c. <STRONG>Cookies: All</STRONG><BR></FONT></P>
+<P style="TEXT-ALIGN: center"><FONT class=extract><IMG alt="Cloudfront and API Gateway manual 2" src="https://d1tcczg8b21j1t.cloudfront.net/strapi-assets/api_gateway_and_cloudfront_manual_4_baf2bafea2.png" width="90%"></FONT></P>
+<P><FONT class=extract>6. Select <STRONG>Response headers policy: Simple CORS.</STRONG><BR></FONT></P>
+<P style="TEXT-ALIGN: center"><FONT class=extract><IMG alt="Cloudfront and API Gateway manual 2" src="https://d1tcczg8b21j1t.cloudfront.net/strapi-assets/api_gateway_and_cloudfront_manual_5_c5883a94ca.png" width="90%"></FONT></P>
+<P><FONT class=extract>7. You can leave everything else on default or set what you need and click on <STRONG>&#8220;Create distribution&#8221;</STRONG>.<BR>8. Your CloudFront distribution should be ready to use after couple of minutes. For example, you can proceed to add the cloudfront domain to </FONT><A href="https://www.stormit.cloud/blog/amazon-route-53/" target=_blank><FONT class=extract>Route 53 DNS</FONT></A><FONT class=extract>.</FONT></P></BODY>

@@ -1,0 +1,6 @@
+<b> : </b><SPAN role=heading aria-level=2 class=devsite-heading>Customizing a message across platforms</SPAN></H2>
+<P>The <SPAN class=notranslate><SPAN class=notranslate>Firebase</SPAN> Admin SDK</SPAN> and the FCM v1 HTTP protocol both allow your message requests to set all fields available in the <A href="https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages#Message"><CODE dir=ltr translate="no">message</CODE></A> object. This includes:</P>
+<UL>
+<LI>a common set of fields to be interpreted by <STRONG>all</STRONG> app instances that receive the message.</LI>
+<LI>platform-specific sets of fields, such as <CODE dir=ltr translate="no">AndroidConfig</CODE> and <CODE dir=ltr translate="no">WebpushConfig</CODE>, interpreted only by app instances running on the specified platform.</LI></UL>
+<P>Platform-specific blocks give you flexibility to customize messages for different platforms to ensure that they are handled correctly when received. The FCM backend will take all specified parameters into account and customize the message for each platform.

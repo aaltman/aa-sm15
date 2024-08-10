@@ -1,0 +1,7 @@
+<b> : </b><SPAN role=heading aria-level=3 class=devsite-heading>When to use platform-specific fields</SPAN></H3>
+<P>Use platform-specific fields when you want to:</P>
+<UL>
+<LI>Send fields only to particular platforms</LI>
+<LI>Send platform-specific fields <EM>in addition to</EM> the common fields</LI></UL>
+<P>Whenever you want to send values only to particular platforms, <STRONG>don't</STRONG> use common fields; use platform-specific fields. For example, to send a notification only to Apple platforms and web but not to Android, you must use two separate sets of fields, one for Apple and one for web.</P>
+<P>When you are sending messages with specific <A href="https://firebase.google.com/docs/cloud-messaging/concept-options#delivery_options">delivery options</A>, use platform-specific fields to set them. You can specify different values per platform if you want. However, even when you want to set essentially the same value across platforms, you must use platform-specific fields. This is because each platform may interpret the value slightly differently&#8212;for example, time-to-live is set on Android as an expiration time in seconds, while on Apple it is set as an expiration <EM>date</EM>.

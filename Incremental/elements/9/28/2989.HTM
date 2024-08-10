@@ -1,0 +1,8 @@
+There are several distinct entities involved in sending an iOS push notification:</P>
+<UL>
+<LI>Provider: A provider is a server that you deploy, manage and configure to work with APNs&nbsp;</LI>
+<LI>APNs: Apple Push Notification service, which is described in more detail below</LI>
+<LI>Client device: The targeted device, such as an iPhone</LI>
+<LI>Client app: the developer&#8217;s mobile app</LI></UL>
+<P>Once you&#8217;ve completed setting up push notifications on your providers and in your app, your providers can send notification requests to APNs. APNs then delivers the notification to each targeted device. Once APNs receives a notification, the system delivers the notification to the appropriate app on the device.&nbsp;</P>
+<P>If a notification arrives while the device is powered on but the app is not running, the system can still display the notification. Plus, if the device is powered off when a notification is sent, APNs will actually hold onto the notification and retry when the device is on again.&nbsp;

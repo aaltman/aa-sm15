@@ -1,0 +1,3 @@
+<b> : </b><SPAN role=heading aria-level=3 class=devsite-heading>Maximum message rate to a single device</SPAN></H3>
+<P>For Android, you can send up to 240 messages/minute and 5,000 messages/hour to a single device. This high threshold is meant to allow for short term bursts of traffic, such as when users are interacting rapidly over chat. This limit prevents errors in sending logic from inadvertently draining the battery on a device.</P>
+<P>For iOS, we return an error when the rate exceeds APNs limits.</P><ASIDE class=caution><STRONG>Caution:</STRONG><SPAN> Do not routinely send messages near this maximum rate. This could waste end users&#8217; resources, and your app may be marked as abusive.</SPAN></ASIDE>

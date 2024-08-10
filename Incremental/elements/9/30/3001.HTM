@@ -1,0 +1,32 @@
+<b> : </b><SPAN role=heading aria-level=2 class=devsite-heading>Message types</SPAN></H2></DIV>
+<P>With <SPAN class=notranslate>FCM</SPAN>, you can send two types of messages to clients:</P>
+<UL>
+<LI>Notification messages, sometimes thought of as "display messages." These are handled by the <SPAN class=notranslate>FCM</SPAN> SDK automatically.</LI>
+<LI>Data messages, which are handled by the client app.</LI></UL>
+<P>Notification messages contain a predefined set of user-visible keys. Data messages, by contrast, contain only your user-defined custom key-value pairs. Notification messages can contain an optional data payload. Maximum payload for both message types is 4096 bytes, except when sending messages from the <SPAN class=notranslate>Firebase</SPAN> console, which enforces a 1000 character limit.</P>
+<P></P>
+<DIV class=devsite-table-wrapper>
+<TABLE>
+<TBODY>
+<TR>
+<TH></TH>
+<TH>Use scenario</TH>
+<TH>How to send</TH></TR>
+<TR>
+<TD>Notification message</TD>
+<TD><SPAN class=notranslate>FCM</SPAN> SDK displays the message to end-user devices on behalf of the client app when it's running in the background. Otherwise, if the app is running in the foreground when the notification is received, the app's code determines the behavior. Notification messages have a predefined set of user-visible keys and an optional data payload of custom key-value pairs. </TD>
+<TD>
+<OL>
+<LI>
+<P>In a trusted environment such as <A href="https://firebase.google.com/docs/functions"><SPAN class=notranslate>Cloud Functions</SPAN></A> or your app server, use the <A href="https://firebase.google.com/docs/cloud-messaging/server#choose">Admin SDK or the HTTP v1 API</A>. Set the <CODE dir=ltr translate="no">notification</CODE> key. May have optional data payload. Always collapsible.</P>
+<P>See some <A href="https://firebase.google.com/docs/cloud-messaging/send-message#example-notification-message-with-platform-specific-delivery-options">examples of display notifications</A> and send request payloads. </P></LI>
+<LI>Use the <A href="https://console.firebase.google.com/project/_/notification">Notifications composer</A>: Enter the Message Text, Title, etc., and send. Add optional data payload by providing Custom data. </LI></OL></TD></TR>
+<TR>
+<TD>Data message</TD>
+<TD>Client app is responsible for processing data messages. Data messages have only custom key-value pairs with no reserved key names (see below). </TD>
+<TD>In a trusted environment such as <A href="https://firebase.google.com/docs/functions"><SPAN class=notranslate>Cloud Functions</SPAN></A> or your app server, use the <A href="https://firebase.google.com/docs/cloud-messaging/server#choose">Admin SDK or the FCM Server Protocols</A>. In the send request, Set the <CODE dir=ltr translate="no">data</CODE> key. </TD></TR></TBODY></TABLE></DIV>
+<P></P>
+<P></P>
+<P>Use notification messages when you want the <SPAN class=notranslate>FCM</SPAN> SDK to handle displaying a notification automatically when your app is running in the background. Use data messages when you want to process the messages with your own client app code.</P>
+<P></P>
+<P><SPAN class=notranslate>FCM</SPAN> can send a notification message including an optional data payload. In such cases, <SPAN class=notranslate>FCM</SPAN> handles displaying the notification payload, and the client app handles the data payload.

@@ -1,0 +1,17 @@
+<b> : </b><SPAN role=heading aria-level=3 class=devsite-heading>Non-collapsible and collapsible messages</SPAN></H3>
+<P></P>
+<P></P>
+<P>A <I>non-collapsible</I> message denotes that each individual message is delivered to the device. A non-collapsible message delivers some useful content, as opposed to a collapsible message like a content-free "ping" to the mobile app to contact the server to fetch data.</P>
+<P></P><ASIDE class=caution><SPAN class=notranslate>FCM</SPAN> does not guarantee the order of delivery.</ASIDE> 
+<P></P>
+<P>Some typical use cases of non-collapsible messages are chat messages or critical messages. For example, in an IM app, you would want to deliver every message, because every message has different content. </P>
+<P></P>
+<P>For Android there is a limit of 100 messages that can be stored without collapsing. If the limit is reached, all stored messages are discarded. When the device is back online, it receives a special message indicating that the limit was reached. The app can then handle the situation properly, typically by requesting a full sync from the app server.</P>
+<P></P>
+<P>A <I>collapsible message</I> is a message that may be replaced by a new message if it has yet to be delivered to the device.</P>
+<P></P>
+<P></P>
+<P>A common use cases of collapsible messages are messages used to tell a mobile app to sync data from the server. An example would be a sports app that updates users with the latest score. Only the most recent message is relevant.</P>
+<P></P>
+<P>To mark a message as collapsible on Android, include the <CODE dir=ltr translate="no">collapse_key</CODE> parameter in the message payload. By default, the collapse key is the app package name registered in the <SPAN class=notranslate>Firebase</SPAN> console. The <SPAN class=notranslate>FCM</SPAN> server can simultaneously store four different collapsible messages per device, each with a different collapse key. If you exceed this number, <SPAN class=notranslate>FCM</SPAN> only keeps four collapse keys, with no guarantees about which ones are kept.</P>
+<P>Topic messages with no payload are collapsible by default. Notification messages are always collapsible and will ignore the <CODE dir=ltr translate="no">collapse_key</CODE> parameter.

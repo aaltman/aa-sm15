@@ -1,0 +1,5 @@
+<b> : </b><SPAN role=heading aria-level=3 class=devsite-heading>Collapsible message throttling</SPAN></H3>
+<P>As described above, collapsible messages are content-free notifications designed to collapse on top of each other. In the event that a developer is repeating the same message to an app too frequently, we delay (throttle) messages to reduce the impact on a user&#8217;s battery.</P>
+<P>For example, if you send large numbers of new email sync requests to a single device, we might delay the next email sync request a few minutes so that the device can sync at a lower average rate. This throttling is done strictly to limit the battery impact experienced by the user.</P>
+<P>If your use case requires high burst send patterns, then non-collapsible messages may be the right choice. For such messages, make sure to include the content in such messages in order to reduce the battery cost.</P>
+<P>We limit collapsible messages to a burst of 20 messages per app per device, with a refill of 1 message every 3 minutes.

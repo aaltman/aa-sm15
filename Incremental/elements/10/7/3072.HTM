@@ -1,0 +1,13 @@
+<DIV class="js-vote-count flex--item d-flex fd-column ai-center fc-theme-body-font fw-bold fs-subheading py4" data-value="37" itemprop="upvoteCount"></DIV> <A aria-label=Timeline aria-describedby=--stacks-s-tooltip-a0mhsf5o class="js-post-issue flex--item s-btn s-btn__unset c-pointer py6 mx-auto" href="https://stackoverflow.com/posts/61210085/timeline" data-s-tooltip-placement="right" data-controller="s-tooltip" data-ks-title="timeline" data-shortcut="T"><SVG aria-hidden=true class="mln2 mr0 svg-icon iconHistory" viewBox="0 0 19 18" height="18" width="19"></SVG></A>
+<DIV class="votecell post-layout--left">
+<DIV class="js-voting-container d-flex jc-center fd-column ai-center gs4 fc-black-300" data-post-id="61210085" data-referrer="None"></DIV></DIV>
+<DIV class="answercell post-layout--right">
+<DIV class="s-prose js-post-body" itemprop="text">
+<P>API Gateway and Load Balancer are 2 different things.</P>
+<P>Load Balancer -&gt; Its a software which works at protocol or socket level (eg. tcp, http, or port 3306 etc.) Its job is to balance the incoming traffic by distributing it to the destinations with various logics (eg. Round robin). I doesn't offer features such as authorisation checks, authentication of requests etc.</P>
+<P>Whereas</P>
+<P>API Gateway -&gt; Its a managed service provided by various hosting companies to manage API operations to seamlessly scale the API infra. It takes cares of the access control, response caching, response types, authorisation, authentication, request throttling, data handling, identifying the right destinations based on custom rules, and seamless scaling the backend. Generally Managed API gateways by default comes with scalable infra, so putting them behind load balancer might not make sense.</P>
+<P>About resolving the Domain, most likely always the DNS resolves to the load balancer, which in turn fetches the response from the API gateway service.</P>
+<BLOCKQUOTE>
+<P>DNS -&gt; Load Balancer -&gt; API gateway -&gt; Backend service</P></BLOCKQUOTE>
+<P>Hope I could explain and clear your confusion.</P></DIV></DIV>

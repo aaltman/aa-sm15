@@ -1,0 +1,12 @@
+<H2>Choosing CDNs vs. load balancers</H2>
+<P>CDNs and load balancers have some traits in common, including that they both:</P>
+<UL>
+<LI>Help maximize application or data uptime</LI>
+<LI>Make it possible to distribute data across a network of servers</LI></UL>
+<P style="CLEAR: left">However, their similarities end there. At the end of the day, CDNs and load balancers are fundamentally different types of tools. The main purpose of CDNs is to distribute content across a wide geographic area, whereas a load balancer distributes traffic across a network of servers that are usually in close geographic proximity to each other.</P>
+<P>Should you choose to use a CDN, or a load balancer? The short answer is that, if you are delivering a production application to a significant number of users, you probably need both.</P>
+<UL>
+<LI>A load balancer will let you distribute your application across a cluster of servers, which is important for&nbsp;optimizing uptime and performance.</LI>
+<LI>A CDN, meanwhile, will help you optimize the experience of end-users in disparate geographic regions.</LI></UL>
+<P style="CLEAR: left">There might be situations where you need a load balancer but not a CDN. For example, when hosting applications for a city agency whose user-base is large enough to require a server cluster and load balancer but most of whose users are in the same geographic area. Or, you might have a situation where you need a CDN but not a load balancer (for example, you have a geographically dispersed user base but there aren&#8217;t enough users in any one location to require a server cluster in that location). But such situations are rather rare.</P>
+<P>The bottom line: Load balancers and CDNs are both important tools for modern application delivery and hosting, and they both help to optimize interactions between servers and clients. But they&#8217;re different types of tools, and you shouldn&#8217;t assume that if you have one, you don&#8217;t need the other.

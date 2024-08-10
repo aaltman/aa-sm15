@@ -1,0 +1,8 @@
+<b> : </b><SPAN class=heading-anchor-content>Choosing between a reverse proxy and an API gateway<A class=heading-anchor href="https://ngrok.com/blog-post/reverse-proxy-vs-api-gateway#choosing-between-a-reverse-proxy-and-an-api-gateway"></A></SPAN></H2></DIV>
+<P>Now, when to use each one? The choice depends on your specific use case and requirements. Go for an API gateway when you need to:&nbsp;</P>
+<UL role=list>
+<LI>Expose and manage APIs for external clients.</LI>
+<LI>Implement API-specific features such as authentication, authorization, rate limiting, and API documentation.</LI>
+<LI>Simplify communication between microservices and external clients in a microservices architecture. For instance, if you're developing a mobile banking app connecting to various financial services, an API gateway can efficiently manage requests to services like account balances, transactions, and payments, ensuring security and control.</LI></UL>
+<P>Conversely, choose a reverse proxy to handle tasks like load balancing, TLS offloading, and caching in web applications and websites. For example, in a high-traffic e-commerce site, a reverse proxy can distribute user requests among multiple servers, enhancing load handling efficiency, improving performance, and simplifying server configurations.&nbsp;</P>
+<P>Sometimes, the choice is not straightforward, and organizations often use API gateways and reverse proxies in tandem. For example, you might use a reverse proxy to terminate TLS before forwarding requests to an API gateway. On the other hand, an API gateway may forward requests to other reverse proxies that service the actual API endpoints.

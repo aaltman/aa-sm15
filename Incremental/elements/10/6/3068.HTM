@@ -1,0 +1,26 @@
+<b> : </b>Benefits of using Amazon CloudFront together with Amazon API Gateway</H3>
+<P>The first and major benefit of CloudFront is caching which may be a motivation for using CloudFront with API Gateway. Although API Gateway offers a built-in caching mechanism, it has some drawbacks:</P>
+<P style="MARGIN-LEFT: 15px">
+<UL>
+<LI>It's only available for older REST APIs.</LI>
+<LI>It's priced by the hour (512MB costs 0.02$ per hour).</LI>
+<LI>If API Gateway returns an error, it will cache the error.</LI></UL>
+<P></P>
+<P>There are<STRONG> some more specific benefits to using your own CloudFront distribution</STRONG> in front of Amazon API Gateway:</P>
+<P style="MARGIN-LEFT: 15px">
+<UL>
+<LI>Currently, <A href="https://www.stormit.cloud/blog/what-is-aws-shield-how-does-it-work/" target=_blank>AWS Shield Advanced</A> doesn't support enabling protection on API Gateways but supports CloudFront.</LI>
+<LI>You can add custom caching behaviors (for example static files on S3, and some paths going to an ALB+EC2), and some paths going to API Gateway in multiple regions. This allows you to have everything behind the same domain.</LI>
+<LI>CloudFront also supports geoblocking, which you can use to help block requests from particular geographic locations from being served.</LI>
+<LI>Set up <A href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html" target=_blank>Cloudfront access logs</A>.</LI>
+<LI>Your own CloudFront distribution can be used with any type of API Gateway: WebSocket API, HTTP API, REST API.</LI>
+<LI>The data transfer costs to the Internet are smaller for CloudFront than API Gateway (0.085$ vs 0.090$), with data transfers between API Gateway and CloudFront are free of charge. And it&#8217;s possible to <A href="https://www.stormit.cloud/cdn-cost-calculator/" target=_blank>optimize CloudFront costs further</A> with StormIT optimized pricing. CloudFront offers 1TB of DTO in the free tier.</LI>
+<LI>You can leverage <A href="https://www.stormit.cloud/blog/lambda-at-edge/" target=_blank>Lambda@Edge</A> to bring the code to the edge and enact HTTP header manipulations, URL rewrites/redirects, cache-key normalizations, and more.</LI></UL>
+<P></P><A href="https://www.flashedgecdn.com/free-trial/">
+<DIV class=flashedge-banner>
+<DIV class=flashedge-logo><svg id=Layer_2 viewBox="0 0 124.98 26.75" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2"><g id=Layer_1-2 data-name="Layer 1"><g id=Vrstva_2 data-name="Vrstva 2"><g id=Vrstva_1-2 data-name="Vrstva 1-2"><g></g></g></g></g></svg></DIV></DIV></A><A href="https://www.flashedgecdn.com/free-trial/">
+<DIV class=flashedge-content>
+<P class=flashedge-paragraph>Maximize Performance,</P>
+<P class=flashedge-paragraph>Minimize Costs with FlashEdge CDN</P></DIV>
+<DIV class=flashedge-button>Get free-trial now</DIV>
+<DIV class=flashedge-topleft><svg id=Layer_2 viewBox="0 0 131.64 91.24" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2"><g id=Layer_1-2 data-name="Layer 1"><g class=cls-3></g></g></svg></DIV></A><A href="https://www.flashedgecdn.com/free-trial/"><svg id=Layer_2 viewBox="0 0 131.64 83.15" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2"><g id=Layer_1-2 data-name="Layer 1"><g class=cls-3></g></g></svg></A><A href="https://www.flashedgecdn.com/free-trial/"><svg id=Layer_2 viewBox="0 0 195.31 195.9" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2"><g id=Layer_1-2 data-name="Layer 1"><g class=cls-4></g></g></svg></A>

@@ -1,0 +1,14 @@
+<H1 id=amazon-api-gateway class=topictitle>Amazon API Gateway</H1>
+<DIV class=awsdocs-page-header-container><AWSDOCS-PAGE-HEADER>
+<DIV class=H+dM-Hvk-bFSb3XTaZZptw==><A href="https://docs.aws.amazon.com/pdfs/wellarchitected/latest/serverless-applications-lens/wellarchitected-serverless-applications-lens.pdf#amazon-api-gateway">PDF</A><A href="https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/wellarchitected-serverless-applications-lens.rss">RSS</A></DIV></AWSDOCS-PAGE-HEADER><AWSDOCS-FILTER-SELECTOR id=awsdocs-filter-selector></AWSDOCS-FILTER-SELECTOR></DIV>
+<P>To build RESTful APIs, use REST APIs from Amazon API Gateway. REST APIs are intended for APIs that require API proxy functionality and API management features in a single solution.</P>
+<P>Amazon API Gateway Edge-optimized APIs provide a fully managed Amazon CloudFront distribution to optimize access for geographically dispersed consumers. API requests are routed to the nearest CloudFront Point of Presence (POP), which typically improves connection time. </P>
+<DIV class=mediaobject><IMG class="aws-docs-img-whiteBg aws-docs-img-padding" style="MAX-WIDTH: 100%" alt="Diagram showing Edge-optimized API Gateway deployment" src="https://docs.aws.amazon.com/images/wellarchitected/latest/serverless-applications-lens/images/edge-optimized-api-gateway-deployment.png"> 
+<DIV class=caption>
+<P><EM>Figure 22: Edge-optimized API Gateway deployment</EM></P></DIV>
+<DIV></DIV></DIV>
+<P>The API Gateway Regional endpoint doesn&#8217;t provide a CloudFront distribution, and enables HTTP2 by default, which helps reduce overall latency when requests originate from the same Region. Regional endpoints also allow you to associate your own Amazon CloudFront distribution or an existing CDN. </P>
+<DIV class=mediaobject><IMG class="aws-docs-img-whiteBg aws-docs-img-padding" style="MAX-WIDTH: 100%" alt="Diagram showing Regional Endpoint API Gateway deployment" src="https://docs.aws.amazon.com/images/wellarchitected/latest/serverless-applications-lens/images/regional-endpoint-api-gateway-deployment.png"> 
+<DIV class=caption>
+<P><EM>Figure 23: Regional Endpoint API Gateway deployment</EM></P></DIV>
+<DIV></DIV></DIV>This table can help you decide whether to deploy an Edge-optimized API or Regional API Endpoint:

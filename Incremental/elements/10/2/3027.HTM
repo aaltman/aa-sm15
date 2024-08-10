@@ -1,0 +1,23 @@
+<b> : </b><SPAN role=heading aria-level=2 class=devsite-heading>Credentials</SPAN></H2>
+<P>Depending on which <SPAN class=notranslate>FCM</SPAN> features you implement, you may need the following credentials from your Firebase project:</P>
+<DIV class=devsite-table-wrapper>
+<TABLE>
+<TBODY>
+<TR id=projectid>
+<TD>Project ID</TD>
+<TD>A unique identifier for your Firebase project, used in requests to the <SPAN class=notranslate>FCM</SPAN> v1 HTTP endpoint. This value is available in the <A href="https://console.firebase.google.com/project/_/settings/general"><SPAN class=notranslate>Firebase</SPAN> console <STRONG>Settings</STRONG></A> pane.</TD></TR>
+<TR id=regtoken>
+<TD>Registration token</TD>
+<TD>
+<P>A unique token string that identifies each client app instance. The registration token is required for single device and device group messaging. Note that registration tokens must be kept secret.</P></TD></TR>
+<TR id=senderid>
+<TD>Sender ID</TD>
+<TD>A unique numerical value created when you create your Firebase project, available in the <A href="https://console.firebase.google.com/project/_/settings/cloudmessaging/"><SPAN class=notranslate>Cloud Messaging</SPAN></A> tab of the <SPAN class=notranslate>Firebase</SPAN> console <STRONG>Settings</STRONG> pane. The sender ID is used to identify each sender that can send messages to the client app.</TD></TR>
+<TR id=accesstoken>
+<TD>Access token</TD>
+<TD>A short-lived OAuth 2.0 token that authorizes requests to the HTTP v1 API. This token is associated with a service account that belongs to your Firebase project. To create and rotate access tokens, follow the steps described in <A href="https://firebase.google.com/docs/cloud-messaging/auth-server">Authorize Send Requests</A>. </TD></TR>
+<TR id=apikey>
+<TD>Server key (for **deprecated** legacy protocols)</TD>
+<TD>
+<P>A server key that authorizes your app server for access to Google services, including sending messages via the deprecated <SPAN class=notranslate>Firebase Cloud Messaging</SPAN> legacy protocols.</P>
+<P><STRONG>Important:</STRONG> Do not include the server key anywhere in your client code. Also, make sure to use only server keys to authorize your app server. Android, Apple platform, and browser keys are rejected by <SPAN class=notranslate>FCM</SPAN>. </P></TD></TR></TBODY></TABLE></DIV>
