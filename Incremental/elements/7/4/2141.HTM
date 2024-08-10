@@ -1,0 +1,2 @@
+Overlapping communication and computation in CUDA barriers:</P>
+<P>Some threads can pass barrier_wait() if all threads have arrived at barrier_arrive().&nbsp; If there's work to be done after barrier_arrive() but before the rest of the threads are ready to pass barrier_wait(), it can be done in between the two calls, hiding some of the latency.&nbsp;

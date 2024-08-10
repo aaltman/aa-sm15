@@ -1,0 +1,147 @@
+<b> : </b>Availability Table</H1>
+<P style="FONT-SIZE: 18px; FONT-FAMILY: Roboto; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(81,81,84); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px 0px 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">Availability is generally calculated based on how long a service was unavailable over some period. Assuming no planned downtime,<SPAN>&nbsp;</SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(67,136,255)" href="https://sre.google/sre-book/availability-table/#tablea1" data-type="xref">Table 1-1</A><SPAN>&nbsp;</SPAN>indicates how much downtime is permitted to reach a given availability level.</P>
+<DIV class=table-wrapper style="FONT-SIZE: 18px; FONT-FAMILY: Roboto; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(81,81,84); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">
+<TABLE id=tablea1 style="FONT-SIZE: 1em; WIDTH: 978px; BORDER-COLLAPSE: collapse; BORDER-SPACING: 0px; MARGIN: 10px 0px">
+<CAPTION class=jumptarget style="OUTLINE-WIDTH: 0px; OUTLINE-STYLE: none; OUTLINE-COLOR: invert"><SPAN class=label>Table 1-1.<SPAN>&nbsp;</SPAN></SPAN>Availability table</CAPTION>
+<THEAD>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TH style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; VERTICAL-ALIGN: top; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; COLOR: rgb(66,66,66); PADDING-BOTTOM: 20px; TEXT-ALIGN: left; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px; border-image: initial" align=center><STRONG style="COLOR: rgb(158,158,158)">Availability level</STRONG></TH>
+<TH style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; VERTICAL-ALIGN: top; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; COLOR: rgb(66,66,66); PADDING-BOTTOM: 20px; TEXT-ALIGN: left; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 0px; border-image: initial" colSpan=6 align=center><STRONG style="COLOR: rgb(158,158,158)">Allowed unavailability window</STRONG></TH></TR></THEAD>
+<TBODY>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">&nbsp;</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px"><STRONG style="COLOR: rgb(158,158,158)">per year</STRONG></P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px"><STRONG style="COLOR: rgb(158,158,158)">per quarter</STRONG></P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px"><STRONG style="COLOR: rgb(158,158,158)">per month</STRONG></P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px"><STRONG style="COLOR: rgb(158,158,158)">per week</STRONG></P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px"><STRONG style="COLOR: rgb(158,158,158)">per day</STRONG></P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px"><STRONG style="COLOR: rgb(158,158,158)">per hour</STRONG></P></TD></TR>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">90%</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">36.5 days</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">9 days</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">3 days</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">16.8 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">2.4 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">6 minutes</P></TD></TR>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">95%</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">18.25 days</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">4.5 days</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">1.5 days</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">8.4 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">1.2 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">3 minutes</P></TD></TR>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">99%</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">3.65 days</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">21.6 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">7.2 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">1.68 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">14.4 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">36 seconds</P></TD></TR>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">99.5%</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">1.83 days</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">10.8 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">3.6 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">50.4 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">7.20 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">18 seconds</P></TD></TR>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">99.9%</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">8.76 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">2.16 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">43.2 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">10.1 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">1.44 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">3.6 seconds</P></TD></TR>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">99.95%</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">4.38 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">1.08 hours</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">21.6 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">5.04 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">43.2 seconds</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">1.8 seconds</P></TD></TR>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">99.99%</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">52.6 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">12.96 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">4.32 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">60.5 seconds</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">8.64 seconds</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">0.36 seconds</P></TD></TR>
+<TR style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; BACKGROUND: rgb(255,255,255); BORDER-BOTTOM: rgb(228,228,228) 1px solid; BORDER-LEFT: medium none; border-image: initial">
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">99.999%</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">5.26 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">1.30 minutes</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">25.9 seconds</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">6.05 seconds</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">0.87 seconds</P></TD>
+<TD style="BORDER-TOP: medium none; BORDER-RIGHT: medium none; WIDTH: 1em; VERTICAL-ALIGN: top; BORDER-BOTTOM: medium none; PADDING-BOTTOM: 20px; PADDING-TOP: 20px; PADDING-LEFT: 0px; BORDER-LEFT: medium none; PADDING-RIGHT: 10px">
+<P style="MARGIN: 0px 0px 20px">0.04 seconds</P></TD></TR></TBODY></TABLE></DIV>
+<P style="FONT-SIZE: 18px; FONT-FAMILY: Roboto; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(81,81,84); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px 0px 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">Using an aggregate unavailability metric (i.e., "<EM style="FONT-WEIGHT: bold; FONT-STYLE: normal">X</EM>% of all operations failed") is more useful than focusing on outage lengths for services that may be partially available&#8212;for instance, due to having multiple replicas, only some of which are unavailable&#8212;and for services whose load varies over the course of a day or week rather than remaining constant.</P>
+<P style="FONT-SIZE: 18px; FONT-FAMILY: Roboto; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(81,81,84); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px 0px 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">See Equations<SPAN>&nbsp;</SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(67,136,255)" href="https://sre.google/sre-book/embracing-risk#risk-management_measuring-service-risk_time-availability-equation" data-type="xref" data-xrefstyle="select:labelnumber">Time-based availability</A><SPAN>&nbsp;</SPAN>and<SPAN>&nbsp;</SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(67,136,255)" href="https://sre.google/sre-book/embracing-risk#risk-management_measuring-service-risk_aggregate-availability-equation" data-type="xref" data-xrefstyle="select:labelnumber">Aggregate availability</A><SPAN>&nbsp;</SPAN>in<SPAN>&nbsp;</SPAN><A style="TEXT-DECORATION: none; COLOR: rgb(67,136,255)" href="https://sre.google/sre-book/embracing-risk/" data-type="xref">Embracing Risk</A><SPAN>&nbsp;</SPAN>for calculations.

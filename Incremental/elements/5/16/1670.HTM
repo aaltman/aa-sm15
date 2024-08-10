@@ -1,0 +1,15 @@
+<b> : </b>6. APIs &amp; Security</H3></DIV><SPAN style="FONT-SIZE: 21px; FONT-FAMILY: roboto, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FLOAT: none; FONT-WEIGHT: 400; COLOR: ; FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; DISPLAY: inline !important; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">If you're designing an external or internal API, there are several points to consider. Generally simple object access protocol (SOAP) is no longer de rigueur due to its overly prescriptive requirements, but for your usecase, it may happen to make sense.</SPAN>
+<UL style="BOX-SIZING: border-box; FONT-SIZE: 21px; FONT-FAMILY: roboto, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; MARGIN-TOP: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: ; FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(255,255,255); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">
+<LI style="BOX-SIZING: border-box">
+<P style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">When is representational state transfer (REST) good enough?</P></LI>
+<LI style="BOX-SIZING: border-box">
+<P style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">Are you having to handle lots of internal microservices, where speed is an issue? Would gRPC be better?</P></LI>
+<LI style="BOX-SIZING: border-box">
+<P style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">If you need to reduce the data pulled by mobile devices, or otherwise want more targeted calls to the database, would GraphQL make more sense?</P></LI>
+<LI style="BOX-SIZING: border-box">
+<P style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">What are the possible security concerns you may have, and how could you mitigate those?</P></LI>
+<LI style="BOX-SIZING: border-box">
+<P style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">How can you use pagination to reduce the results returned from your queries?</P></LI>
+<LI style="BOX-SIZING: border-box">
+<P style="BOX-SIZING: border-box; MARGIN-BOTTOM: 0px; MARGIN-TOP: 0px">If you&#8217;re supporting an external API, would a tier-based rate limiting system make sense, so that users don&#8217;t abuse your API?</P></LI></UL>
+<DIV style="BOX-SIZING: border-box; FONT-SIZE: 21px; FONT-FAMILY: roboto, sans-serif; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: ; FONT-STYLE: normal; TEXT-ALIGN: left; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(205,235,139); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">

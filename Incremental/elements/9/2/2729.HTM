@@ -1,0 +1,69 @@
+<b> : </b><B style="FONT-WEIGHT: bolder">3.3 Choosing an algorithm</B></H3>
+<P style='FONT-SIZE: 16px; FONT-FAMILY: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(74,74,74); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px 0px 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(251,251,251); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'><SPAN style="FONT-WEIGHT: 400">The best load balancing algorithm depends on the needs of the system. If the server pool and the requests are both homogeneous, and there is only one balancer, then Round Robin will work well and is the default in many load balancer applications.</SPAN></P>
+<P style='FONT-SIZE: 16px; FONT-FAMILY: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(74,74,74); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px 0px 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(251,251,251); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'><SPAN style="FONT-WEIGHT: 400">If the server pool is heterogeneous in computing power, then it&#8217;s useful to use Round Robin weighted by server capacity. On the other hand if the requests are heterogenous, Least Load is helpful to prevent servers from being intermittently overloaded.</SPAN></P>
+<P style='FONT-SIZE: 16px; FONT-FAMILY: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(74,74,74); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px 0px 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(251,251,251); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'><SPAN style="FONT-WEIGHT: 400">When the system has a pool of load balancers, then the load balancing algorithm needs either randomness or a power of d choice algorithms to avoid all the balancers sending traffic to the currently least loaded server.</SPAN></P>
+<P style='FONT-SIZE: 16px; FONT-FAMILY: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(74,74,74); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px 0px 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(251,251,251); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'><SPAN style="FONT-WEIGHT: 400">At this point you might be wondering, if there&#8217;s a pool of load balancers, who balances the balancers? One approach is to have an L4 LB in front of L7 LBs, for example putting a Round Robin balancer to a pool of Power-of-d-choices balancers.</SPAN></P>
+<TABLE style='FONT-SIZE: 16px; FONT-FAMILY: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(74,74,74); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(251,251,251); font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+<TBODY>
+<TR>
+<TD>
+<P style="MARGIN: 0px"><B style="FONT-WEIGHT: bolder">Request size</B></P></TD>
+<TD>
+<P style="MARGIN: 0px"><B style="FONT-WEIGHT: bolder">Server size</B></P></TD>
+<TD>
+<P style="MARGIN: 0px"><B style="FONT-WEIGHT: bolder">Request volume</B></P></TD>
+<TD>
+<P style="MARGIN: 0px"><B style="FONT-WEIGHT: bolder">Choice</B></P></TD></TR>
+<TR>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Uniform</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Uniform</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Low</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Round robin</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Uniform</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Uniform</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">High</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Random</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Uniform</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Mixed</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Low</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Weighted round robin</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Uniform</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Mixed</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">High</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Weighted random</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Mixed</SPAN></P></TD>
+<TD>&nbsp;</TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Low</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Least load</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Mixed</SPAN></P></TD>
+<TD>&nbsp;</TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">High</SPAN></P></TD>
+<TD>
+<P style="MARGIN: 0px"><SPAN style="FONT-WEIGHT: 400">Power-of-d-choices</SPAN></P></TD></TR></TBODY></TABLE>
+<P style='FONT-SIZE: 16px; FONT-FAMILY: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(74,74,74); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; MARGIN: 0px 0px 20px; LETTER-SPACING: normal; BACKGROUND-COLOR: rgb(251,251,251); TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>&nbsp;

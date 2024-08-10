@@ -1,0 +1,11 @@
+<b> : </b>Shakespeare: A Sample Service</H1>
+<P style="MARGIN: 0px 0px 20px">To provide a model of how a service would hypothetically be deployed in the Google production environment, let&#8217;s look at an example service that interacts with multiple Google technologies. Suppose we want to offer a service that lets you determine where a given word is used throughout all of Shakespeare&#8217;s works.</P>
+<P style="MARGIN: 0px 0px 20px">We can divide this system into two parts:</P>
+<UL style="PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 0px 55px; PADDING-RIGHT: 0px">
+<LI style="PADDING-BOTTOM: 25px">A batch component that reads all of Shakespeare&#8217;s texts, creates an index, and writes the index into a Bigtable. This job need only run once, or perhaps very infrequently (as you never know if a new text might be discovered!).</LI>
+<LI style="PADDING-BOTTOM: 25px">An application frontend that handles end-user requests. This job is always up, as users in all time zones will want to search in Shakespeare&#8217;s books.</LI></UL>
+<P style="MARGIN: 0px 0px 20px">The batch component is a MapReduce comprising three phases.</P>
+<P style="MARGIN: 0px 0px 20px">The mapping phase reads Shakespeare&#8217;s texts and splits them into individual words. This is faster if performed in parallel by multiple workers.</P>
+<P style="MARGIN: 0px 0px 20px">The shuffle phase sorts the tuples by word.</P>
+<P style="MARGIN: 0px 0px 20px">In the reduce phase, a tuple of (<EM style="FONT-WEIGHT: bold; FONT-STYLE: normal">word</EM>,<SPAN>&nbsp;</SPAN><EM style="FONT-WEIGHT: bold; FONT-STYLE: normal">list of locations</EM>) is created.</P>
+<P style="MARGIN: 0px 0px 20px">Each tuple is written to a row in a Bigtable, using the word as the key.</P><SECTION id=life-of-a-request-nqsMUBUJ class=pagebreak-before data-type="sect2">

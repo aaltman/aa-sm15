@@ -1,0 +1,326 @@
+<H3 style='FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+<HR>
+Conflict-serializable schedules: conflict-serializability
+<HR>
+</H3>
+<UL style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+<P></P>
+<LI><FONT color=darkmagenta><B>Conflict-<I>equivalent</I><SPAN>&nbsp;</SPAN>schedules</B></FONT>
+<P></P>
+<UL>
+<LI><B>Conflict-<I>equivalent</I></B><SPAN>&nbsp;</SPAN>schedules:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ffeeee border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>2<SPAN>&nbsp;</SPAN><B>schedules</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>and<SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>2</SUB></B></FONT><SPAN>&nbsp;</SPAN>are<SPAN>&nbsp;</SPAN><FONT color=red><B><I>conflict</I><SPAN>&nbsp;</SPAN>equivalent</B></FONT><SPAN>&nbsp;</SPAN><B><I>iff</I></B>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=lightyellow border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI><B>Schedule</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>can be<SPAN>&nbsp;</SPAN><FONT color=red><B>transformed</B></FONT><SPAN>&nbsp;</SPAN>into<SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>by a<SPAN>&nbsp;</SPAN><B>sequence</B><SPAN>&nbsp;</SPAN>of<SPAN>&nbsp;</SPAN><FONT color=red><B><I>non-conflicting</I><SPAN>&nbsp;</SPAN>swaps</B></FONT><SPAN>&nbsp;</SPAN>of<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>adjacent</I><SPAN>&nbsp;</SPAN>actions</B></FONT></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P>
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI><B>Example:</B>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=lightcyan border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>Consider the following<SPAN>&nbsp;</SPAN><FONT color=blue><B>2 schedules</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched01.gif"></TD></TR></TBODY></TABLE></UL>
+<P>The<SPAN>&nbsp;</SPAN><FONT color=blue><B>schedules</B></FONT><SPAN>&nbsp;</SPAN>are<SPAN>&nbsp;</SPAN><FONT color=red><B><I>conflict</I><SPAN>&nbsp;</SPAN>equivalent</B></FONT><SPAN>&nbsp;</SPAN>because:</P>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched01b.gif"></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL>
+<P></P>
+<HR>
+
+<HR>
+
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI><FONT color=darkmagenta><B>Conflict-serializability</B></FONT>
+<P></P>
+<UL>
+<LI><B>Conflict-<I>serializable</I></B><SPAN>&nbsp;</SPAN>schedules:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ffeeee border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>A<SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>is<SPAN>&nbsp;</SPAN><FONT color=red><B>conflict<SPAN>&nbsp;</SPAN><I>serializable</I></B></FONT><SPAN>&nbsp;</SPAN><B><I>iff</I></B>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=lightyellow border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>The<SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>can be<SPAN>&nbsp;</SPAN><FONT color=red><B>transformed</B></FONT><SPAN>&nbsp;</SPAN>into a<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>serial</I><SPAN>&nbsp;</SPAN>sechdule</B></FONT><SPAN>&nbsp;</SPAN>by a<SPAN>&nbsp;</SPAN><B>sequence</B><SPAN>&nbsp;</SPAN>of<SPAN>&nbsp;</SPAN><FONT color=red><B><I>non-conflicting</I><SPAN>&nbsp;</SPAN>swaps</B></FONT><SPAN>&nbsp;</SPAN>of<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>adjacent</I><SPAN>&nbsp;</SPAN>actions</B></FONT></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P>
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI><B>Example:</B>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=lightcyan border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>Consider the following<SPAN>&nbsp;</SPAN><FONT color=blue><B>schedule</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched02.gif"></TD></TR></TBODY></TABLE></UL>
+<P></P></LI>
+<LI>We<SPAN>&nbsp;</SPAN><B>perform</B><SPAN>&nbsp;</SPAN>the following<SPAN>&nbsp;</SPAN><FONT color=blue><B>sequence</B></FONT><SPAN>&nbsp;</SPAN>of<SPAN>&nbsp;</SPAN><FONT color=red><B><I>non-conflicting</I><SPAN>&nbsp;</SPAN>swaps</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched02b.gif"></TD></TR></TBODY></TABLE></UL>
+<P>and<SPAN>&nbsp;</SPAN><B>obtain</B><SPAN>&nbsp;</SPAN>a<SPAN>&nbsp;</SPAN><FONT color=red><B><I>serial</I><SPAN>&nbsp;</SPAN>schedule</B></FONT><SPAN>&nbsp;</SPAN>!!!</P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P><B>Conclusion:</B></P>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=lightyellow border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>The<SPAN>&nbsp;</SPAN><FONT color=blue><B>schedule</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched02.gif"></TD></TR></TBODY></TABLE></UL>
+<P>is a<SPAN>&nbsp;</SPAN><FONT color=red><B><I>conflict</I>-serializable</B></FONT><SPAN>&nbsp;</SPAN>schedule</P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL>
+<P></P>
+<HR>
+
+<HR>
+
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI><FONT color=darkmagenta><B>Conflict-serializable schedule are<SPAN>&nbsp;</SPAN><I>always</I><SPAN>&nbsp;</SPAN>serializable</B></FONT>
+<P></P>
+<UL>
+<LI><B>Fact:</B>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ffeeee border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>A<SPAN>&nbsp;</SPAN><FONT color=red><B><I>conflict</I>-serializable</B></FONT><SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN>is (<FONT color=blue><B>always</B></FONT>) a<SPAN>&nbsp;</SPAN><FONT color=red><B><I>serializable</I></B></FONT><SPAN>&nbsp;</SPAN>schedule &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</LI></UL></TD></TR></TBODY></TABLE></UL>
+<P><B>Reason:</B></P>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ccffcc border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI><FONT color=red><B>Swapping</B></FONT><SPAN>&nbsp;</SPAN>two<SPAN>&nbsp;</SPAN><FONT color=blue><B>non-conflicting operations</B></FONT><SPAN>&nbsp;</SPAN>in a<SPAN>&nbsp;</SPAN><FONT color=red><B>schedule</B></FONT><SPAN>&nbsp;</SPAN>will
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=lightyellow border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI><FONT color=red><B>not change</B></FONT><SPAN>&nbsp;</SPAN>the<SPAN>&nbsp;</SPAN><FONT color=blue><B>effect</B></FONT><SPAN>&nbsp;</SPAN>of the<SPAN>&nbsp;</SPAN><FONT color=red><B>execution</B></FONT><SPAN>&nbsp;</SPAN>of the<SPAN>&nbsp;</SPAN><FONT color=blue><B>operations</B></FONT><SPAN>&nbsp;</SPAN>in a<SPAN>&nbsp;</SPAN><FONT color=red><B>schedule</B></FONT></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P>
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI><FONT color=red><B>Therefore</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=lightcyan border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>The<SPAN>&nbsp;</SPAN><FONT color=red><B><I>effect</I></B></FONT><SPAN>&nbsp;</SPAN>of the<SPAN>&nbsp;</SPAN><B>execution</B><SPAN>&nbsp;</SPAN>of a<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>conflict</I>-serializable</B></FONT><SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN>is<SPAN>&nbsp;</SPAN><FONT color=red><B><I>equivalent</I></B></FONT><SPAN>&nbsp;</SPAN>to the<SPAN>&nbsp;</SPAN><B>execution</B><SPAN>&nbsp;</SPAN>of a<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>serial</I></B></FONT><SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN>of the<SPAN>&nbsp;</SPAN><FONT color=red><B>transactions</B></FONT><SPAN>&nbsp;</SPAN>for<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>every</I><SPAN>&nbsp;</SPAN>database state</B></FONT><SPAN>&nbsp;</SPAN>!!!</LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P>
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI>So<SPAN>&nbsp;</SPAN><FONT color=red><B>by definition</B></FONT><SPAN>&nbsp;</SPAN>of a<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>serializable</I><SPAN>&nbsp;</SPAN>schedule</B></FONT>: (see:<SPAN>&nbsp;</SPAN><A href="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/serializability1.html"><FONT color=red><B>click here</B></FONT></A>)
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ffeeee border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>A<SPAN>&nbsp;</SPAN><FONT color=red><B><I>conflict</I>-serializable</B></FONT><SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN>is a<SPAN>&nbsp;</SPAN><FONT color=blue><B>serializable</B></FONT><SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL>
+<P></P>
+<HR>
+
+<HR>
+
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI><FONT color=darkmagenta><B>Schedules can be<SPAN>&nbsp;</SPAN><I>serializable</I><SPAN>&nbsp;</SPAN>but<SPAN>&nbsp;</SPAN><FONT color=red>not</FONT><SPAN>&nbsp;</SPAN><I>conflict</I>-serializable</B></FONT>
+<P></P>
+<UL>
+<LI><B>Example</B><SPAN>&nbsp;</SPAN>of a<SPAN>&nbsp;</SPAN><FONT color=blue><B>schedule</B></FONT><SPAN>&nbsp;</SPAN>that is<SPAN>&nbsp;</SPAN><FONT color=red><B><I>serializable</I></B></FONT><SPAN>&nbsp;</SPAN>but<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>non</I>-conflict serializable</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=lightcyan border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>Consider the following<SPAN>&nbsp;</SPAN><FONT color=red><B>3 transactions</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched03.gif"></TD></TR></TBODY></TABLE></UL>
+<P></P>
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI>Consider the following<SPAN>&nbsp;</SPAN><FONT color=blue><B>2 schedules</B></FONT><SPAN>&nbsp;</SPAN>with the<SPAN>&nbsp;</SPAN><FONT color=red><B>3 transactions</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched03a.gif"></TD></TR></TBODY></TABLE></UL>
+<P><FONT color=blue><B>Schedule S<SUB>2</SUB></B></FONT><SPAN>&nbsp;</SPAN>is a<SPAN>&nbsp;</SPAN><FONT color=red><B><I>serial</I><SPAN>&nbsp;</SPAN>schedule</B></FONT><SPAN>&nbsp;</SPAN>!!!</P>
+<P></P>
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI>The<SPAN>&nbsp;</SPAN><FONT color=red><B><I>effect</I></B></FONT><SPAN>&nbsp;</SPAN>(=<SPAN>&nbsp;</SPAN><FONT color=blue><B>state</B></FONT><SPAN>&nbsp;</SPAN>of the<SPAN>&nbsp;</SPAN><FONT color=red><B>database</B></FONT>) of<SPAN>&nbsp;</SPAN><B>schedules</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>and<SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>2</SUB></B></FONT><SPAN>&nbsp;</SPAN>are<SPAN>&nbsp;</SPAN><FONT color=red><B><I>identical</I></B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched03b.gif"></TD></TR></TBODY></TABLE></UL>
+<P>(The<SPAN>&nbsp;</SPAN><FONT color=red><B>database state</B></FONT><SPAN>&nbsp;</SPAN>= the<SPAN>&nbsp;</SPAN><FONT color=blue><B>values</B></FONT><SPAN>&nbsp;</SPAN>of the<SPAN>&nbsp;</SPAN><FONT color=red><B>database elements</B></FONT>)</P>
+<P><FONT color=red><B>Therefore</B></FONT>:</P>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ffeeee border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>The<SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>is a<SPAN>&nbsp;</SPAN><FONT color=red><B><I>serializable</I><SPAN>&nbsp;</SPAN>schedule</B></FONT><SPAN>&nbsp;</SPAN>!!!
+<P><FONT color=red><B>because</B></FONT><SPAN>&nbsp;</SPAN>(by<SPAN>&nbsp;</SPAN><FONT color=blue><B>definition</B></FONT>):</P>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ccffcc border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI><B>Schedule</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>is<SPAN>&nbsp;</SPAN><FONT color=red><B>equivalent</B></FONT><SPAN>&nbsp;</SPAN>to the<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>serial</I><SPAN>&nbsp;</SPAN>schedule S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>for<SPAN>&nbsp;</SPAN><FONT color=red><B>every database state</B></FONT><SPAN>&nbsp;</SPAN>!!!</LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P>
+<P></P>
+<HR>
+
+<HR>
+
+<P></P></LI>
+<LI><FONT color=red><B>However</B></FONT>:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ccffcc border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>We<SPAN>&nbsp;</SPAN><FONT color=red><B>can<I>not</I></B></FONT><SPAN>&nbsp;</SPAN><FONT color=blue><B>transform</B></FONT><SPAN>&nbsp;</SPAN>the<SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN><FONT color=red><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>into a<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>serial</I><SPAN>&nbsp;</SPAN>schedule</B></FONT><SPAN>&nbsp;</SPAN>by<SPAN>&nbsp;</SPAN><FONT color=red><B><I>swapping</I></B></FONT><SPAN>&nbsp;</SPAN>adjacent<SPAN>&nbsp;</SPAN><FONT color=blue><B>non-conflicting</B></FONT><SPAN>&nbsp;</SPAN>actions:
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" border=5>
+<TBODY>
+<TR>
+<TD><IMG src="https://www.cs.emory.edu/~cheung/Courses/554/Syllabus/7-serializability/FIGS/conflict-sched03c.gif"></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P>
+<P><FONT color=red><B>Therefore</B></FONT>,<SPAN>&nbsp;</SPAN><B>by</B><SPAN>&nbsp;</SPAN><FONT color=blue><B><I>definition</I></B></FONT>:</P>
+<P></P>
+<UL>
+<TABLE style="FONT-SIZE: 16px" bgColor=#ffeeee border=5>
+<TBODY>
+<TR>
+<TD>
+<UL>
+<LI>The<SPAN>&nbsp;</SPAN><B>schedule</B><SPAN>&nbsp;</SPAN><FONT color=blue><B>S<SUB>1</SUB></B></FONT><SPAN>&nbsp;</SPAN>is<SPAN>&nbsp;</SPAN><FONT color=red><B><I>not</I></B></FONT><SPAN>&nbsp;</SPAN>a<SPAN>&nbsp;</SPAN><FONT color=blue><B><I>conflict</I>-serializable</B></FONT><SPAN>&nbsp;</SPAN>schedule !!!</LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL></TD></TR></TBODY></TABLE></UL>
+<P></P></LI></UL>
+<P></P></LI></UL>
+<P style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'></P>
+<HR style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+
+<HR style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+
+<HR style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>
+
+<HR style='FONT-SIZE: medium; FONT-FAMILY: "Times New Roman"; WHITE-SPACE: normal; WORD-SPACING: 0px; TEXT-TRANSFORM: none; FONT-WEIGHT: 400; COLOR: rgb(0,0,0); FONT-STYLE: normal; ORPHANS: 2; WIDOWS: 2; LETTER-SPACING: normal; TEXT-INDENT: 0px; font-variant-ligatures: normal; font-variant-caps: normal; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial'>

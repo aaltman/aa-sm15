@@ -1,0 +1,12 @@
+<b> : </b><SPAN class=section-number style="BOX-SIZING: border-box">3.2.3.6.<SPAN>&nbsp;</SPAN></SPAN>Manage Utilization of L2 set-aside cache<A title="Permalink to this headline" class=headerlink style="BOX-SIZING: border-box; CURSOR: pointer; TEXT-DECORATION: none; COLOR: ; FONT: 14px/1 FontAwesome; MARGIN-LEFT: 0.5em; DISPLAY: inline-block; text-rendering: auto; -webkit-font-smoothing: antialiased; opacity: 0" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#manage-utilization-of-l2-set-aside-cache">&#61633;</A></H4>
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 15px 5px 15px 0px">Multiple CUDA kernels executing concurrently in different CUDA streams may have a different access policy window assigned to their streams. However, the L2 set-aside cache portion is shared among all these concurrent CUDA kernels. As a result, the net utilization of this set-aside cache portion is the sum of all the concurrent kernels&#8217; individual use. The benefits of designating memory accesses as persisting diminish as the volume of persisting accesses exceeds the set-aside L2 cache capacity.</P>
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 15px 5px 15px 0px">To manage utilization of the set-aside L2 cache portion, an application must consider the following:</P>
+<UL class=simple style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 24px; LINE-HEIGHT: 24px; PADDING-RIGHT: 0px">
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">Size of L2 set-aside cache.</P></LI>
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">CUDA kernels that may concurrently execute.</P></LI>
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">The access policy window for all the CUDA kernels that may concurrently execute.</P></LI>
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">When and how L2 reset is required to allow normal or streaming accesses to utilize the previously set-aside L2 cache with equal priority.</P></LI></UL></SECTION><SECTION id=query-l2-cache-properties style="BOX-SIZING: border-box; DISPLAY: block"><SPAN id=l2-cache-query style="BOX-SIZING: border-box"></SPAN>

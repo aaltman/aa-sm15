@@ -1,3 +1,4 @@
-<b> : </b>32-bit compat mode<A title="Permalink to this heading" class=headerlink style="TEXT-DECORATION: none; COLOR: rgb(221,221,221); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; VISIBILITY: hidden" href="https://docs.kernel.org/driver-api/ioctl.html#bit-compat-mode"></A></H2>
+<B>: </B>32-bit compat mode<A title="Permalink to this heading" class=headerlink style="TEXT-DECORATION: none; COLOR: rgb(221,221,221); PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; VISIBILITY: hidden" href="https://docs.kernel.org/driver-api/ioctl.html#bit-compat-mode"></A>
+<H2></H2>
 <P style="LINE-HEIGHT: 1.4em; hyphens: auto">In order to support 32-bit user space running on a 64-bit machine, each subsystem or driver that implements an ioctl callback handler must also implement the corresponding compat_ioctl handler.</P>
 <P style="LINE-HEIGHT: 1.4em; hyphens: auto">As long as all the rules for data structures are followed, this is as easy as setting the .compat_ioctl pointer to a helper function such as compat_ptr_ioctl() or blkdev_compat_ptr_ioctl().</P><SECTION id=compat-ptr>

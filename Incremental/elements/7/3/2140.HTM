@@ -1,0 +1,2 @@
+Hiding CUDA barrier latency: concrete example</P>
+<P>The CUDA docs on barrier_arrive() and barrier_wait() give an example in which after reaching barrier_arrive(), the local thread group (? TODO: clarify) does some initialization of its own memory block before arriving at barrier_wait().&nbsp; After the wait, the local thread group can join the rest in processing data that includes but extends beyond the block that was initialized while waiting for other threads outside of this group to call barrier_arrive().

@@ -1,0 +1,5 @@
+The most performant approach to flushing WAL writes we can get is with<SPAN>&nbsp;</SPAN><B style="FONT-WEIGHT: bold">Steal</B><SPAN>&nbsp;</SPAN>and<SPAN>&nbsp;</SPAN><B style="FONT-WEIGHT: bold">No-Force</B><SPAN>&nbsp;</SPAN>policy.<BR>
+<P></P>
+<UL style="TEXT-ALIGN: left">
+<LI>Steal says: A transaction can steal pages from the buffer to do work. This allows Transaction C's dirty pages to be written to disk before it completes so that there's room for Transaction B to do work. 
+<LI>No-Force says: Dirty pages for finished transactions can be flushed to disk whenever convenient. They don't have to flush to disk before we can commit the transaction.</LI></UL>

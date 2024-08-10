@@ -1,0 +1,16 @@
+<b> : </b><SPAN class=section-number style="BOX-SIZING: border-box">3.2.8.<SPAN>&nbsp;</SPAN></SPAN>Asynchronous Concurrent Execution<A title="Permalink to this headline" class=headerlink style="BOX-SIZING: border-box; CURSOR: pointer; TEXT-DECORATION: none; COLOR: ; FONT: 14px/1 FontAwesome; MARGIN-LEFT: 0.5em; DISPLAY: inline-block; text-rendering: auto; -webkit-font-smoothing: antialiased; opacity: 0" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#asynchronous-concurrent-execution">&#61633;</A></H3>
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 15px 5px 15px 0px">CUDA exposes the following operations as independent tasks that can operate concurrently with one another:</P>
+<UL class=simple style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; PADDING-LEFT: 0px; MARGIN: 0px 0px 24px; LINE-HEIGHT: 24px; PADDING-RIGHT: 0px">
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">Computation on the host;</P></LI>
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">Computation on the device;</P></LI>
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">Memory transfers from the host to the device;</P></LI>
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">Memory transfers from the device to the host;</P></LI>
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">Memory transfers within the memory of a given device;</P></LI>
+<LI style="LIST-STYLE-TYPE: disc; BOX-SIZING: border-box; MARGIN-LEFT: 24px">
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 0px 5px 0px 0px">Memory transfers among devices.</P></LI></UL>
+<P style="BOX-SIZING: border-box; COLOR: ; MARGIN: 15px 5px 15px 0px">The level of concurrency achieved between these operations will depend on the feature set and compute capability of the device as described below.</P><SECTION id=concurrent-execution-between-host-and-device style="BOX-SIZING: border-box; DISPLAY: block"><SPAN id=concurrent-execution-host-device style="BOX-SIZING: border-box"></SPAN>
