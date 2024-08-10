@@ -1,0 +1,4 @@
+<b> : </b><STRONG>3.2 LFU - least frequently used</STRONG></H3>
+<P><SPAN style="FONT-WEIGHT: 400">In an LFU replacement policy, the entry in the cache that has been used the least frequently will be freed. Frequency is tracked with a simple access count in the entry metadata.&nbsp;</SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">LFU replacement policies are especially helpful for applications where infrequently accessed data is the least likely to be used again. For example, an encyclopedia-like service could have certain articles that are popular (e.g. about celebrities) and others that are more obscure. </SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">With a CDN running LFU replacement would mean the popular articles are persisted in the cache and faster to load, while the obscure articles are freed quickly.&nbsp;</SPAN>

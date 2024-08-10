@@ -1,0 +1,24 @@
+<b> : </b>Integration and ecosystem</H3>
+<P>In terms of integration and ecosystem support, Kafka Streams naturally integrates seamlessly with Kafka and benefits from the Kafka ecosystem. This makes it a convenient choice for organizations already invested in Kafka. The <A href="https://redpanda.com/guides/kafka-tutorial/what-is-kafka-connect"><STRONG>Kafka Connect</STRONG></A> API facilitates integration with various databases, message queues, and file formats. For instance, the JDBC Connector allows Kafka Streams to interact directly with relational databases.</P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab">// Example - Kafka Streams with Kafka Connect</SPAN><SPAN>
+</SPAN>
+<SPAN>StreamsBuilder builder = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> StreamsBuilder();
+</SPAN><SPAN>KStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; sourceStream = builder.stream(</SPAN><SPAN style="COLOR: #abe338">"source-topic"</SPAN><SPAN>);
+</SPAN><SPAN>sourceStream.to(</SPAN><SPAN style="COLOR: #abe338">"destination-topic"</SPAN><SPAN>);
+</SPAN>
+<SPAN></SPAN><SPAN style="COLOR: #d4d0ab">// ... Kafka Streams application logic ...</SPAN><SPAN>
+</SPAN>
+<SPAN>KafkaStreams streams = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> KafkaStreams(builder.build(), properties);
+</SPAN>streams.start();</CODE></PRE>
+<P>Similarly, Flink offers extensive integration capabilities with various external systems. It has a vibrant community that contributes to a wide range of connectors and integrations. This makes Flink adaptable to more diverse environments and use cases. For example:</P>
+<UL role=list>
+<LI>Flink Connectors for Kafka, AWS Kinesis, Elasticsearch, JDBC, RabbitMQ, and Apache Cassandra.</LI>
+<LI>Flink Table and SQL API: Allows easy integration with external systems for streaming and batch processing.</LI></UL><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab">// Code snippet example - Flink with Kafka Connector</SPAN><SPAN>
+</SPAN>
+<SPAN>StreamsBuilder builder = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> StreamsBuilder();
+</SPAN><SPAN>KStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; sourceStream = builder.stream(</SPAN><SPAN style="COLOR: #abe338">"source-topic"</SPAN><SPAN>);
+</SPAN><SPAN>sourceStream.to(</SPAN><SPAN style="COLOR: #abe338">"destination-topic"</SPAN><SPAN>);
+</SPAN>
+<SPAN></SPAN><SPAN style="COLOR: #d4d0ab">// ... Kafka Streams application logic ...</SPAN><SPAN>
+</SPAN>
+<SPAN>KafkaStreams streams = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> KafkaStreams(builder.build(), properties);
+</SPAN>streams.start();</CODE></PRE>

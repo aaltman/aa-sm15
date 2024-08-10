@@ -1,0 +1,8 @@
+<b> : </b><B>2.1 Short Polling</B></H3>
+<P><SPAN style="FONT-WEIGHT: 400">Short polling is the original polling protocol for clients to get regular information updates from a server. The steps of short polling are:</SPAN></P>
+<UL>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Client sends Server an HTTP request for new information.</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Server responds with new information, or no information.</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Client repeats the request at a set interval (e.g. 2s)</SPAN></LI></UL>
+<P><SPAN style="FONT-WEIGHT: 400">The advantages of Short polling are that it&#8217;s very simple and widely supported because it&#8217;s part of the HTTP. The downside of short polling is that it has a lot of request overhead from both sides: the client has to constantly make new requests, and the server has to handle them whether or not there&#8217;s new information. In practice if you want a polling connection, long polling is preferred to short polling.&nbsp;</SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><IMG alt="short polling" src="https://d3no4ktch0fdq4.cloudfront.net/public/CACHE/images/blog-articles/content-images/Diagram_19_2x_25a5182a-3701-4ca0-b71d-a30df791da28_1024x1024/ba229342f3dc2f571025c2a6ec7c6ff3.webp" width=660 height=544 loading="lazy"></SPAN>

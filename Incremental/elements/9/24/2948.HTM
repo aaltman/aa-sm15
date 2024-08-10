@@ -1,0 +1,7 @@
+<b> : </b><A name=which></A><B>4. Which to use</B></H2>
+<P><SPAN style="FONT-WEIGHT: 400">Whether to use queues or pub-sub depends mostly on how many message consumers the system has. If a message needs to have only one consumer, then the message queue is the right approach. If a message needs to have possibly many consumers that get a copy, the pub-sub approach is best. </SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">Implementations also differ in the particular message-passing guarantees they provide. Some feature variations to note are:</SPAN></P>
+<UL>
+<LI style="FONT-WEIGHT: 400"><B>Persistence:</B><SPAN style="FONT-WEIGHT: 400"> the messages are saved to persistent storage so they can be recovered in case the message broker itself goes down.&nbsp;</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><B>Replays:</B><SPAN style="FONT-WEIGHT: 400"> the messages are stored even after they are consumed so a service can &#8220;replay&#8221; the message stream in failure cases to recover properly.&nbsp;</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><B>Ordering:</B><SPAN style="FONT-WEIGHT: 400"> the messages always arrive to the consumer in a particular order. </SPAN></LI></UL>

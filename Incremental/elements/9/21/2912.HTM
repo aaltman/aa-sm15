@@ -1,0 +1,6 @@
+<b> : </b><STRONG>1.4 When not to use caching</STRONG></H3>
+<UL>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Caching isn&#8217;t helpful when it takes just as long to access the cache as it does to access the primary data.</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Caching doesn&#8217;t work as well when requests have low repetition (higher randomness), because caching performance comes from repeated memory access patterns.&nbsp;</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Caching isn&#8217;t helpful when the data changes frequently, as the cached version gets out of sync and the primary data store must be accessed every time.&nbsp;</SPAN></LI></UL>
+<P><SPAN style="FONT-WEIGHT: 400">It&#8217;s important to note that caches should not be used as permanent data storage - they are almost always implemented in volatile memory because it is faster, and should thus be considered transient. In section 2 below, we&#8217;ll talk more about strategies for writing to a caching layer that don&#8217;t cause data loss.</SPAN>

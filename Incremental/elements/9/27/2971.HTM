@@ -1,0 +1,25 @@
+<b> : </b>Kafka Streams DSL vs. Flink DataStream API</H3>
+<P>Kafka Streams offers a Domain-Specific Language (DSL) that simplifies building Java stream-processing applications. The DSL provides high-level abstractions like KStream and KTable, which represent data streams and table change logs, respectively.</P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab">// Code Snippet Example - Kafka Streams DSL</SPAN><SPAN>
+</SPAN><SPAN>StreamsBuilder builder = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> StreamsBuilder();
+</SPAN><SPAN>KStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; textLines = builder.stream(</SPAN><SPAN style="COLOR: #abe338">"input-topic"</SPAN><SPAN>);
+</SPAN><SPAN>KTable&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, Long&gt; wordCounts = textLines
+</SPAN><SPAN>    .flatMapValues(textLine -&gt; Arrays.asList(textLine.toLowerCase().split(</SPAN><SPAN style="COLOR: #abe338">"\\W+"</SPAN><SPAN>)))
+</SPAN>    .groupBy((key, word) -&gt; word)
+    .count();
+
+<SPAN>wordCounts.toStream().to(</SPAN><SPAN style="COLOR: #abe338">"output-topic"</SPAN><SPAN>, Produced.with(Serdes.String(), Serdes.Long()));
+</SPAN><SPAN>KafkaStreams streams = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> KafkaStreams(builder.build(), properties);
+</SPAN>streams.start();</CODE></PRE>
+<P>In the above example, the DSL is used to implement a simple word count application, demonstrating the straightforward and declarative style of Kafka Streams.</P>
+<P>While Kafka Streams' DSL is tailored for Kafka-centric applications and offers an easy way to process data within the Kafka ecosystem, it is limited to Java and closely tied to Kafka's architecture. In comparison, Flink's DataStream API provides a more flexible programming model, supporting Java, Scala, and Python. It offers a rich set of operators for stateful computations, windowing, and complex event processing that extend beyond the Kafka ecosystem.</P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab">// Code Snippet Example - Flink DataStream API</SPAN><SPAN>
+</SPAN>StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+<SPAN>DataStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; text = env.fromElements(</SPAN><SPAN style="COLOR: #d4d0ab">/* input data */</SPAN><SPAN>);
+</SPAN><SPAN>DataStream&lt;Tuple2&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, Integer&gt;&gt; counts = text
+</SPAN><SPAN>    .flatMap(</SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> Tokenizer())
+</SPAN><SPAN>    .keyBy(</SPAN><SPAN style="COLOR: #f5ab35">0</SPAN><SPAN>)
+</SPAN><SPAN>    .window(TumblingProcessingTimeWindows.of(Time.seconds(</SPAN><SPAN style="COLOR: #f5ab35">5</SPAN><SPAN>)))
+</SPAN><SPAN>    .sum(</SPAN><SPAN style="COLOR: #f5ab35">1</SPAN><SPAN>);
+</SPAN>
+counts.print();
+env.execute();</CODE></PRE>
+<P>This snippet shows a similar word count application in Flink, highlighting the expressive and versatile nature of the DataStream API.

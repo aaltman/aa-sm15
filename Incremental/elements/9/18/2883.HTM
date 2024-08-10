@@ -1,0 +1,230 @@
+<H2><B><FONT class=extract>1. Load balancing basics</FONT></B></H2>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>There are two main types of Load Balancers (LB), their names referring to layers in the OSI model of network communication. L4 LBs operate at Layer 4, the transport layer, and L7 LBs operate at Layer 7, the application layer. We&#8217;ll discuss the tradeoffs between which layer an LB operates at more in Section 2.2. </FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>There are many algorithms for deciding exactly how to distribute tasks. The most commonly used classes of algorithms are Round Robin, Least Load, and User and Resource Hashing. Some of these methods are only available on L7 LBs.</FONT></SPAN></P>
+<H3><B><FONT class=extract>1.1 Advantages of load balancing</FONT></B></H3>
+<UL>
+<LI><FONT class=extract><B>Enable horizontal scaling:</B><SPAN style="FONT-WEIGHT: 400"> spinning up multiple instances of a service is not possible without a load balancer directing traffic efficiently to the cluster.&nbsp;</SPAN> </FONT>
+<LI><FONT class=extract><B>Dynamic scaling</B><SPAN style="FONT-WEIGHT: 400">: it's possible to seamlessly add and remove servers to respond to load.</SPAN> </FONT>
+<LI><FONT class=extract><B>Abstraction</B><SPAN style="FONT-WEIGHT: 400">: the end user only needs to know the address of the load balancer, not the address of every server in the cluster.</SPAN> </FONT>
+<LI><FONT class=extract><B>Throughput</B><SPAN style="FONT-WEIGHT: 400">: service availability and response time are unaffected by overall traffic.</SPAN> </FONT>
+<LI><FONT class=extract><B>Redundancy</B><SPAN style="FONT-WEIGHT: 400">: distributing load over a cluster means no one server is a single point of failure. Note that the load balancer itself must also not become a single point of failure.</SPAN> </FONT>
+<LI><FONT class=extract><B>Continuous deployment</B><SPAN style="FONT-WEIGHT: 400">: it's possible to roll out software updates without taking the whole service down, by using the load balancer to take out one machine at a time.</SPAN></FONT></LI></UL>
+<H2><A name=types></A><B><FONT class=extract>2. Types of load balancers</FONT></B></H2>
+<H3><B><FONT class=extract>2.1 Hardware vs software load balancers</FONT></B></H3>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Hardware load balancers are specialized appliances with circuitry designed to perform load balancing tasks. They are generally very performant and very expensive. Hardware LBs are generally L4 LBs, because L7 decisions are more complex and need to be updated more often.</FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>The most well-known and respected software load balancers are HAProxy and nginx. Software load balancers like these run on standard servers and are less hardware optimized, but cheaper to set up and run. With a software load balancer, requests are simply routed to the load balancer server instead of an application server.&nbsp;</FONT></SPAN></P>
+<H3><B><FONT class=extract>2.2 DNS vs L4 vs L7 load balancers</FONT></B></H3>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>DNS load-balancers integrate with the Domain Name Services (DNS) infrastructure to cause a client&#8217;s name lookup for a service (e.g., for &#8220;</FONT></SPAN><A href="https://www.google.com/"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>www.google.com</FONT></SPAN></A><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>&#8221;) to return a different IP address to each requester corresponding to one of a pool of back-end servers in their geographic location.</FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>An L4 load balancer acts on information found in the network and transport layers of the request. This includes the protocol (TCP, UDP, etc.), source and destination IP addresses, and source and destination port numbers. The L4 LB doesn't have access to the contents of the request like application-level headers or the requested URL&nbsp; As a result, the routing decisions are based entirely on request headers at L4 and below. For example, an L4 LB can route requests from the same IP address to the same server every time. </FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>L7 LBs on the other hand have access to the full information carried by the request at the application layer, and as a result&nbsp; they can make more sophisticated routing decisions. For example, they can route requests for video content to a pool of servers optimized for video, requests for static content to a different set of servers, etc. They can also route requests based on the user, so that the same user always lands on the same server (for session stickiness) or the same pool of servers (for performance reasons).</FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>In order to look inside the request an L7 LB needs to handle decryption. This means the LB does </FONT></SPAN><A href="https://en.wikipedia.org/wiki/Transport_Layer_Security"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>TLS termination</FONT></SPAN></A><SPAN style="FONT-WEIGHT: 400"><FONT class=extract> so the </FONT></SPAN><A href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>TCP connection</FONT></SPAN></A><SPAN style="FONT-WEIGHT: 400"><FONT class=extract> ends at the load balancer. The benefit of this is it&nbsp; frees backend servers from having to perform decryption (a performance-intensive task) and from managing certificates. On the flipside, the load balancing layer becomes a more concentrated attack surface.</FONT></SPAN></P>
+<TABLE>
+<TBODY>
+<TR>
+<TD>
+<P><B><FONT class=extract>What</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>L4</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>L7</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>DNS</FONT></B></P></TD></TR>
+<TR>
+<TD>
+<P><B><FONT class=extract>Data requirements</FONT></B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Request packet header</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Contents of the request</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>DNS lookup before request</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><B><FONT class=extract>Session security</FONT></B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>SSL passthrough</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>TLS termination</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Not impacted</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><B><FONT class=extract>Implementation location</FONT></B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Hardware or software</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Usually software only</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Integrated with DNS server</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><B><FONT class=extract>Speed</FONT></B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Fast</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Less fast but modern hardware can take it</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Fast</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><B><FONT class=extract>Access to content</FONT></B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Content agnostic</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Inspects and manipulates content (cookies, session management, different protocols or request types to different servers)</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Content agnostic</FONT></SPAN></P></TD></TR></TBODY></TABLE>
+<P><FONT class=extract>&nbsp;</FONT></P>
+<H2><A name=algorithms></A><B><FONT class=extract>3. Load balancing algorithms</FONT></B></H2>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Load balancing algorithms are generally divided into two groups: static and dynamic. Static algorithms function the same regardless of the state of the back end serving the requests, whereas dynamic algorithms take into account the state of the backend and consider system load when routing requests.<BR><BR>Static algorithms are generally simpler and more efficient to implement but can lead to uneven distribution of requests. Dynamic algorithms are more complex and entail more overhead, as they require communication between the LB and the back-end servers, but can more efficiently distribute requests.&nbsp; </FONT></SPAN></P>
+<H3><B><FONT class=extract>3.1 Static</FONT></B></H3>
+<P><FONT class=extract><B>Round robin </B><SPAN style="FONT-WEIGHT: 400">is the simplest and one of the most used algorithms. The load balancer maintains a list of available servers, and routes the first request to the first server, the second request to the second server, and so on. This works well if every server in the pool has roughly the same performance characteristics.</SPAN></FONT></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>A &#8220;weighted&#8221; round robin takes server characteristics into account, so that servers with more resources get proportionally more of the requests. The advantages of this algorithm are that it is simple, very fast, and easy to understand. The disadvantages are that the current load of each server is not taken into account, and that the relative computation cost of each request is also not taken into account.</FONT></SPAN></P>
+<P><FONT class=extract><SPAN style="FONT-WEIGHT: 400">A </SPAN><B>Random</B><SPAN style="FONT-WEIGHT: 400"> algorithm is another simple and popular approach. Requests are sent to random servers, which can be weighted by server capacity. Random works well for systems with a large number of requests because the law of large numbers means randomization will tend towards a uniform distribution. It also works well with running several LBs at the same time, because they don&#8217;t need to coordinate. </SPAN></FONT></P>
+<H3><B><FONT class=extract><IMG alt="Load balancing round robin" src="https://d3no4ktch0fdq4.cloudfront.net/public/CACHE/images/blog-articles/content-images/Diagram_10_2x_1_1024x1024/5ced6d5c402fa4fbdab34e6aa3c805f8.webp" width=660 height=860 loading="lazy"></FONT></B></H3>
+<P><FONT class=extract><SPAN style="FONT-WEIGHT: 400">With a </SPAN><B>User IP Hashing</B><SPAN style="FONT-WEIGHT: 400"> algorithm, the same user always goes to the same server. If the assigned server ever goes down the distribution is rebalanced. In this way we get session stickiness for free, and some caching wins. </SPAN></FONT></P>
+<P><FONT class=extract><SPAN style="FONT-WEIGHT: 400">In a similar scheme, </SPAN><B>URL Hashing</B><SPAN style="FONT-WEIGHT: 400"> algorithms map requests for the same content to the same server, which helps with server specialization and caching. Since URL hashing relies on the content of requests to make load balancing decisions, it can only be implemented in L7.&nbsp;</SPAN></FONT></P>
+<H3><B><FONT class=extract>3.2 Dynamic</FONT></B></H3>
+<P><FONT class=extract><SPAN style="FONT-WEIGHT: 400">In a </SPAN><B>Least Load</B><SPAN style="FONT-WEIGHT: 400"> algorithm, requests are sent to the server with the lowest load at the time of request. Load can be measured with a variety of metrics, including number of connections, amount of traffic, and request latency. </SPAN></FONT></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract><IMG alt="load balancing system design interviews" src="https://d3no4ktch0fdq4.cloudfront.net/public/CACHE/images/blog-articles/content-images/Diagram_11_2x_1_1024x1024/4cee9cb5b61260bd94fe23425917f25e.webp" width=660 height=860 loading="lazy"></FONT></SPAN></P>
+<P><FONT class=extract><SPAN style="FONT-WEIGHT: 400">The &#8220;</SPAN><B>power-of-d-choices</B><SPAN style="FONT-WEIGHT: 400">&#8221; algorithm is popular for large distributed clusters because it effectively addresses a problem that arises when we have a pool of independent load balancers instead of a single load balancer. If every LB in the pool sends a request to the least busy server, then that server will be hit with requests from all LBs and quickly become overloaded. </SPAN></FONT></P>
+<P><FONT class=extract><SPAN style="FONT-WEIGHT: 400">If every LB instead chooses a server randomly, this problem will be alleviated, but then the current server load won't be taken into account. The power-of-d-choices solution is to choose a subset of d servers at random (nginx uses d=2) and pick the best (least busy) server between them. Choosing the size of </SPAN><I><SPAN style="FONT-WEIGHT: 400">d </SPAN></I><SPAN style="FONT-WEIGHT: 400">correctly impacts the overall effectiveness of this load balancing approach.&nbsp;</SPAN></FONT></P>
+<TABLE>
+<TBODY>
+<TR>
+<TD>
+<P><B><FONT class=extract>Algorithm</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>Kind</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>Pros</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>Cons</FONT></B></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>(Weighted) Round robin</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Static</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Simple</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Doesn't take load into account</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Randomized</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Static</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Siimple, stateless</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Doesn't take load into account, requires large number of requests</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Hashing</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Static</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Caching, stickiness</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Requires inspecting the request</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Least load</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Dynamic</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Optimal use of resources</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Complex, high overhead</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Power-of-d-choices</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Dynamic</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Efficient when &#8220;d&#8221; is low, works with multiple LBs</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Allocation is only as optimal as Least Load when &#8220;d&#8221; approaches the total number of servers.</FONT></SPAN></P></TD></TR></TBODY></TABLE>
+<P><FONT class=extract>&nbsp;</FONT></P>
+<H3><B><FONT class=extract>3.3 Choosing an algorithm</FONT></B></H3>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>The best load balancing algorithm depends on the needs of the system. If the server pool and the requests are both homogeneous, and there is only one balancer, then Round Robin will work well and is the default in many load balancer applications.</FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>If the server pool is heterogeneous in computing power, then it&#8217;s useful to use Round Robin weighted by server capacity. On the other hand if the requests are heterogenous, Least Load is helpful to prevent servers from being intermittently overloaded. </FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>When the system has a pool of load balancers, then the load balancing algorithm needs either randomness or a power of d choice algorithms to avoid all the balancers sending traffic to the currently least loaded server. </FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>At this point you might be wondering, if there&#8217;s a pool of load balancers, who balances the balancers? One approach is to have an L4 LB in front of L7 LBs, for example putting a Round Robin balancer to a pool of Power-of-d-choices balancers.</FONT></SPAN></P>
+<TABLE>
+<TBODY>
+<TR>
+<TD>
+<P><B><FONT class=extract>Request size</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>Server size</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>Request volume</FONT></B></P></TD>
+<TD>
+<P><B><FONT class=extract>Choice</FONT></B></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Uniform</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Uniform</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Low</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Round robin</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Uniform</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Uniform</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>High</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Random</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Uniform</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Mixed</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Low</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Weighted round robin</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Uniform</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Mixed</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>High</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Weighted random</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Mixed</FONT></SPAN></P></TD>
+<TD><FONT class=extract>&nbsp;</FONT></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Low</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Least load</FONT></SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Mixed</FONT></SPAN></P></TD>
+<TD><FONT class=extract>&nbsp;</FONT></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>High</FONT></SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Power-of-d-choices</FONT></SPAN></P></TD></TR></TBODY></TABLE>
+<P><FONT class=extract>&nbsp;</FONT></P>
+<H2><A name=security></A><B><FONT class=extract>4. Load balancers and security</FONT></B></H2>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Since L7 LBs need to examine the request to make routing decisions, any encrypted requests (HTTPS) need to be decrypted. That means an L7 LB will terminate the TCP connection with the request source and start a new connection to pass the request to the backend servers. This new request can be encrypted or not, depending how much you trust your backend server network. </FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Load Balancers are also a natural point of protection against DDOS attacks. Since they generally prevent server overload by distributing requests well, in the case of a DDOS attack the LB makes it harder to overload the whole system. They also remove a single point of failure, and therefore make the system harder to attack. </FONT></SPAN></P>
+<H2><A name=examples></A><B><FONT class=extract>5. Example load balancing questions</FONT></B></H2>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>The questions asked in system design interviews tend to begin with a broad problem or goal, so it&#8217;s unlikely that you&#8217;ll get an interview question entirely about load balancing. </FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>However, you may be asked to solve a problem where it&#8217;s an important part of the solution. As a result, what you really need to know is WHEN you should bring it up and how you should approach it.</FONT></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>To help you with this, we&#8217;ve compiled the below list of sample system design questions, where load balancing is an important consideration.&nbsp;</FONT></SPAN></P>
+<UL>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Design a scalable AWS system (</FONT></SPAN><A href="https://github.com/donnemartin/system-design-primer/blob/master/solutions/system_design/scaling_aws/README.md"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Read the answer</FONT></SPAN></A><FONT class=extract><SPAN style="FONT-WEIGHT: 400">)</SPAN> </FONT>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Design Instagram (</FONT></SPAN><A href="https://instagram-engineering.com/what-powers-instagram-hundreds-of-instances-dozens-of-technologies-adf2e22da2ad"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Read the answer</FONT></SPAN></A><FONT class=extract><SPAN style="FONT-WEIGHT: 400">)</SPAN> </FONT>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Design Pinterest (</FONT></SPAN><A href="http://highscalability.com/blog/2013/4/15/scaling-pinterest-from-0-to-10s-of-billions-of-page-views-a.html"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Read about how Pinterest scaled</FONT></SPAN></A><FONT class=extract><SPAN style="FONT-WEIGHT: 400">)&nbsp;</SPAN> </FONT>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Design BookMyShow (</FONT></SPAN><A href="https://www.geeksforgeeks.org/design-bookmyshow-a-system-design-interview-question/?ref=rp"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Read the answer</FONT></SPAN></A><FONT class=extract><SPAN style="FONT-WEIGHT: 400">)</SPAN> </FONT>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Design a Cloud Gateway for Netflix (</FONT></SPAN><A href="https://netflixtechblog.com/open-sourcing-zuul-2-82ea476cb2b3"><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>Read the answer</FONT></SPAN></A><SPAN style="FONT-WEIGHT: 400"><FONT class=extract>)</FONT></SPAN></LI></UL>

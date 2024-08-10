@@ -1,0 +1,12 @@
+<b> : </b><STRONG>1.3 When to use sharding&nbsp;</STRONG></H3>
+<P><SPAN style="FONT-WEIGHT: 400">The benefits of a sharded architecture, versus other kinds of database partitioning are:</SPAN></P>
+<UL>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Leveraging average hardware instead of high end machines</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Quickly scaling by adding more shards</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Better performance because each machine is under less load</SPAN></LI></UL>
+<P><SPAN style="FONT-WEIGHT: 400">Sharding is particularly useful when a single database server:&nbsp;</SPAN></P>
+<UL>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Can&#8217;t hold all the data</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Can't compute all the query responses fast enough</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Can&#8217;t handle the number of concurrent connections</SPAN></LI></UL>
+<P><SPAN style="FONT-WEIGHT: 400">You might also need sharding when you need to maintain distinct geographic regions, even if the above compute constraints </SPAN><I><SPAN style="FONT-WEIGHT: 400">haven't </SPAN></I><SPAN style="FONT-WEIGHT: 400">been hit. Either your service will be faster when the data servers are physically closer to the users, or there's legislation about data location and usage in one of the countries your service operates in.&nbsp;</SPAN>

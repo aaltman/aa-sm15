@@ -1,0 +1,62 @@
+<b> : </b><B>3.2 Dynamic</B></H3>
+<P><SPAN style="FONT-WEIGHT: 400">In a </SPAN><B>Least Load</B><SPAN style="FONT-WEIGHT: 400"> algorithm, requests are sent to the server with the lowest load at the time of request. Load can be measured with a variety of metrics, including number of connections, amount of traffic, and request latency. </SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400"><IMG alt="load balancing system design interviews" src="https://d3no4ktch0fdq4.cloudfront.net/public/CACHE/images/blog-articles/content-images/Diagram_11_2x_1_1024x1024/4cee9cb5b61260bd94fe23425917f25e.webp" width=660 height=860 loading="lazy"></SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">The &#8220;</SPAN><B>power-of-d-choices</B><SPAN style="FONT-WEIGHT: 400">&#8221; algorithm is popular for large distributed clusters because it effectively addresses a problem that arises when we have a pool of independent load balancers instead of a single load balancer. If every LB in the pool sends a request to the least busy server, then that server will be hit with requests from all LBs and quickly become overloaded. </SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">If every LB instead chooses a server randomly, this problem will be alleviated, but then the current server load won't be taken into account. The power-of-d-choices solution is to choose a subset of d servers at random (nginx uses d=2) and pick the best (least busy) server between them. Choosing the size of </SPAN><I><SPAN style="FONT-WEIGHT: 400">d </SPAN></I><SPAN style="FONT-WEIGHT: 400">correctly impacts the overall effectiveness of this load balancing approach.&nbsp;</SPAN></P>
+<TABLE>
+<TBODY>
+<TR>
+<TD>
+<P><B>Algorithm</B></P></TD>
+<TD>
+<P><B>Kind</B></P></TD>
+<TD>
+<P><B>Pros</B></P></TD>
+<TD>
+<P><B>Cons</B></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">(Weighted) Round robin</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Static</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Simple</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Doesn't take load into account</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Randomized</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Static</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Siimple, stateless</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Doesn't take load into account, requires large number of requests</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Hashing</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Static</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Caching, stickiness</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Requires inspecting the request</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Least load</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Dynamic</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Optimal use of resources</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Complex, high overhead</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Power-of-d-choices</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Dynamic</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Efficient when &#8220;d&#8221; is low, works with multiple LBs</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Allocation is only as optimal as Least Load when &#8220;d&#8221; approaches the total number of servers.</SPAN></P></TD></TR></TBODY></TABLE>
+<P>&nbsp;

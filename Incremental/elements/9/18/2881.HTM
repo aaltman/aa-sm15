@@ -1,0 +1,8 @@
+<b> : </b><B>3.2 How to improve availability</B></H3>
+<P><SPAN style="FONT-WEIGHT: 400">The solution to partial system failure is redundancy - making sure that if something goes wrong there's a copy of it so the system can continue functioning. Redundancy has many components, including:</SPAN></P>
+<UL>
+<LI style="FONT-WEIGHT: 400"><B>Failover systems</B><SPAN style="FONT-WEIGHT: 400"> - duplicates of any part of the system that are switched to in the case of failure. These can be either hot failovers that run in parallel for immediate switch, or cold failovers that only start when needed.</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><B>Clustering</B><SPAN style="FONT-WEIGHT: 400"> - running multiple instances of a part of the system, so if one node goes down the rest can manage without it.</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><B>Backups</B><SPAN style="FONT-WEIGHT: 400"> - data backups and replication ensure that if the data storage fails, for example a power outage at the data center, there's another copy that can be accessed.</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><B>Geographic redundancy</B><SPAN style="FONT-WEIGHT: 400"> - physically locating systems in different parts of the world, so if something happens that affects a region, there are redundant systems that still function.&nbsp;</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><B>Automatic testing, deployment, and rollbacks</B><SPAN style="FONT-WEIGHT: 400"> - to mitigate all the issues related to deploying new software or changing the architecture, it&#8217;s helpful to automate processes that catch software bugs, prevent human deployment errors, and automatically rollback to a previous stable deploy if something goes wrong.&nbsp;</SPAN></LI></UL>

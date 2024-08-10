@@ -1,0 +1,38 @@
+<b> : </b>Handling late-arriving events</H3>
+<P>Kafka Streams and Flink offer mechanisms to manage late-arriving data, which is crucial for ensuring accurate results in stream processing. Kafka Streams handles these events with a concept called "windowing." This feature allows events to be processed within a defined time frame or window, with a grace period for late events.</P>
+<P>However, compared to Flink, its capabilities are somewhat limited when dealing with delayed data or out-of-order events.</P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab">// Code snippet example - Windowing in Kafka Streams</SPAN><SPAN>
+</SPAN><SPAN>StreamsBuilder builder = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> StreamsBuilder();
+</SPAN><SPAN>KStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; stream = builder.stream(</SPAN><SPAN style="COLOR: #abe338">"input-topic"</SPAN><SPAN>);
+</SPAN>
+<SPAN>KGroupedStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; groupedStream = stream.groupByKey();
+</SPAN><SPAN>TimeWindowedKStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; windowedStream = groupedStream
+</SPAN><SPAN>    .windowedBy(TimeWindows.of(Duration.ofMinutes(</SPAN><SPAN style="COLOR: #f5ab35">5</SPAN><SPAN>)).grace(Duration.ofMinutes(</SPAN><SPAN style="COLOR: #f5ab35">1</SPAN><SPAN>)));
+</SPAN>
+windowedStream
+<SPAN>    .aggregate(</SPAN><SPAN style="COLOR: #d4d0ab">/* aggregation logic */</SPAN><SPAN>)
+</SPAN>    .toStream()
+<SPAN>    .to(</SPAN><SPAN style="COLOR: #abe338">"output-topic"</SPAN><SPAN>);
+</SPAN>
+<SPAN>KafkaStreams streams = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN><SPAN> KafkaStreams(builder.build(), properties);
+</SPAN>streams.start();</CODE></PRE>
+<P>This example demonstrates a 5-minute window with a 1-minute grace period for late-arriving events. Kafka Streams can effectively manage late data within this grace period but may struggle with data arriving significantly later.</P>
+<P>On the other hand, Flink provides more robust support for late-arriving events through its watermarking feature. It tracks the progress of event time and allows for flexible handling of out-of-order events. Flink is particularly strong in scenarios where late data is expected and accuracy over time is critical.</P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab">// Code snippet example - Watermarking in Flink</SPAN><SPAN>
+</SPAN>StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+<SPAN>DataStream&lt;MyEvent&gt; stream = env.addSource(</SPAN><SPAN style="COLOR: #d4d0ab">/* source */</SPAN><SPAN>)
+</SPAN>    .assignTimestampsAndWatermarks(WatermarkStrategy
+<SPAN>        .&lt;MyEvent&gt;forBoundedOutOfOrderness(Duration.ofSeconds(</SPAN><SPAN style="COLOR: #f5ab35">30</SPAN><SPAN>))
+</SPAN>        .withTimestampAssigner((event, timestamp) -&gt; event.getTimestamp()));
+
+stream
+    .keyBy(MyEvent::getKey)
+<SPAN>    .window(TumblingEventTimeWindows.of(Time.minutes(</SPAN><SPAN style="COLOR: #f5ab35">5</SPAN><SPAN>)))
+</SPAN><SPAN>    .aggregate(</SPAN><SPAN style="COLOR: #d4d0ab">/* aggregation logic */</SPAN><SPAN>);
+</SPAN>
+env.execute();</CODE></PRE>
+<P>In this snippet, watermarks are set with a maximum out-of-orderness of 30 seconds, indicating how late an event can be relative to the observed watermark. Flink's watermarking allows for advanced handling of late-arriving and out-of-order data, making it highly suitable for complex event time processing.</P>
+<DIV class=blog-cta>
+<DIV class=blog-cta__content>
+<DIV class=blog-cta__title>Have questions about Kafka or streaming data?</DIV>
+<DIV class=blog-cta__summary>Join a global community and chat with the experts on Slack.</DIV></DIV>
+<DIV class=blog-cta__button-wrap><A class="button__solid-orange w-button" href="https://redpanda.com/slack">Join Slack</A></DIV></DIV>

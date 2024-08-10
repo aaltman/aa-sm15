@@ -1,0 +1,3 @@
+<b> : </b><STRONG>2.1 Range</STRONG></H3>
+<P><SPAN style="FONT-WEIGHT: 400">Data can be assigned to a shard based on what "range" it falls into. For example, a database with sequential time-based data like log history could shard based on month ranges. One big advantage of range-based shard keys is they make sequential access patterns very fast, because data that is "close" in the given range will be on the same shard. </SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">One downside to ranges is the balance of data can be unpredictable. For example, an e-commerce company might have a lot more orders in December because of holiday shopping, so the shard with the December range could get overwhelmed while the other shards aren't doing much.</SPAN>

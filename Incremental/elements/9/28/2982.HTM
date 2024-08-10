@@ -1,0 +1,26 @@
+<b> : </b><STRONG>Main Differences</STRONG></H2>
+<P>As previously mentioned, Flink is a running engine on which processing jobs run, while Kafka Streams is a Java library that enables client applications to run streaming jobs without the need for extra distributed systems besides a running Kafka cluster. This implies that if users want to leverage Flink for stream processing, they will need to work with two systems.</P>
+<DIV class=wp-block-image><FIGURE class="aligncenter size-large is-resized"><IMG class=wp-image-6795 style="HEIGHT: 646px; WIDTH: 768px" alt="" src="https://bitrock.it/wp-content/wp-content/uploads/2023/07/kafka-apis-1024x861.png" width=1024 height=861 sizes="(max-width: 1024px) 100vw, 1024px" srcset="https://bitrock.it/wp-content/uploads/2023/07/kafka-apis-1024x861.png 1024w, https://bitrock.it/wp-content/uploads/2023/07/kafka-apis-300x252.png 300w, https://bitrock.it/wp-content/uploads/2023/07/kafka-apis-768x646.png 768w, https://bitrock.it/wp-content/uploads/2023/07/kafka-apis.png 1069w" decoding="async" fetchpriority="high"></FIGURE></DIV>
+<P>In addition, both Apache Flink and Kafka Streams offer high-level APIs (Flink DataStream APIs, Kafka Streams DSL) as well as advanced APIs for more complex implementations, such as the Kafka Streams Processor APIs.</P>
+<P>Now, let&#8217;s take a closer look at the main differences between Apache Kafka and Flink.</P>
+<OL>
+<LI><STRONG>Integrations</STRONG></LI></OL>
+<P>How do these systems establish connections with the external world? <STRONG>Apache Flink</STRONG> offers native integration with a wide range of technologies, including Hadoop, RDBMS, Elasticsearch, Hive, and more. This integration is made possible through the utilization of the Flink Connectors suite, where these connectors function as sources within Flink pipelines.</P>
+<P><STRONG>Kafka Streams</STRONG> is tightly integrated with Kafka for processing streaming data. The Kafka ecosystem provides Kafka Connect, which allows for the integration of external data sources as events are journaled into topics. For example, using the Kafka Connect Debezium connector, users can stream&nbsp; Change Data Capture stream events into a Kafka topic. A Kafka Stream topology can then consume this topic and apply processing logic to meet specific business requirements.</P>
+<OL start=2>
+<LI><STRONG>Scalability</STRONG></LI></OL>
+<P>&nbsp;<STRONG>Apache Flink</STRONG> is an engine designed to scale out across a cluster of machines, and its scalability is only bound by the cluster definition. On the other hand, while it is possible to scale<STRONG> Kafka Streams</STRONG> applications out horizontally, the potential scalability is limited to the maximum number of partitions owned by the source topics.&nbsp;</P>
+<OL start=3>
+<LI><STRONG>Fault tolerance and reliability</STRONG></LI></OL>
+<P>&nbsp;Both Kafka Streams and&nbsp; Apache Flink ensure high availability and fault tolerance, but they employ different approaches. <STRONG>Kafka Stream</STRONG> delegates to the capabilities of Kafka brokers. <STRONG>Apache Flink</STRONG> depends&nbsp; on external systems for persistent state management by using tiered storage and it relies on systems like Zookeeper or Kubernetes for achieving high availability.</P>
+<OL start=4>
+<LI><STRONG>Operation</STRONG></LI></OL>
+<P><STRONG>&nbsp;Kafka Stream</STRONG> as a library, requires users to write their applications and operate them as they would normally. For example, a Kubernetes deployment can be used for this purpose and by adding Horizontal Pod Autoscaling (HPA) , it can enable horizontal scale-out.</P>
+<P><STRONG>&nbsp;Apache Flink</STRONG> is an engine that needs to be orchestrated in order to enable Flink workloads. Currently, Flink users can leverage a Kubernetes Flink operator developed by the community to integrate Flink executions natively over Kubernetes clusters.</P>
+<OL start=5>
+<LI><STRONG>Windowing&nbsp;</STRONG></LI></OL>
+<P>Both Kafka Stream and Flink support windowing (tumbling, sliding, session) with some differences:</P>
+<UL>
+<LI><STRONG>Kafka Stream</STRONG> manages windowing based on event time and processing time.</LI>
+<LI><STRONG>Apache Flink</STRONG> manages flexible windowing based on event time, processing time, and ingestion time.</LI></UL>
+<DIV class=wp-block-image><FIGURE class="aligncenter size-full is-resized"><IMG class=wp-image-6797 style="HEIGHT: 613px; WIDTH: 851px" alt="" src="https://bitrock.it/wp-content/wp-content/uploads/2023/07/flinkRuntime-1.png" width=851 height=613 sizes="(max-width: 851px) 100vw, 851px" srcset="https://bitrock.it/wp-content/uploads/2023/07/flinkRuntime-1.png 851w, https://bitrock.it/wp-content/uploads/2023/07/flinkRuntime-1-300x216.png 300w, https://bitrock.it/wp-content/uploads/2023/07/flinkRuntime-1-768x553.png 768w" decoding="async"></FIGURE></DIV>

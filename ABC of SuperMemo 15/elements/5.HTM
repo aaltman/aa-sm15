@@ -1,0 +1,21 @@
+<FONT class=extract>A <B>sliding window</B> is an interval both of whose endpoints are allowed to move only forward, and never backward (or <I>vice versa</I>). It is analogous to an actual window that opens from left to right; when opening the window its left edge only moves to the right, and so does its right edge, and when closing it, the opposite is true. </FONT>
+<P></P>
+<P><FONT class=extract>However, in computer science, sliding windows are allowed to change in size as they are moving; the right edge may move without the left edge's movement, or <I>vice versa</I>. Notice that when the right edge moves, the window becomes larger, and when the left edge moves, the window becomes smaller. </FONT></P>
+<P><FONT class=extract>The sliding window is used in certain situations in which we need to keep track of some function whose domain is the set of intervals, with the property that the function's value can be efficiently recomputed after one of the edges moves a small amount. </FONT></P>
+<P><FONT class=extract>A simple example is as follows: given a list of non-negative integers, we wish to find the longest interval (contiguous subsequence of the list) with the property that the sum of all the elements it contains does not exceed a bound <IMG class="mwe-math-fallback-image-inline tex" alt=K src="https://wcipeg.com/wiki/images/math/a/5/f/a5f3c6a11b03839d46af9fb43c97c188.png">. </FONT></P>
+<P><FONT class=extract>To solve this problem, we first observe that if we know the sum of all the elements in an interval, and we advance the left edge of the interval, then we simply exclude one element from the old interval from the new interval, and the sum decreases by the value of that element; and if we advance the right edge, then we simply include one new element, and the sum increases by the value of that element. </FONT></P>
+<P><FONT class=extract>We then observe that for every possible position of the left edge of an interval, there is a corresponding position of the right edge such that the resulting interval is the longest interval possible with its left edge at the given position such that its sum does not exceed <IMG class="mwe-math-fallback-image-inline tex" alt=K src="https://wcipeg.com/wiki/images/math/a/5/f/a5f3c6a11b03839d46af9fb43c97c188.png">. For example, if the array is given by <IMG class="mwe-math-fallback-image-inline tex" alt="[9, 2, 6, 3, 1, 5, 0, 7]" src="https://wcipeg.com/wiki/images/math/a/3/e/a3e4109270a19cac82c7e91bec7564e4.png">, and our bound is <IMG class="mwe-math-fallback-image-inline tex" alt="K = 15" src="https://wcipeg.com/wiki/images/math/9/b/a/9ba40fc15a1c130812fb42d874131c05.png">, then the longest intervals starting at each possible position that do not go over this bound are <IMG class="mwe-math-fallback-image-inline tex" alt="[9, 2], [2, 6, 3, 1], [6, 3, 1, 5, 0], [3, 1, 5, 0], [1, 5, 0, 7], [5, 0, 7], [0, 7], [7]" src="https://wcipeg.com/wiki/images/math/1/8/f/18f5eee020a6b0312a7073a5d9acc10a.png">. Observe that as we advance the left edge, the right edge also advances. This is because when we advance the left edge, we decrease the sum, so the right edge "wants" to advance to increase the sum and bring it closer to <IMG class="mwe-math-fallback-image-inline tex" alt=K src="https://wcipeg.com/wiki/images/math/a/5/f/a5f3c6a11b03839d46af9fb43c97c188.png"> again. (Note that this doesn't work when there are negative numbers in the array.) </FONT></P>
+<P><FONT class=extract>Here is the pseudocode. In the below, <CODE>A</CODE> is a zero-indexed array of length <CODE>n</CODE>. At each possible position for the left edge of the window, we advance the right edge as far as we can without going over the bound <CODE>K</CODE>. Then we advance the left edge. The variable <CODE>sum</CODE> keeps track of the sum so far. </FONT></P><PRE><FONT class=extract>input n, A, K
+best &#8592; 0
+l &#8592; 0
+r &#8592; 0
+sum &#8592; 0
+while l &lt; n
+    // The inner 'while' loop will not change the asymptotic complexity of O(N) , because r is incremented at most N times 
+    //  during the whole execution
+    while(r &lt; n) and ( sum + A[r] &#8804; K )       // then we can advance the right edge
+        sum &#8592; sum + A[r]
+        r &#8592; r + 1
+    best &#8592; max(best, r-l)
+    sum &#8592; sum - A[l]         // now advance the left edge
+    l &#8592; l + 1</FONT></PRE>

@@ -1,0 +1,62 @@
+<b> : </b><B>2.2 DNS vs L4 vs L7 load balancers</B></H3>
+<P><SPAN style="FONT-WEIGHT: 400">DNS load-balancers integrate with the Domain Name Services (DNS) infrastructure to cause a client&#8217;s name lookup for a service (e.g., for &#8220;</SPAN><A href="https://www.google.com/"><SPAN style="FONT-WEIGHT: 400">www.google.com</SPAN></A><SPAN style="FONT-WEIGHT: 400">&#8221;) to return a different IP address to each requester corresponding to one of a pool of back-end servers in their geographic location.</SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">An L4 load balancer acts on information found in the network and transport layers of the request. This includes the protocol (TCP, UDP, etc.), source and destination IP addresses, and source and destination port numbers. The L4 LB doesn't have access to the contents of the request like application-level headers or the requested URL&nbsp; As a result, the routing decisions are based entirely on request headers at L4 and below. For example, an L4 LB can route requests from the same IP address to the same server every time. </SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">L7 LBs on the other hand have access to the full information carried by the request at the application layer, and as a result&nbsp; they can make more sophisticated routing decisions. For example, they can route requests for video content to a pool of servers optimized for video, requests for static content to a different set of servers, etc. They can also route requests based on the user, so that the same user always lands on the same server (for session stickiness) or the same pool of servers (for performance reasons).</SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">In order to look inside the request an L7 LB needs to handle decryption. This means the LB does </SPAN><A href="https://en.wikipedia.org/wiki/Transport_Layer_Security"><SPAN style="FONT-WEIGHT: 400">TLS termination</SPAN></A><SPAN style="FONT-WEIGHT: 400"> so the </SPAN><A href="https://en.wikipedia.org/wiki/Transmission_Control_Protocol"><SPAN style="FONT-WEIGHT: 400">TCP connection</SPAN></A><SPAN style="FONT-WEIGHT: 400"> ends at the load balancer. The benefit of this is it&nbsp; frees backend servers from having to perform decryption (a performance-intensive task) and from managing certificates. On the flipside, the load balancing layer becomes a more concentrated attack surface.</SPAN></P>
+<TABLE>
+<TBODY>
+<TR>
+<TD>
+<P><B>What</B></P></TD>
+<TD>
+<P><B>L4</B></P></TD>
+<TD>
+<P><B>L7</B></P></TD>
+<TD>
+<P><B>DNS</B></P></TD></TR>
+<TR>
+<TD>
+<P><B>Data requirements</B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Request packet header</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Contents of the request</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">DNS lookup before request</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><B>Session security</B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">SSL passthrough</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">TLS termination</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Not impacted</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><B>Implementation location</B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Hardware or software</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Usually software only</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Integrated with DNS server</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><B>Speed</B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Fast</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Less fast but modern hardware can take it</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Fast</SPAN></P></TD></TR>
+<TR>
+<TD>
+<P><B>Access to content</B></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Content agnostic</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Inspects and manipulates content (cookies, session management, different protocols or request types to different servers)</SPAN></P></TD>
+<TD>
+<P><SPAN style="FONT-WEIGHT: 400">Content agnostic</SPAN></P></TD></TR></TBODY></TABLE>
+<P>&nbsp;

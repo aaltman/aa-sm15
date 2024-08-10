@@ -1,0 +1,213 @@
+<DIV class="rte-blog w-richtext">
+<H2><FONT class=extract>Kafka Streams vs. Flink</FONT></H2>
+<P><FONT class=extract>In the streaming data ecosystem, </FONT><A href="https://redpanda.com/guides/kafka-tutorial"><STRONG><FONT class=extract>Apache Kafka</FONT></STRONG></A><FONT class=extract>&#174; is a distributed data store optimized for ingesting real-time data. Kafka Streams is a client library provided by Kafka for additional stream processing and transformation functions on top of Kafka.</FONT></P>
+<P><FONT class=extract>On the other hand, Apache Flink&#174; is a data processing framework that can act on both data streams and batches. It has advanced processing capabilities but requires a data ingestion tool like Kafka or Redpanda for complete efficiency.</FONT></P>
+<P><FONT class=extract>In this article, we compare Kafka Streams and Flink in detail. We discuss technical nuances, performance characteristics, and practical applications&#8212;providing insights into their strengths, limitations, and best use cases.</FONT></P>
+<H2><FONT class=extract>Summary of key concepts: Kafka streams vs. Flink</FONT></H2>
+<DIV class=w-embed>
+<DIV role=region class=blog-table>
+<TABLE>
+<TBODY>
+<TR>
+<TH><FONT class=extract>Aspect</FONT></TH>
+<TH><FONT class=extract>Kafka Streams</FONT></TH>
+<TH><FONT class=extract>Flink</FONT></TH></TR>
+<TR>
+<TD><FONT class=extract>Performance</FONT></TD>
+<TD><FONT class=extract>Offers efficient processing within the Kafka ecosystem, suitable for real-time analytics and moderate workloads.</FONT></TD>
+<TD><FONT class=extract>Excels in high-throughput, low-latency scenarios, especially in large-scale streaming applications.</FONT></TD></TR>
+<TR>
+<TD><FONT class=extract>Scalability</FONT></TD>
+<TD><FONT class=extract>Effectively scales within Kafka-centric environments, handling medium to large data streams with ease.</FONT></TD>
+<TD><FONT class=extract>Demonstrates superior scalability, capable of managing complex and voluminous data streams.</FONT></TD></TR>
+<TR>
+<TD><FONT class=extract>Ease of use</FONT></TD>
+<TD><FONT class=extract>User-friendly, especially for those familiar with Kafka, thanks to its integration and straightforward setup.</FONT></TD>
+<TD><FONT class=extract>Has a steeper learning curve but provides rich features and extensive documentation for skilled users.</FONT></TD></TR>
+<TR>
+<TD><FONT class=extract>Ecosystem support</FONT></TD>
+<TD><FONT class=extract>Benefits from strong integration and support within the Kafka ecosystem.</FONT></TD>
+<TD><FONT class=extract>Features a broad and active community with extensive integrations and tools for diverse streaming needs.</FONT></TD></TR>
+<TR>
+<TD><FONT class=extract>Use cases</FONT></TD>
+<TD><FONT class=extract>Best suited for applications deeply integrated with Kafka, such as stream processing at a moderate scale and real-time analytics.</FONT></TD>
+<TD><FONT class=extract>Ideal for complex event processing, large-scale applications, and scenarios requiring advanced streaming capabilities.</FONT></TD></TR>
+<TR>
+<TD><FONT class=extract>Fault tolerance</FONT></TD>
+<TD><FONT class=extract>Provides adequate fault tolerance primarily through Kafka&#8217;s built-in mechanisms.</FONT></TD>
+<TD><FONT class=extract>Offers advanced fault tolerance with a robust checkpointing strategy, positioning it as a leader in this area.</FONT></TD></TR>
+<TR>
+<TD><FONT class=extract>Handling late-arriving events</FONT></TD>
+<TD><FONT class=extract>Capable of managing late-arriving events but may be limited in more complex scenarios.</FONT></TD>
+<TD><FONT class=extract>Offers sophisticated handling of late-arriving events with flexible event time processing.</FONT></TD></TR>
+<TR>
+<TD><FONT class=extract>Programming flexibility</FONT></TD>
+<TD><FONT class=extract>Focused mainly on Java, with constrained support for other programming languages.</FONT></TD>
+<TD><FONT class=extract>Supports various programming languages and offers API abstractions like PyFlink and Table APIs for enhanced flexibility.</FONT></TD></TR></TBODY></TABLE></DIV></DIV>
+<H2><FONT class=extract>Overview of Kafka Streams</FONT></H2><FIGURE class="w-richtext-align-fullwidth w-richtext-figure-type-image">
+<DIV><FONT class=extract><IMG alt="The core components that connect to Kafka and the data flow between them" src="https://cdn.prod.website-files.com/6659da8aecd70e0898c0d7ed/66a3d696deb9d3352ed2048b_66882bb184176f1466de7a98_guide-kafka-streams-flink-img1.png" loading="lazy"></FONT></DIV><FIGCAPTION><FONT class=extract>The core components that connect to Kafka and the data flow between them</FIGCAPTION></FIGURE> </FONT>
+<P><FONT class=extract>Kafka Streams is a client library for building applications and microservices that transform or react to stream data. The input and output data are stored in Kafka topics. It combines the simplicity of writing and deploying standard Java and Scala applications on the client side with the benefits of Kafka's server-side cluster technology for fault-tolerant, stateful stream processing.</FONT></P>
+<H3><FONT class=extract>Key features</FONT></H3>
+<UL role=list>
+<LI><FONT class=extract><STRONG>Stateful processing</STRONG> allows applications to maintain their state, vital for many real-world use cases like aggregations or windowed computations. </FONT>
+<LI><FONT class=extract><STRONG>Queriable state</STRONG> allows applications to query the state stored in Kafka directly, making data more accessible. </FONT>
+<LI><FONT class=extract><STRONG>Exactly-once semantics</STRONG> ensure that each record is processed exactly once, thereby preventing data duplication and ensuring data integrity, even in a failure. </FONT>
+<LI><FONT class=extract><STRONG>Join operations</STRONG> provide the capability to join streams and tables in various ways, enabling complex stream processing use cases. </FONT>
+<LI><FONT class=extract><STRONG>Custom partitioning</STRONG> offers control over how data is partitioned and processed, allowing for more optimized and efficient stream processing.</FONT></LI></UL>
+<DIV class=blog-cta>
+<DIV class=blog-cta__content>
+<DIV class=blog-cta__title><FONT class=extract>When to choose Redpanda over Apache Kafka</FONT></DIV>
+<DIV class=blog-cta__summary><FONT class=extract>Start streaming data like it's 2024.</FONT></DIV></DIV>
+<DIV class=blog-cta__button-wrap><A class="button__solid-orange w-button" href="https://redpanda.com/blog/when-to-choose-redpanda-vs-kafka"><FONT class=extract>Learn More</FONT></A></DIV></DIV>
+<H3><FONT class=extract>Strengths and limitations</FONT></H3>
+<P><FONT class=extract>Kafka Streams is inherently designed to work with Kafka, leading to straightforward setups and configurations for those already using Kafka. It offers a simple path for building streaming applications without needing a separate cluster or infrastructure besides Kafka. Leveraging Kafka&#8217;s robustness, it naturally scales with Kafka clusters and maintains high reliability.</FONT></P>
+<P><FONT class=extract>Kafka Streams also don't need a "cluster" to be deployed, unlike Flink. They can be deployed as microservices, simplifying the deployment for less data-intensive workloads, like event-driven microservices.</FONT></P>
+<P><FONT class=extract>At the same time, its tight coupling with Kafka can be a limitation for systems that don't extensively use Kafka. Compared to more comprehensive streaming solutions like Flink, Kafka Streams may lack some advanced features, particularly for complex event processing and handling large-scale data streams. It also offers limited support for non-JVM programming languages.</FONT></P>
+<H2><FONT class=extract>Overview of Flink</FONT></H2><FIGURE class="w-richtext-align-fullwidth w-richtext-figure-type-image">
+<DIV><FONT class=extract><IMG alt="Overview of Flink&#8217;s architecture" src="https://cdn.prod.website-files.com/6659da8aecd70e0898c0d7ed/66a3d696deb9d3352ed20488_66882bb1d3259cde91d30f24_guide-kafka-streams-flink-img2.png" loading="lazy"></FONT></DIV><FIGCAPTION><FONT class=extract>Overview of Flink&#8217;s architecture</FIGCAPTION></FIGURE> </FONT>
+<P><FONT class=extract>Flink is a distributed stream processing framework known for easily handling complex and high-volume data processing tasks. It is designed to run in all common cluster environments and perform computations at in-memory speed.</FONT></P>
+<P><FONT class=extract>Flink's core is a streaming dataflow engine that provides data distribution, communication, and fault tolerance for distributed computations over multiple streams. It supports batch and stream processing, making it a versatile choice for various real-time analytics applications.</FONT></P>
+<H3><FONT class=extract>Key features</FONT></H3>
+<UL role=list>
+<LI><FONT class=extract><STRONG>Complex event processing:</STRONG> Flink excels in CEP, allowing for pattern detection and sequence identification in data streams, which is useful for scenarios like fraud detection. </FONT>
+<LI><FONT class=extract><STRONG>Machine learning library:</STRONG> Flink has a machine learning library, making it possible to run ML algorithms on data streams directly within Flink. </FONT>
+<LI><FONT class=extract><STRONG>Temporal table joins:</STRONG> Flink supports joining a dynamic table (a stream) with a static table, enabling temporal queries and simplifying stream processing logic. </FONT>
+<LI><FONT class=extract><STRONG>Dynamic scaling:</STRONG> Flink can scale applications up or down based on the workload, enhancing resource management and efficiency. </FONT>
+<LI><FONT class=extract><STRONG>Savepoints and state migration</STRONG> allow for creating savepoints, facilitating updates and migrations without data loss, and ensuring business continuity.</FONT></LI></UL>
+<H3><FONT class=extract>Strengths and limitations</FONT></H3>
+<P><FONT class=extract>Flink is built to scale out to thousands of nodes, allowing it to efficiently handle large-scale, stateful computations. It supports many use cases, from simple data transformations to complex event-driven applications and analytics. It also integrates with many storage systems and has rich connectors for various data sources and sinks.</FONT></P>
+<P><FONT class=extract>However, managing and operating a Flink cluster can be complex, requiring a good understanding of the system&#8217;s internals. Flink can be overkill for smaller workloads, as it's designed for heavy-duty, continuous processing tasks.</FONT></P>
+<DIV class=blog-cta>
+<DIV class=blog-cta__content>
+<DIV class=blog-cta__title><FONT class=extract>Redpanda: a powerful Kafka alternative</FONT></DIV>
+<DIV class=blog-cta__summary><FONT class=extract>Fully Kafka API compatible. 6x faster. 100% easier to use.</FONT></DIV></DIV>
+<DIV class=blog-cta__button-wrap><A class="button__solid-orange w-button" href="https://redpanda.com/what-is-redpanda"><FONT class=extract>Learn More</FONT></A></DIV></DIV>
+<H2><FONT class=extract>Programming model: Kafka Streams vs. Flink</FONT></H2>
+<P><FONT class=extract>Kafka Streams is tightly integrated with the Java ecosystem, and while it does offer a straightforward approach for those familiar with Java, it limits developers to this language.</FONT></P>
+<P><FONT class=extract>Flink is designed with flexibility in mind, supporting multiple programming languages such as Java, Scala, and Python (through PyFlink). Additionally, Flink provides a variety of API abstractions, including the DataStream API for stream processing, DataSet API for batch processing, and the Table API and SQL for declarative programming. This range of options caters to a broader spectrum of developers and use cases, allowing for a choice that best fits the problem.</FONT></P>
+<H3><FONT class=extract>Kafka Streams DSL vs. Flink DataStream API</FONT></H3>
+<P><FONT class=extract>Kafka Streams offers a Domain-Specific Language (DSL) that simplifies building Java stream-processing applications. The DSL provides high-level abstractions like KStream and KTable, which represent data streams and table change logs, respectively.</FONT></P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab"><FONT class=extract>// Code Snippet Example - Kafka Streams DSL</FONT></SPAN><SPAN>
+</SPAN><FONT class=extract><SPAN>StreamsBuilder builder = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> StreamsBuilder();
+</SPAN><SPAN>KStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; textLines = builder.stream(</SPAN><SPAN style="COLOR: #abe338">"input-topic"</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN><SPAN>KTable&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN></FONT><FONT class=extract><SPAN>, Long&gt; wordCounts = textLines
+</SPAN><SPAN>    .flatMapValues(textLine -&gt; Arrays.asList(textLine.toLowerCase().split(</SPAN><SPAN style="COLOR: #abe338">"\\W+"</SPAN></FONT><FONT class=extract><SPAN>)))
+</SPAN>    .groupBy((key, word) -&gt; word)
+    .count();
+
+<SPAN>wordCounts.toStream().to(</SPAN><SPAN style="COLOR: #abe338">"output-topic"</SPAN></FONT><FONT class=extract><SPAN>, Produced.with(Serdes.String(), Serdes.Long()));
+</SPAN><SPAN>KafkaStreams streams = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> KafkaStreams(builder.build(), properties);
+</SPAN>streams.start();</FONT></CODE></PRE>
+<P><FONT class=extract>In the above example, the DSL is used to implement a simple word count application, demonstrating the straightforward and declarative style of Kafka Streams.</FONT></P>
+<P><FONT class=extract>While Kafka Streams' DSL is tailored for Kafka-centric applications and offers an easy way to process data within the Kafka ecosystem, it is limited to Java and closely tied to Kafka's architecture. In comparison, Flink's DataStream API provides a more flexible programming model, supporting Java, Scala, and Python. It offers a rich set of operators for stateful computations, windowing, and complex event processing that extend beyond the Kafka ecosystem.</FONT></P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab"><FONT class=extract>// Code Snippet Example - Flink DataStream API</FONT></SPAN><SPAN>
+</SPAN><FONT class=extract>StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+<SPAN>DataStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; text = env.fromElements(</SPAN><SPAN style="COLOR: #d4d0ab">/* input data */</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN><SPAN>DataStream&lt;Tuple2&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN></FONT><FONT class=extract><SPAN>, Integer&gt;&gt; counts = text
+</SPAN><SPAN>    .flatMap(</SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> Tokenizer())
+</SPAN><SPAN>    .keyBy(</SPAN><SPAN style="COLOR: #f5ab35">0</SPAN></FONT><FONT class=extract><SPAN>)
+</SPAN><SPAN>    .window(TumblingProcessingTimeWindows.of(Time.seconds(</SPAN><SPAN style="COLOR: #f5ab35">5</SPAN></FONT><FONT class=extract><SPAN>)))
+</SPAN><SPAN>    .sum(</SPAN><SPAN style="COLOR: #f5ab35">1</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN>
+counts.print();
+env.execute();</FONT></CODE></PRE>
+<P><FONT class=extract>This snippet shows a similar word count application in Flink, highlighting the expressive and versatile nature of the DataStream API.</FONT></P>
+<H3><FONT class=extract>Integration and ecosystem</FONT></H3>
+<P><FONT class=extract>In terms of integration and ecosystem support, Kafka Streams naturally integrates seamlessly with Kafka and benefits from the Kafka ecosystem. This makes it a convenient choice for organizations already invested in Kafka. The </FONT><A href="https://redpanda.com/guides/kafka-tutorial/what-is-kafka-connect"><STRONG><FONT class=extract>Kafka Connect</FONT></STRONG></A><FONT class=extract> API facilitates integration with various databases, message queues, and file formats. For instance, the JDBC Connector allows Kafka Streams to interact directly with relational databases.</FONT></P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab"><FONT class=extract>// Example - Kafka Streams with Kafka Connect</FONT></SPAN><SPAN>
+</SPAN>
+<FONT class=extract><SPAN>StreamsBuilder builder = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> StreamsBuilder();
+</SPAN><SPAN>KStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; sourceStream = builder.stream(</SPAN><SPAN style="COLOR: #abe338">"source-topic"</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN><SPAN>sourceStream.to(</SPAN><SPAN style="COLOR: #abe338">"destination-topic"</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN>
+<SPAN></SPAN><SPAN style="COLOR: #d4d0ab">// ... Kafka Streams application logic ...</SPAN></FONT><SPAN>
+</SPAN>
+<FONT class=extract><SPAN>KafkaStreams streams = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> KafkaStreams(builder.build(), properties);
+</SPAN>streams.start();</FONT></CODE></PRE>
+<P><FONT class=extract>Similarly, Flink offers extensive integration capabilities with various external systems. It has a vibrant community that contributes to a wide range of connectors and integrations. This makes Flink adaptable to more diverse environments and use cases. For example:</FONT></P>
+<UL role=list>
+<LI><FONT class=extract>Flink Connectors for Kafka, AWS Kinesis, Elasticsearch, JDBC, RabbitMQ, and Apache Cassandra. </FONT>
+<LI><FONT class=extract>Flink Table and SQL API: Allows easy integration with external systems for streaming and batch processing.</FONT></LI></UL><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab"><FONT class=extract>// Code snippet example - Flink with Kafka Connector</FONT></SPAN><SPAN>
+</SPAN>
+<FONT class=extract><SPAN>StreamsBuilder builder = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> StreamsBuilder();
+</SPAN><SPAN>KStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; sourceStream = builder.stream(</SPAN><SPAN style="COLOR: #abe338">"source-topic"</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN><SPAN>sourceStream.to(</SPAN><SPAN style="COLOR: #abe338">"destination-topic"</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN>
+<SPAN></SPAN><SPAN style="COLOR: #d4d0ab">// ... Kafka Streams application logic ...</SPAN></FONT><SPAN>
+</SPAN>
+<FONT class=extract><SPAN>KafkaStreams streams = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> KafkaStreams(builder.build(), properties);
+</SPAN>streams.start();</FONT></CODE></PRE>
+<H3><FONT class=extract>Handling late-arriving events</FONT></H3>
+<P><FONT class=extract>Kafka Streams and Flink offer mechanisms to manage late-arriving data, which is crucial for ensuring accurate results in stream processing. Kafka Streams handles these events with a concept called "windowing." This feature allows events to be processed within a defined time frame or window, with a grace period for late events.</FONT></P>
+<P><FONT class=extract>However, compared to Flink, its capabilities are somewhat limited when dealing with delayed data or out-of-order events.</FONT></P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab"><FONT class=extract>// Code snippet example - Windowing in Kafka Streams</FONT></SPAN><SPAN>
+</SPAN><FONT class=extract><SPAN>StreamsBuilder builder = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> StreamsBuilder();
+</SPAN><SPAN>KStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>&gt; stream = builder.stream(</SPAN><SPAN style="COLOR: #abe338">"input-topic"</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN>
+<SPAN>KGroupedStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN></FONT><FONT class=extract><SPAN>&gt; groupedStream = stream.groupByKey();
+</SPAN><SPAN>TimeWindowedKStream&lt;</SPAN><SPAN style="COLOR: #f5ab35">String</SPAN><SPAN>, </SPAN><SPAN style="COLOR: #f5ab35">String</SPAN></FONT><FONT class=extract><SPAN>&gt; windowedStream = groupedStream
+</SPAN><SPAN>    .windowedBy(TimeWindows.of(Duration.ofMinutes(</SPAN><SPAN style="COLOR: #f5ab35">5</SPAN><SPAN>)).grace(Duration.ofMinutes(</SPAN><SPAN style="COLOR: #f5ab35">1</SPAN></FONT><FONT class=extract><SPAN>)));
+</SPAN>
+windowedStream
+<SPAN>    .aggregate(</SPAN><SPAN style="COLOR: #d4d0ab">/* aggregation logic */</SPAN></FONT><FONT class=extract><SPAN>)
+</SPAN>    .toStream()
+<SPAN>    .to(</SPAN><SPAN style="COLOR: #abe338">"output-topic"</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN>
+<SPAN>KafkaStreams streams = </SPAN><SPAN style="COLOR: #dcc6e0">new</SPAN></FONT><FONT class=extract><SPAN> KafkaStreams(builder.build(), properties);
+</SPAN>streams.start();</FONT></CODE></PRE>
+<P><FONT class=extract>This example demonstrates a 5-minute window with a 1-minute grace period for late-arriving events. Kafka Streams can effectively manage late data within this grace period but may struggle with data arriving significantly later.</FONT></P>
+<P><FONT class=extract>On the other hand, Flink provides more robust support for late-arriving events through its watermarking feature. It tracks the progress of event time and allows for flexible handling of out-of-order events. Flink is particularly strong in scenarios where late data is expected and accuracy over time is critical.</FONT></P><PRE class=w-code-block contentEditable=false style="BACKGROUND: #2b2b2b; OVERFLOW-X: auto; COLOR: #f8f8f2; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em; PADDING-LEFT: 0.5em; DISPLAY: block; PADDING-RIGHT: 0.5em"><CODE class=language-javascript style="WHITE-SPACE: pre"><SPAN style="COLOR: #d4d0ab"><FONT class=extract>// Code snippet example - Watermarking in Flink</FONT></SPAN><SPAN>
+</SPAN><FONT class=extract>StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+<SPAN>DataStream&lt;MyEvent&gt; stream = env.addSource(</SPAN><SPAN style="COLOR: #d4d0ab">/* source */</SPAN></FONT><FONT class=extract><SPAN>)
+</SPAN>    .assignTimestampsAndWatermarks(WatermarkStrategy
+<SPAN>        .&lt;MyEvent&gt;forBoundedOutOfOrderness(Duration.ofSeconds(</SPAN><SPAN style="COLOR: #f5ab35">30</SPAN></FONT><FONT class=extract><SPAN>))
+</SPAN>        .withTimestampAssigner((event, timestamp) -&gt; event.getTimestamp()));
+
+stream
+    .keyBy(MyEvent::getKey)
+<SPAN>    .window(TumblingEventTimeWindows.of(Time.minutes(</SPAN><SPAN style="COLOR: #f5ab35">5</SPAN></FONT><FONT class=extract><SPAN>)))
+</SPAN><SPAN>    .aggregate(</SPAN><SPAN style="COLOR: #d4d0ab">/* aggregation logic */</SPAN></FONT><FONT class=extract><SPAN>);
+</SPAN>
+env.execute();</FONT></CODE></PRE>
+<P><FONT class=extract>In this snippet, watermarks are set with a maximum out-of-orderness of 30 seconds, indicating how late an event can be relative to the observed watermark. Flink's watermarking allows for advanced handling of late-arriving and out-of-order data, making it highly suitable for complex event time processing.</FONT></P>
+<DIV class=blog-cta>
+<DIV class=blog-cta__content>
+<DIV class=blog-cta__title><FONT class=extract>Have questions about Kafka or streaming data?</FONT></DIV>
+<DIV class=blog-cta__summary><FONT class=extract>Join a global community and chat with the experts on Slack.</FONT></DIV></DIV>
+<DIV class=blog-cta__button-wrap><A class="button__solid-orange w-button" href="https://redpanda.com/slack"><FONT class=extract>Join Slack</FONT></A></DIV></DIV>
+<H2><FONT class=extract>Performance: Kafka Streams vs. Flink</FONT></H2>
+<P><FONT class=extract>Kafka Streams is optimized for Kafka-centric environments, offering efficient processing for moderate workloads and real-time analytics within Kafka. On the other hand, Flink is designed for high throughput and low latency, making it ideal for large-scale, complex streaming applications. Its performance shines in demanding environments where data must be processed quickly and reliably at scale.</FONT></P>
+<P><FONT class=extract>Kafka Streams scalability is closely tied to Kafka's scalability. Flink, however, is designed to handle high throughput and can scale out to thousands of nodes, making it a more suitable option for exceptionally large-scale streaming tasks.</FONT></P>
+<P><FONT class=extract>Kafka Streams does offer a lower learning curve, especially for those already familiar with Kafka. Its tight integration with the Kafka ecosystem translates to a more straightforward setup and operational simplicity.</FONT></P>
+<P><FONT class=extract>However, the effort required to learn Flink is worthwhile for its flexibility and ability to handle more complex streaming needs. It offers rich features and extensive documentation for various performance requirements.</FONT></P>
+<H2><FONT class=extract>When to use Kafka Streams vs. Flink</FONT></H2>
+<P><FONT class=extract>The suitability of Kafka Streams vs. Flink often depends on the specific use case.</FONT></P>
+<H3><FONT class=extract>Choosing Kafka Streams</FONT></H3>
+<P><FONT class=extract>Kafka Streams is the optimal choice in scenarios with a heavy reliance on the Kafka ecosystem. It is suitable in environments where the primary goal is to enhance or extend the capabilities of existing Kafka applications with streamlined, real-time data processing. Use cases include real-time monitoring, anomaly detection in data streams, and simple event-driven applications.</FONT></P>
+<P><FONT class=extract>Kafka Streams is also suitable for projects where the operational complexity needs to be minimal, and the development team is familiar with Kafka's architecture. It is also a great fit for applications that require quick, lightweight stream processing capabilities without the overhead of deploying and managing a separate processing cluster.</FONT></P>
+<H3><FONT class=extract>Choosing Flink</FONT></H3>
+<P><FONT class=extract>Flink stands out for its exceptional handling of complex, large-scale tasks. It is best suited for use cases that require event-time processing and advanced windowing capabilities.</FONT></P>
+<P><FONT class=extract>Event-time processing refers to handling events based on the time they occurred. It is important in environments with out-of-order or delayed events that still require accurate analytics related to event timing and order, such as financial transactions or sensor data analysis.</FONT></P>
+<P><FONT class=extract>Window operations allow computations over a sliding time window or a set number of elements. Flink's advanced windowing includes</FONT></P>
+<UL role=list>
+<LI><FONT class=extract>Tumbling windows for processing data in fixed-size, non-overlapping chunks based on time or a count of events. </FONT>
+<LI><FONT class=extract>Sliding windows for overlapping windows, useful for smoothing out bursts in data streams. </FONT>
+<LI><FONT class=extract>Session windows for cases where activity sessions need to be grouped, like user activity on a website.</FONT></LI></UL>
+<P><FONT class=extract>You can perform complex analytics by combining windowing capabilities with Flink&#8217;s stateful processing.</FONT></P>
+<H3><FONT class=extract>Real-world examples</FONT></H3>
+<P><FONT class=extract>LinkedIn, the original developer of Kafka, uses Kafka Streams for real-time analytics and monitoring applications. One significant application is their metrics monitoring and anomaly detection system.</FONT></P>
+<P><FONT class=extract>Leveraging Kafka Streams allows LinkedIn to process vast amounts of real-time data within its Kafka ecosystem. This system plays a crucial role in monitoring the health and performance of various services. It enables quick detection and response to potential issues for maintaining a reliable user experience on the platform.</FONT></P>
+<P><FONT class=extract>Alibaba, one of the world's largest e-commerce and retail platforms, effectively </FONT><A href="https://www.ververica.com/blog/blink-flink-alibaba-search"><STRONG><FONT class=extract>uses Flink for several large-scale applications</FONT></STRONG></A><FONT class=extract>, including real-time analytics and machine learning. Their real-time analytics platform provides Alibaba with timely insights into customer behavior and sales performance and helps optimize operational efficiency. Flink's ability to handle high-throughput and low-latency processing is critical for this.</FONT></P>
+<DIV class=blog-cta>
+<DIV class=blog-cta__content>
+<DIV class=blog-cta__title><FONT class=extract>Redpanda Serverless: from zero to streaming in 5 seconds</FONT></DIV>
+<DIV class=blog-cta__summary><FONT class=extract>Just sign up, spin up, and start streaming data!</FONT></DIV></DIV>
+<DIV class=blog-cta__button-wrap><A class="button__solid-orange w-button" href="https://redpanda.com/redpanda-cloud/serverless"><FONT class=extract>Free Trial</FONT></A></DIV></DIV>
+<H2><FONT class=extract>Conclusion</FONT></H2>
+<P><FONT class=extract>Kafka Streams offers a straightforward approach to stream processing for Kafka-centric environments. It is well-suited for moderate-scale, real-time analytics. On the other hand, Flink excels in large-scale, complex stream processing tasks.</FONT></P>
+<P><FONT class=extract>When choosing between Kafka Streams and Flink, consider the following guidelines:</FONT></P>
+<UL role=list>
+<LI><FONT class=extract><STRONG>Assess the scale and complexity</STRONG> of the data streams your application will handle. Flink is more suited for large-scale, complex processing. </FONT>
+<LI><FONT class=extract><STRONG>Evaluate existing infrastructure.</STRONG> If your environment is heavily invested in Kafka, Kafka Streams offers a smoother integration and simpler operation. </FONT>
+<LI><FONT class=extract><STRONG>Consider development resources.</STRONG> Kafka Streams can be more accessible for teams already familiar with Kafka. </FONT>
+<LI><FONT class=extract><STRONG>Analyze functional requirements.</STRONG> Flink offers a broader range of advanced features in stateful processing, windowing, and complex event processing </FONT>
+<LI><FONT class=extract><STRONG>Look at fault-tolerance needs.</STRONG> Flink&#8217;s advanced checkpointing strategy might be more beneficial.</FONT></LI></UL>
+<P><FONT class=extract>Redpanda (a drop-in Kafka replacement) for data ingestion and Flink for data processing is currently the best combination for stream processing at scale. With Redpanda in the mix, you can add more mileage to your journey regarding performance, reliability, and cost-efficiency.</FONT></P>
+<P><FONT class=extract>Plus, since Redpanda is designed with developers in mind, you can count on a vastly more simplified experience regarding operations and maintenance. </FONT><A href="https://redpanda.com/try-redpanda"><STRONG><FONT class=extract>Try Redpanda Serverless</FONT></STRONG></A><FONT class=extract> to see for yourself. Spin up in seconds, no infrastructure to manage, scale as you grow.</FONT></P></DIV>

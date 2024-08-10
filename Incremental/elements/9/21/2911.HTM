@@ -1,0 +1,6 @@
+<b> : </b><STRONG>1.3 When to use caching</STRONG></H3>
+<UL>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Caching is most helpful when the data you need is slow to access, possibly because of slow hardware, having to go over the network, or complex computation.</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Caching is helpful in systems where there are many requests to static or slow to change data, because repeated requests to the cache will be up to date.&nbsp;</SPAN></LI>
+<LI style="FONT-WEIGHT: 400"><SPAN style="FONT-WEIGHT: 400">Caching can also reduce load on primary data stores, which has the downstream effect of reducing service costs to reach performant response times.&nbsp;</SPAN></LI></UL>
+<P><SPAN style="FONT-WEIGHT: 400">Ultimately the features of a successful caching layer are highly situation-dependent. Creating and optimizing a cache requires tracking </SPAN><STRONG>latency</STRONG> and <STRONG>throughput</STRONG> metrics, and tuning parameters to the particular data access patterns of the system.&nbsp;

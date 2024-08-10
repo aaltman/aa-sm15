@@ -1,0 +1,4 @@
+<b> : </b><STRONG>1.4 When not to use sharding&nbsp;</STRONG></H3>
+<P><SPAN style="FONT-WEIGHT: 400">The disadvantages of database sharding are all about complexity. The queries become more complex because they have to somehow get the correct shard key, and need to be aware of avoiding multi-shard queries. </SPAN></P>
+<P><SPAN style="FONT-WEIGHT: 400">If the shards can't be entirely isolated, you need to implement eventual consistency for duplicated data or upholding relational constraints. The implementation and deployment of your database get a lot more complex, as do failovers, backups, and other kinds of maintenance. Essentially - you should only use database sharding when you absolutely have to.</SPAN></P>
+<P><A name=Approaches></A>
