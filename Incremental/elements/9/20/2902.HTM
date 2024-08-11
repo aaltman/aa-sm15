@@ -1,4 +1,4 @@
-<b> : </b><B>2.3 RAFT</B></H3>
-<P><SPAN style="FONT-WEIGHT: 400">Raft is an alternative to Paxos that is favored because people tend to find it simpler to understand, and therefore easier to implement and use. Raft is an asynchronous algorithm. </SPAN></P>
+<B>: </B><B>2.3 RAFT</B>
+<H3></H3>
 <P><SPAN style="FONT-WEIGHT: 400">In Raft consensus, each node keeps track of the current "election term". When leader election starts each node increments its copy of the term number and listens for messages from other nodes. After a random interval, if the node doesn't hear anything, it will become a candidate leader and ask other nodes for votes. </SPAN></P>
 <P><SPAN style="FONT-WEIGHT: 400">If the candidate ever reaches a majority of votes, it becomes a leader, and if it ever receives a message from another candidate with a higher term number, it concedes. The algorithm restarts if the election is split or times out without consensus. Restarts don't happen too often because the random timeouts help make it so nodes don't usually conflict.</SPAN>
